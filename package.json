@@ -1,0 +1,21 @@
+{
+  "name": "edit-io",
+  "version": "1.0.0",
+  "description": "web editor",
+  "main": "lib/server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudcmd/edit"
+  },
+  "keywords": [
+    "edit",
+    "middleware",
+    "express"
+  ],
+  "author": "coderaiser",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cloudcmd/edit/issues"
+  },
+  "homepage": "https://github.com/cloudcmd/edit"
+}
