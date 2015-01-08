@@ -1,0 +1,24 @@
+{
+  "name": "edward",
+  "homepage": "https://github.com/coderaiser/cloudcmd",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "web editor",
+  "main": "bin/edward.js",
+  "keywords": [
+    "file",
+    "edit"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "node_modules",
+    "modules"
+  ],
+  "dependencies": {
+    "ace-builds": "~1.1.8",
+    "menu": "~0.7.5",
+    "pako": "~0.2.5"
+  }
+}
