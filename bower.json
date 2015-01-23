@@ -18,7 +18,6 @@
   ],
   "dependencies": {
     "ace-builds": "~1.1.8",
-    "menu": "~0.7.5",
     "pako": "~0.2.5"
   }
 }
