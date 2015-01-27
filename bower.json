@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "ace-builds": "~1.1.8",
-    "pako": "~0.2.5"
+    "zipio": "~1.0.1",
+    "daffy": "~1.0.3"
   }
 }
