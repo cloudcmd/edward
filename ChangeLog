@@ -1,0 +1,9 @@
+2015.01.28, v0.4.0
+
+fix:
+- (loadremote) o.pre -> Pre
+
+feature:
+- (bower) add jsSHA
+- (bower) add load
+

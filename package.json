@@ -1,23 +1,23 @@
 {
   "name": "edward",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "web editor",
   "main": "lib/server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cloudcmd/edit"
+    "url": "https://github.com/cloudcmd/edward"
   },
   "keywords": [
-    "edit",
+    "editor",
     "middleware",
     "express"
   ],
   "author": "coderaiser",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cloudcmd/edit/issues"
+    "url": "https://github.com/cloudcmd/edward/issues"
   },
-  "homepage": "https://github.com/cloudcmd/edit",
+  "homepage": "https://github.com/cloudcmd/edward",
   "dependencies": {
     "ashify": "~1.0.1",
     "join-io": "~1.3.3",
