@@ -19,6 +19,7 @@
   "dependencies": {
     "ace-builds": "~1.1.8",
     "zipio": "~1.0.1",
-    "daffy": "~1.0.3"
+    "daffy": "~1.0.3",
+    "execon": "~1.1.1"
   }
 }
