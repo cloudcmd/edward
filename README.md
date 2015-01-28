@@ -6,7 +6,7 @@ Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMUR
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPM_INFO_IMG]:             https://nodei.co/npm/edward.png
 [NPMURL]:                   https://npmjs.org/package/edward "npm"
-[DependencyStatusURL]:      https://gemnasium.com/coderaiser/edward "Dependency Status"
+[DependencyStatusURL]:      https://gemnasium.com/cloudcmd/edward "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
 Web editor used in [Cloud Commander](http://cloudcmd.io).
