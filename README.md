@@ -29,7 +29,7 @@ var express = require('express'),
     app     = express();
 
 app.use(edward({
-    minify  : false, /* default */
+    minify  : true,  /* default */
     online  : false, /* default */
     diff    : true,  /* default */
     zip     : true   /* default */
