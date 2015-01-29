@@ -18,6 +18,9 @@
     "url": "https://github.com/cloudcmd/edward/issues"
   },
   "homepage": "https://github.com/cloudcmd/edward",
+  "bin": {
+    "edward": "bin/edward.js"
+  },
   "dependencies": {
     "ashify": "~1.0.1",
     "join-io": "~1.3.3",
