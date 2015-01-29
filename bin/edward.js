@@ -36,12 +36,10 @@
                 name: arg
             });
         
-        app .use(edward({
+        app .use(express.static(DIR))
+            .use(edward({
                 minify: false
-            }))
-            .get('/', function(req, res) {
-                res.sendFile(DIR + 'index.html');
-            });
+            }));
         
         edward.listen(socket);
         app.listen(port, ip);
