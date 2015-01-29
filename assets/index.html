@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Console</title>
+        
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        <div data-name="edit"></div>
+        <script src="/edward/edward.js"></script>
+        <script>
+            (function() {
+                'use strict';
+                
+                window.addEventListener('DOMContentLoaded', function load() {
+                    var el = document.querySelector('[data-name="js-edit"]');
+                    
+                    edward(el, function() {
+                        console.log('edward ready :)');
+                    });
+                    
+                    window.removeEventListener('DOMContentLoaded', load);
+                });
+            })()
+        </script>
+    </body>
+</html>

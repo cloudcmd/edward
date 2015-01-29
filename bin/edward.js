@@ -15,7 +15,7 @@
         main();
        
     function main() {
-        var DIR         = __dirname + '/../html',
+        var DIR         = __dirname + '/../assets',
             edward      = require('../'),
             http        = require('http'),
             express     = require('express'),
