@@ -15,6 +15,14 @@ Web editor used in [Cloud Commander](http://cloudcmd.io).
 
 `npm i edward`
 
+## API
+`edward` could be used as middleware for `express`.
+For this purpuse API could be used.
+
+### Server
+
+### Client
+
 ## License
 
 MIT
