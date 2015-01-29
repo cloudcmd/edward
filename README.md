@@ -16,10 +16,37 @@ Web editor used in [Cloud Commander](http://cloudcmd.io).
 `npm i edward`
 
 ## API
-`edward` could be used as middleware for `express`.
+Edward could be used as middleware for [express](http://expressjs.com "Express").
 For this purpuse API could be used.
 
 ### Server
+
+#### edward(options)
+Middleware of `edward`. Options could be omitted.
+
+```js
+var express = require('express'),
+    app     = express();
+
+app.use(edward({
+    minify  : false, /* default */
+    online  : false, /* default */
+    diff    : true,  /* default */
+    zip     : true   /* default */
+}));
+
+app.listen(31337);
+```
+
+#### edward.listen(socket)
+Could be used with [socket.io](http://socket.io "Socket.io") to handle editor events with.
+
+```js
+var io      = require('socket.io'),
+    socket  = io.listen(server);
+
+edward.listen(socket);
+```
 
 ### Client
 
