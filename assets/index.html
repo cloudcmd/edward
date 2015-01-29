@@ -12,19 +12,70 @@
             (function() {
                 'use strict';
                 
-                window.addEventListener('DOMContentLoaded', function load() {
+                window.addEventListener('DOMContentLoaded', function domLoad() {
                     var el = document.querySelector('[data-name="js-edit"]');
                     
                     edward(el, function() {
-                        edward
-                            .clearSelection()
-                            .moveCursorTo(0, 0)
-                            .focus();
+                        edward.addCommand({
+                            name    : 'goToLine',
+                            bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
+                            exec    : function () {
+                                edward.goToLine();
+                            }
+                        });
                         
-                        edward.setValueFirst('hello')
+                        edward.addCommand({
+                            name    : 'save',
+                            bindKey : { win: 'Ctrl-S',  mac: 'Command-S' },
+                            exec    : function() {
+                                edward.save();
+                            }
+                        });
+                        
+                        edward.addCommand({
+                            name    : 'saveMC',
+                            bindKey : { win: 'F2',  mac: 'F2' },
+                            exec    : function() {
+                                edward.save();
+                            }
+                        });
+                        
+                        edward.addCommand({
+                            name    : 'beautify',
+                            bindKey : { win: 'Ctrl-B',  mac: 'Command-B' },
+                            exec    : function() {
+                                edward.beautify();
+                            }
+                        });
+                        
+                        edward.addCommand({
+                            name    : 'minify',
+                            bindKey : { win: 'Ctrl-M',  mac: 'Command-M' },
+                            exec    : function() {
+                                edward.minify();
+                            }
+                        });
+                        
+                        load.json('/file', function(error, result) {
+                            var name;
+                            
+                            if (error) {
+                                alert(error);
+                            } else {
+                                name = result.name;
+                                
+                                edward
+                                    .setModeForPath(name)
+                                    .setValueFirst(name, result.data);
+                            }
+                            
+                            edward
+                                .clearSelection()
+                                .moveCursorTo(0, 0)
+                        });
                     });
                     
-                    window.removeEventListener('DOMContentLoaded', load);
+                    window.removeEventListener('DOMContentLoaded', domLoad);
                 });
             })()
         </script>
