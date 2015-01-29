@@ -16,6 +16,9 @@
                     var el = document.querySelector('[data-name="js-edit"]');
                     
                     edward(el, function() {
+                        el.style.fontFamily = 'Droid Sans Mono';
+                        el.style.fontSize   = '16px';
+                        
                         edward.addCommand({
                             name    : 'goToLine',
                             bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
