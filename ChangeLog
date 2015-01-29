@@ -1,3 +1,11 @@
+2015.01.29, v0.5.0
+
+feature:
+- (edward) add bin
+- (package) v0.4.2
+- (client) sha: sha1 -> sha
+
+
 2015.01.29, v0.4.2
 
 fix:
