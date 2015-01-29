@@ -1,3 +1,17 @@
+2015.01.29, v0.6.3
+
+fix:
+- (style) add body
+- (client) story: save -> set
+- (index) edit -> js-edit
+- (client) edward
+- (client) edward: !options -> !callback
+
+feature:
+- (style) add .edit
+- (package) add restafary
+
+
 2015.01.29, v0.6.2
 
 fix:
