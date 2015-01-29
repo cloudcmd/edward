@@ -1,3 +1,13 @@
+2015.01.29, v0.4.2
+
+fix:
+- (edward) config -> options
+
+feature:
+- (client) sha: sha1 -> sha
+- (package) v0.4.1
+
+
 2015.01.28, v0.4.1
 
 fix:
