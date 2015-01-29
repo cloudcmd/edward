@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        <div data-name="js-edit"></div>
+        <div class="edit" data-name="js-edit"></div>
         <script src="/edward/edward.js"></script>
         <script>
             (function() {
@@ -16,8 +16,12 @@
                     var el = document.querySelector('[data-name="js-edit"]');
                     
                     edward(el, function() {
-                        el.classList.add('edit');
-                        console.log('edward ready :)');
+                        edward
+                            .clearSelection()
+                            .moveCursorTo(0, 0)
+                            .focus();
+                        
+                        edward.setValueFirst('hello')
                     });
                     
                     window.removeEventListener('DOMContentLoaded', load);
