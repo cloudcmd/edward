@@ -1,3 +1,10 @@
+2015.01.29, v0.6.0
+
+feature:
+- (package) add express
+- (socket) listen: size, socket -> socket, {size}
+
+
 2015.01.29, v0.5.0
 
 feature:
