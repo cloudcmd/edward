@@ -20,6 +20,7 @@
             http        = require('http'),
             express     = require('express'),
             io          = require('socket.io'),
+            restafary   = require('restafary'),
             
             server      = http.createServer(),
             app         = express(server),
@@ -37,6 +38,7 @@
             });
         
         app .use(express.static(DIR))
+            .use(restafary())
             .use(edward({
                 minify: false
             }));
