@@ -1,3 +1,15 @@
+2015.01.29, v0.6.2
+
+fix:
+- (client) edward.css -> PREFIX + edward.css
+- (loadremote) map
+
+feature:
+- (css) add
+- (assets) add
+- (edward) sendFile -> express.static
+
+
 2015.01.29, v0.6.1
 
 feature:
