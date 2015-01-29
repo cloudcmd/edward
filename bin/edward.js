@@ -16,23 +16,19 @@
        
     function main() {
         var DIR         = __dirname + '/../html',
-        
             edward      = require('../'),
             http        = require('http'),
-            
             express     = require('express'),
             io          = require('socket.io'),
             
-            app         = express(),
-            server      = http.createServer(app),
-            
+            server      = http.createServer(),
+            app         = express(server),
             socket      = io.listen(server),
             
             port        =   process.env.PORT            ||  /* c9           */
                             process.env.app_port        ||  /* nodester     */
                             process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
                             1337,
-            
             ip          =   process.env.IP              ||  /* c9           */
                             '0.0.0.0',
             
@@ -40,13 +36,15 @@
                 name: arg
             });
         
-        app .use(edward())
+        app .use(edward({
+                minify: false
+            }))
             .get('/', function(req, res) {
                 res.sendFile(DIR + 'index.html');
             });
         
         edward.listen(socket);
-        server.listen(port, ip);
+        app.listen(port, ip);
         
         console.log('url: http://' + ip + ':' + port);
         console.log(str);
