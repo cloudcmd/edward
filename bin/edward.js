@@ -5,7 +5,7 @@
     
     var error,
         fs              = require('fs'),
-        rendy           = require('rendy'),
+        path            = require('path'),
         tryCatch        = require('try-catch'),
         args            = process.argv.slice(2),
         arg             = args[0];
@@ -27,6 +27,8 @@
     
     function main(name) {
         var socket,
+            cwd         = process.cwd() + '/',
+            filename    = path.normalize(cwd + name),
             DIR         = __dirname + '/../assets/',
             edward      = require('../'),
             http        = require('http'),
@@ -42,23 +44,23 @@
                             process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
                             1337,
             ip          =   process.env.IP              ||  /* c9           */
-                            '0.0.0.0',
-            
-            index       = fs.readFileSync(DIR + 'index.html', 'utf8');
+                            '0.0.0.0';
         
-        app .use(express.static(DIR))
-            .use(restafary())
+        app .use(restafary({
+                prefix: '/api/v1/fs'
+            }))
+            .use(express.static(DIR))
             .use(edward({
                 minify: false
             }))
             .get('/file', function(req, res) {
-                readFile(name, index, function(error, data) {
+                fs.readFile(name, 'utf8', function(error, data) {
                     if (error)
                         res .status(404)
                             .send(error.message);
                     else
                         res.send({
-                            name: name,
+                            name: filename,
                             data: data
                         });
                 });
@@ -71,21 +73,6 @@
         
         console.log('url: http://' + ip + ':' + port);
     }
-    
-    function readFile(name, index, callback) {
-        fs.readFile(name, 'utf8', function(error, value) {
-            var data;
-            
-            if (!error)
-                data = rendy(index, {
-                    name: name,
-                    value: value
-                });
-            
-            callback(error, data);
-        });
-    }
-    
     
     function version() {
         console.log('v' + info().version);
