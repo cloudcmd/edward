@@ -17,6 +17,15 @@ Web editor used in [Cloud Commander](http://cloudcmd.io).
 
 `npm i edward -g`
 
+## Command line parameters
+
+Usage: `edward [filename]`
+
+|Parameter              |Operation
+|:----------------------|:--------------------------------------------
+| `-h, --help`          | display help and exit
+| `-v, --version`       | output version information and exit
+
 ## API
 Edward could be used as middleware for [express](http://expressjs.com "Express").
 For this purpuse API could be used.
