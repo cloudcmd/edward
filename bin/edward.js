@@ -85,9 +85,11 @@
                 msg = ERROR_ISDIR;
                 
             if (msg)
-                error.message = rendy(msg, {
-                    name: arg
-                });
+                error = {
+                    message: rendy(msg, {
+                        name: arg
+                    })
+                };
             
             callback(error);
         });
