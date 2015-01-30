@@ -1,3 +1,12 @@
+2015.01.30, v1.0.8
+
+fix:
+- (edward) checkFile: error is null
+
+feature:
+- (package) rm try-catch
+
+
 2015.01.30, v1.0.7
 
 fix:
