@@ -1,3 +1,9 @@
+2015.01.30, v1.0.4
+
+feature:
+- (story) get, set -> get{Hash,Data}, set{Hash,Data}
+
+
 2015.01.30, v1.0.3
 
 feature:
