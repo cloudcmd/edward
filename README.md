@@ -11,6 +11,8 @@ Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMUR
 
 Web editor used in [Cloud Commander](http://cloudcmd.io).
 
+![Edward](https://raw.githubusercontent.com/cloudcmd/edward/master/img/edward.png "Edward")
+
 ## Install
 
 `npm i edward -g`
