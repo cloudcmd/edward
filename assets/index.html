@@ -19,6 +19,29 @@
                         el.style.fontFamily = 'Droid Sans Mono';
                         el.style.fontSize   = '16px';
                         
+                        addCommands();
+                        
+                        load.json('/file', function(error, result) {
+                            var name, data;
+                            
+                            if (error) {
+                                alert(error);
+                            } else {
+                                name    = result.name;
+                                data    = result.data;
+                                
+                                edward
+                                    .setModeForPath(name)
+                                    .setValueFirst(name, data);
+                            }
+                            
+                            edward
+                                .clearSelection()
+                                .moveCursorTo(0, 0)
+                        });
+                    });
+                    
+                    function addCommands() {
                         edward.addCommand({
                             name    : 'goToLine',
                             bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
@@ -58,25 +81,7 @@
                                 edward.minify();
                             }
                         });
-                        
-                        load.json('/file', function(error, result) {
-                            var name;
-                            
-                            if (error) {
-                                alert(error);
-                            } else {
-                                name = result.name;
-                                
-                                edward
-                                    .setModeForPath(name)
-                                    .setValueFirst(name, result.data);
-                            }
-                            
-                            edward
-                                .clearSelection()
-                                .moveCursorTo(0, 0)
-                        });
-                    });
+                    }
                     
                     window.removeEventListener('DOMContentLoaded', domLoad);
                 });
