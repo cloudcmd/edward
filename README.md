@@ -49,6 +49,7 @@ edward.listen(socket);
 ```
 
 ### Client
+Edward uses [ace](http://ace.c9.io/ "Ace") on client side, so API is similar.
 
 ## License
 
