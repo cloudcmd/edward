@@ -10,9 +10,11 @@
         args            = process.argv.slice(2),
         arg             = args[0];
         
-    if (/^(-v|--v)$/.test(arg))
+    if (!arg)
+        usage();
+    else if (/^(-v|--v)$/.test(arg))
         version();
-    else if (!arg || /^(-h|--help)$/.test(arg))
+    else if (/^(-h|--help)$/.test(arg))
         help();
     else
         checkFile(arg, function(error) {
@@ -98,11 +100,15 @@
         return require('../package');
     }
     
+    function usage() {
+        var msg = 'Usage: ' + info().name + ' [filename]';
+        console.log(msg);
+    }
+    
     function help() {
-        var bin         = require('../json/bin'),
-            usage       = 'Usage: ' + info().name + ' [filename]';
+        var bin         = require('../json/bin');
             
-        console.log(usage);
+        console.log(usage());
         console.log('Options:');
         
         Object.keys(bin).forEach(function(name) {
