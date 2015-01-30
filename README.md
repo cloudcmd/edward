@@ -13,7 +13,7 @@ Web editor used in [Cloud Commander](http://cloudcmd.io).
 
 ## Install
 
-`npm i edward`
+`npm i edward -g`
 
 ## API
 Edward could be used as middleware for [express](http://expressjs.com "Express").
