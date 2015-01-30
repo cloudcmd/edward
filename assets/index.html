@@ -1,8 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Console</title>
-        
+        <title>Edward</title>
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
@@ -13,9 +12,7 @@
                 'use strict';
                 
                 window.addEventListener('DOMContentLoaded', function domLoad() {
-                    var el = document.querySelector('[data-name="js-edit"]');
-                    
-                    edward(el, function() {
+                    edward('[data-name="js-edit"]', function(el) {
                         el.style.fontFamily = 'Droid Sans Mono';
                         el.style.fontSize   = '16px';
                         
