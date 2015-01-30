@@ -108,7 +108,7 @@
     function help() {
         var bin         = require('../json/bin');
             
-        console.log(usage());
+        usage();
         console.log('Options:');
         
         Object.keys(bin).forEach(function(name) {
