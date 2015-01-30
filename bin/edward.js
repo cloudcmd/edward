@@ -3,10 +3,10 @@
 (function() {
     'use strict';
     
-    var error,
-        fs              = require('fs'),
+    var fs              = require('fs'),
         path            = require('path'),
         tryCatch        = require('try-catch'),
+        rendy           = require('rendy'),
         args            = process.argv.slice(2),
         arg             = args[0];
         
@@ -14,16 +14,13 @@
         version();
     else if (!arg || /^(-h|--help)$/.test(arg))
         help();
-    else {
-        error = tryCatch(function() {
-            fs.statSync(arg);
-        });
-        
-        if (error)
-            console.error(error.message);
-        else
-            main(arg);
-    }
+    else
+        checkFile(arg, function(error) {
+           if (!error)
+                main(arg);
+            else
+                console.error(error.message);
+       });
     
     function main(name) {
         var socket,
@@ -72,6 +69,25 @@
         edward.listen(socket);
         
         console.log('url: http://' + ip + ':' + port);
+    }
+    
+    function checkFile(name, fn) {
+        var error = tryCatch(function() {
+                var stat = fs.statSync(name);
+                
+                if (stat.isDirectory())
+                    throw(Error(rendy('Error: \'{{ name }}\' is directory', {
+                        name: arg
+                    })));
+            });
+        
+        if (error && error.code === 'ENOENT')
+            error.message = rendy('Error: no such file or directory: \'{{ name }}\'', {
+                name: arg
+            });
+                
+        
+        fn(error);
     }
     
     function version() {
