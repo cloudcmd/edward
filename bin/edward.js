@@ -5,7 +5,6 @@
     
     var fs              = require('fs'),
         path            = require('path'),
-        tryCatch        = require('try-catch'),
         rendy           = require('rendy'),
         args            = process.argv.slice(2),
         arg             = args[0];
@@ -73,23 +72,25 @@
         console.log('url: http://' + ip + ':' + port);
     }
     
-    function checkFile(name, fn) {
-        var error = tryCatch(function() {
-                var stat = fs.statSync(name);
-                
-                if (stat.isDirectory())
-                    throw(Error(rendy('Error: \'{{ name }}\' is directory', {
-                        name: arg
-                    })));
-            });
+    function checkFile(name, callback) {
+        var ERROR_ENOENT    = 'Error: no such file or directory: \'{{ name }}\'',
+            ERROR_ISDIR     = 'Error: \'{{ name }}\' is directory';
         
-        if (error && error.code === 'ENOENT')
-            error.message = rendy('Error: no such file or directory: \'{{ name }}\'', {
-                name: arg
-            });
+        fs.stat(name, function(error, stat) {
+            var msg;
+            
+            if (error && error.code === 'ENOENT')
+                msg = ERROR_ENOENT;
+            else if (stat.isDirectory())
+                msg = ERROR_ISDIR;
                 
-        
-        fn(error);
+            if (msg)
+                error.message = rendy(msg, {
+                    name: arg
+                });
+            
+            callback(error);
+        });
     }
     
     function version() {
