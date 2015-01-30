@@ -1,6 +1,6 @@
 {
   "name": "edward",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "web editor",
   "main": "lib/server.js",
   "repository": {
