@@ -6,6 +6,7 @@
     var fs              = require('fs'),
         path            = require('path'),
         rendy           = require('rendy'),
+        mellow          = require('mellow'),
         args            = process.argv.slice(2),
         arg             = args[0];
         
@@ -58,7 +59,7 @@
                             .send(error.message);
                     else
                         res.send({
-                            name: convertPath(filename),
+                            name: mellow.pathFromWin(filename),
                             data: data
                         });
                 });
@@ -93,16 +94,6 @@
             
             callback(error);
         });
-    }
-    
-    function convertPath(path) {
-        var WIN = process.platform === 'win32';
-        
-        if (WIN) {
-            path = '/' + path.replace(':', '');
-        }
-        
-        return path;
     }
     
     function version() {
