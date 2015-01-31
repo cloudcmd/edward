@@ -58,7 +58,7 @@
                             .send(error.message);
                     else
                         res.send({
-                            name: filename,
+                            name: convertPath(filename),
                             data: data
                         });
                 });
@@ -93,6 +93,16 @@
             
             callback(error);
         });
+    }
+    
+    function convertPath(path) {
+        var WIN = process.platform === 'win32';
+        
+        if (WIN) {
+            path = '/' + path.replace(':', '');
+        }
+        
+        return path;
     }
     
     function version() {
