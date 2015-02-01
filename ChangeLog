@@ -1,3 +1,9 @@
+2015.02.01, v1.0.12
+
+feature:
+- (client) loadFiles: load load.js only when it is not loadded
+
+
 2015.02.01, v1.0.11
 
 feature:
