@@ -13,6 +13,14 @@ Web editor used in [Cloud Commander](http://cloudcmd.io).
 
 ![Edward](https://raw.githubusercontent.com/cloudcmd/edward/master/img/edward.png "Edward")
 
+## Features
+- Syntax highlighting based on extension of file for over 110 languages.
+- Built-in `emmet` (for html files)
+- Drag n drop (drag file from desktop to editor).
+- Built-in `jshint` (with options in `.jshintrc` file)
+- Built-in `beautifier` (with options in `json/beautify.json`, could be overriden in `~/.beautify.json`)
+- Configurable options (could be edited in `json/edit.json`)
+
 ## Install
 
 `npm i edward -g`
