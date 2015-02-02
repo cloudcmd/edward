@@ -81,6 +81,31 @@ edward.listen(socket);
 
 ### Client
 Edward uses [ace](http://ace.c9.io/ "Ace") on client side, so API is similar.
+All you need is put minimal `html`, `css`, and `js` into your page.
+
+Minimal html:
+
+```html
+<div class="edit" data-name="js-edit"></div>
+<script src="/edward/edward.js"></script>
+```
+
+Minimal css:
+
+```css
+html, body, .edit {
+    height: 100%;
+    margin: 0;
+}
+```
+
+Minimal js:
+```js
+edward('[data-name="js-edit"]', function(el) {
+    console.log('edward is ready');
+});
+```
+For more information you could always look around into `assets` and `bin` directory.
 
 ## License
 
