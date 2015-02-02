@@ -17,25 +17,6 @@
                         el.style.fontSize   = '16px';
                         
                         addCommands();
-                        
-                        load.json('/file', function(error, result) {
-                            var name, data;
-                            
-                            if (error) {
-                                alert(error);
-                            } else {
-                                name    = result.name;
-                                data    = result.data;
-                                
-                                edward
-                                    .setModeForPath(name)
-                                    .setValueFirst(name, data);
-                            }
-                            
-                            edward
-                                .clearSelection()
-                                .moveCursorTo(0, 0)
-                        });
                     });
                     
                     function addCommands() {

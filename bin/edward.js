@@ -6,7 +6,6 @@
     var fs              = require('fs'),
         path            = require('path'),
         rendy           = require('rendy'),
-        mellow          = require('mellow'),
         args            = process.argv.slice(2),
         arg             = args[0];
         
@@ -26,6 +25,7 @@
     
     function main(name) {
         var socket,
+            edSocket,
             cwd         = process.cwd() + '/',
             filename    = path.normalize(cwd + name),
             DIR         = __dirname + '/../assets/',
@@ -51,24 +51,21 @@
             .use(express.static(DIR))
             .use(edward({
                 minify: false
-            }))
-            .get('/file', function(req, res) {
-                fs.readFile(name, 'utf8', function(error, data) {
-                    if (error)
-                        res .status(404)
-                            .send(error.message);
-                    else
-                        res.send({
-                            name: mellow.pathFromWin(filename),
-                            data: data
-                        });
-                });
-            });
+            }));
         
-        server.listen(port, ip),
+        server.listen(port, ip);
         
         socket      = io.listen(server),
-        edward.listen(socket);
+        edSocket    = edward.listen(socket);
+        
+        edSocket.on('connection', function() {
+            fs.readFile(name, 'utf8', function(error, data) {
+                if (error)
+                    console.error(error.message);
+                else
+                    edSocket.emit('file', filename, data);
+                });
+        });
         
         console.log('url: http://' + ip + ':' + port);
     }
