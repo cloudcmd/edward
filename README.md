@@ -26,6 +26,18 @@ Usage: `edward [filename]`
 | `-h, --help`          | display help and exit
 | `-v, --version`       | output version information and exit
 
+## Hot keys
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `Ctrl + s`            | save
+| `Ctrl + f`            | find
+| `Ctrl + h`            | replace
+| `Ctrl + g`            | go to line
+| `Ctrl + b`            | beautify js, css or html
+| `Ctrl + m`            | minify js, css or html
+
+For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts "Ace keyboard shortcuts").
+
 ## API
 Edward could be used as middleware for [express](http://expressjs.com "Express").
 For this purpuse API could be used.
