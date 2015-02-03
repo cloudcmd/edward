@@ -1,3 +1,9 @@
+2015.02.03, v1.1.4
+
+feature:
+- (client) speed up: load join.js and load.js in parallel only when they need
+
+
 2015.02.02, v1.1.3
 
 feature:
