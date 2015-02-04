@@ -13,8 +13,10 @@
                 
                 window.addEventListener('DOMContentLoaded', function domLoad() {
                     edward('[data-name="js-edit"]', function(el) {
-                        el.style.fontFamily = 'Droid Sans Mono';
-                        el.style.fontSize   = '16px';
+                        edward.setOptions({
+                            fontSize: '16px',
+                            fontFamily: 'Droid Sans Mono'
+                        });
                     });
                     
                     window.removeEventListener('DOMContentLoaded', domLoad);
