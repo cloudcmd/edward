@@ -50,7 +50,8 @@
             }))
             .use(express.static(DIR))
             .use(edward({
-                minify: false
+                minify: false,
+                online: false
             }));
         
         server.listen(port, ip);
