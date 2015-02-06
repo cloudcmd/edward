@@ -61,7 +61,7 @@ var express = require('express'),
 
 app.use(edward({
     minify  : true,  /* default */
-    online  : false, /* default */
+    online  : true,  /* default */
     diff    : true,  /* default */
     zip     : true   /* default */
 }));
