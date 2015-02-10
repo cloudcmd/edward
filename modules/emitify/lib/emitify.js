@@ -37,8 +37,10 @@
         var events  = this._all[event] || [],
             index   = events.indexOf(callback);
         
-        while (~index)
+        while (~index) {
             events.splice(index, 1);
+            index = events.indexOf(callback);
+        }
     };
     
     Emitify.prototype.removeListener    =
