@@ -1,0 +1,15 @@
+{
+  "name": "emitify",
+  "homepage": "https://github.com/coderaiser/emitify",
+  "version": "1.0.0",
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0",
+    "commit": "8c0335f9f27b11b1e8e08f9321a03df10aa4ab37"
+  },
+  "_source": "git://github.com/coderaiser/emitify.git",
+  "_target": "~1.0.0",
+  "_originalSource": "emitify",
+  "_direct": true
+}
