@@ -10,8 +10,20 @@
         this._all = {};
     }
     
+    Emitify.prototype._check = function(event, callback) {
+        var isTwo = arguments.length === 2;
+        
+        if (typeof event !== 'string')
+            throw(Error('event should be string!'));
+        
+        if (isTwo && typeof callback !== 'function')
+            throw(Error('callback should be function!'));
+    };
+    
     Emitify.prototype.on   = function(event, callback) {
         var funcs = this._all[event];
+        
+        this._check(event, callback);
         
         if (funcs)
             funcs.push(callback);
@@ -27,7 +39,9 @@
     Emitify.prototype.once  = function(event, callback) {
         var self = this;
         
-        this.on(event, function() {
+        self._check(event, callback);
+        
+        self.on(event, function() {
             callback();
             self.off(event, callback);
         });
@@ -36,6 +50,8 @@
     Emitify.prototype.off   = function(event, callback) {
         var events  = this._all[event] || [],
             index   = events.indexOf(callback);
+        
+        this._check(event, callback);
         
         while (~index) {
             events.splice(index, 1);
@@ -48,6 +64,8 @@
     
     Emitify.prototype.emit = function(event, data) {
         var funcs = this._all[event];
+        
+        this._check(event);
         
         if (funcs)
             funcs.forEach(function(fn) {
