@@ -62,17 +62,18 @@
     Emitify.prototype.removeListener    =
     Emitify.prototype.off;
     
-    Emitify.prototype.emit = function(event, data) {
-        var funcs = this._all[event];
+    Emitify.prototype.emit = function(event) {
+        var args    = [].slice.call(arguments, 1),
+            funcs   = this._all[event];
         
         this._check(event);
         
         if (funcs)
             funcs.forEach(function(fn) {
-                fn(data);
+                fn.apply(null, args);
             });
         else if (event === 'error')
-            throw data;
+            throw args[0];
     };
     
 })(this);
