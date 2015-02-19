@@ -1,7 +1,7 @@
 {
   "name": "edward",
   "version": "1.1.25",
-  "description": "web editor",
+  "description": "web editor based on Ace",
   "main": "lib/server.js",
   "repository": {
     "type": "git",
