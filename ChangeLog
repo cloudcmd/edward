@@ -1,3 +1,12 @@
+2015.02.20, v1.2.0
+
+feature:
+- (edward) setUseOfWorker: private
+- (edward) getSession: private
+- (package) description: add ace
+- (jshintrc) rm indent, not supported anymore by jshint
+
+
 2015.02.19, v1.1.25
 
 feature:
