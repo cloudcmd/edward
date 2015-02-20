@@ -9,7 +9,7 @@ Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMUR
 [DependencyStatusURL]:      https://gemnasium.com/cloudcmd/edward "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
-Web editor used in [Cloud Commander](http://cloudcmd.io).
+Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://ace.c9.io "Ace").
 
 ![Edward](https://raw.githubusercontent.com/cloudcmd/edward/master/img/edward.png "Edward")
 
