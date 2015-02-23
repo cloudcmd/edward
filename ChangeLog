@@ -1,3 +1,9 @@
+2015.02.23, v1.2.2
+
+feature:
+- (package) add socket-file
+
+
 2015.02.23, v1.2.1
 
 fix:
