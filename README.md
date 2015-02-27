@@ -40,7 +40,7 @@ Usage: `edward [filename]`
 | `Ctrl + s`            | save
 | `Ctrl + f`            | find
 | `Ctrl + h`            | replace
-| `Ctrl + g`            | go to line
+| `Ctrl + l`            | go to line
 | `Ctrl + b`            | beautify js, css or html
 | `Ctrl + m`            | minify js, css or html
 
