@@ -1,3 +1,10 @@
+2015.02.27, v1.4.0
+
+feature:
+- (client) goToLine: Ctrl-g -> Ctrl-l
+- (modules) ace: rm date
+
+
 2015.02.25, v1.3.5
 
 fix:
