@@ -1,3 +1,9 @@
+2015.03.04, v1.4.1
+
+fix:
+- (client) goToLine condition: number -> line
+
+
 2015.02.27, v1.4.0
 
 feature:
