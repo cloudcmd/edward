@@ -23,7 +23,12 @@ Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://a
 
 ## Install
 
-`npm i edward -g`
+Install [bower](http://bower.io "Bower").
+And then run command:
+
+```
+npm i dword -g
+```
 
 ## Command line parameters
 
