@@ -9,6 +9,9 @@ Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMUR
 [DependencyStatusURL]:      https://gemnasium.com/cloudcmd/edward "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
+[beautifile]:               https://github.com/coderaiser/node-beautifile "Beautifile"
+[beautify.json]:            https://github.com/coderaiser/node-beautifile "beautify.json"
+
 Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://ace.c9.io "Ace").
 
 ![Edward](https://raw.githubusercontent.com/cloudcmd/edward/master/img/edward.png "Edward")
@@ -18,7 +21,7 @@ Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://a
 - Built-in `emmet` (for html files)
 - Drag n drop (drag file from desktop to editor).
 - Built-in `jshint` (with options in `.jshintrc` file)
-- Built-in `beautifier` (with options in `json/beautify.json`, could be overriden in `~/.beautify.json`)
+- Built-in [beautifier][beautifile] (with options in [json/beautify.json][beautify.json], could be overriden by `~/.beautify.json`)
 - Configurable options (could be edited in `json/edit.json`)
 
 ## Install
