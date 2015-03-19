@@ -1,6 +1,7 @@
 {
     "options": {
         "theme": "ace/theme/tomorrow_night_blue",
+        "wrap": 80,
         "tabSize": 4,
         "useSoftTabs": true,
         "showInvisibles": true,
