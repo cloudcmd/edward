@@ -26,9 +26,6 @@ Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://a
 
 ## Install
 
-Install [bower](http://bower.io "Bower").
-And then run command:
-
 ```
 npm i dword -g
 ```
