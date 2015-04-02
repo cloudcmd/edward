@@ -27,7 +27,7 @@ Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://a
 ## Install
 
 ```
-npm i dword -g
+npm i edward -g
 ```
 
 ![NPM_INFO][NPM_INFO_IMG]
