@@ -4,7 +4,7 @@ Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMUR
 [BuildStatusIMGURL]:        https://img.shields.io/travis/cloudcmd/edward/master.svg?style=flat
 [DependencyStatusIMGURL]:   https://img.shields.io/gemnasium/cloudcmd/edward.svg?style=flat
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
-[NPM_INFO_IMG]:             https://nodei.co/npm/edward.png
+[NPM_INFO_IMG]:             https://nodei.co/npm/edward.png?downloads=true&&stars&&downloadRank "npm install edward"
 [NPMURL]:                   https://npmjs.org/package/edward "npm"
 [DependencyStatusURL]:      https://gemnasium.com/cloudcmd/edward "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
@@ -29,6 +29,8 @@ Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://a
 ```
 npm i dword -g
 ```
+
+![NPM_INFO][NPM_INFO_IMG]
 
 ## Command line parameters
 
