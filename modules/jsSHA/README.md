@@ -1,7 +1,7 @@
 # jsSHA
 A JavaScript implementation of the complete Secure Hash Standard family
-		(SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512) as well as HMAC by
-		Brian Turek
+	(SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512) as well as HMAC by
+	Brian Turek
 
 ## About
 jsSHA is a javaScript implementation of the complete Secure Hash Algorithm
@@ -48,12 +48,17 @@ functionality removed
 
 A test page that calculates various hashes and has their correct values
 
+**test/genHashRounds.py**
+
+A Python2 script that generates multi-round hash values
+
 **build/make-release**
 
 A Bash script that runs the various Google Closure Compiler commands to build
 a release
 
 **build/externs.js**
+
 File needed solely to make the Google Closure Compilter work
 
 ## Usage
@@ -78,8 +83,8 @@ key "SecretKey" and hashing algorithm SHA-512 was calculated.
 	var hmac = shaObj.getHMAC("SecretKey", "TEXT", "SHA-512", "HEX");
 
 The constructor takes an optional parameter, encoding, that specifies the
-encoding used to encode TEXT-type inputs. Valid options are "UTF8" and "UTF16"
-and it defaults to "UTF8"
+encoding used to encode TEXT-type inputs. Valid options are "UTF8", "UTF16BE",
+and "UTF16LE", it defaults to "UTF8"
 
 getHash takes two optional parameters, a numRounds integer and an outputFormatOpts
 hashlist.  numRounds controls the number of hashing iterations/rounds performed
@@ -94,10 +99,10 @@ same way as above.
 ### Node.js
 jsSHA is available through NPM and be installed by simply doing
 
-	npm install jsSHA
+	npm install jssha
 To use the module, first require it using:
 
-	jsSHA = require("jsSHA");
+	jsSHA = require("jssha");
 
 The rest of the instructions are identical to the [Browser](#browser) section above.
 
@@ -112,10 +117,11 @@ a command like the following:
 		--compilation_level ADVANCED_OPTIMIZATIONS \
 		--js /path/to/sha_dev.js --js_output_file /path/to/sha.js
 		
-where <FLAG> is a bitwise OR of the following values:
-  - 4 for SHA-384/SHA-512
-  - 2 for SHA-224/256
-  - 1 for SHA-1
+where FLAG is a bitwise OR of the following values:
+
+* 4 for SHA-384/SHA-512
+* 2 for SHA-224/256
+* 1 for SHA-1
 
 ##Contact Info
 The project's website is located at [http://caligatio.github.com/jsSHA/](http://caligatio.github.com/jsSHA/)
