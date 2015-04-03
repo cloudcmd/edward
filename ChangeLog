@@ -1,3 +1,11 @@
+2015.04.03, v1.4.11
+
+feature:
+- (gitignore) modules/ace
+- (jsSHA) v1.6.0
+- (ace) v1.1.9
+
+
 2015.03.27, v1.4.10
 
 feature:
