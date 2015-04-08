@@ -10,7 +10,7 @@ Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMUR
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
 [beautifile]:               https://github.com/coderaiser/node-beautifile "Beautifile"
-[beautify.json]:            https://github.com/coderaiser/node-beautifile "beautify.json"
+[beautify.json]:            https://github.com/coderaiser/node-beautifile/tree/master/json/beautify.json "beautify.json"
 
 Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://ace.c9.io "Ace").
 
