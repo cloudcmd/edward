@@ -1,3 +1,9 @@
+2015.04.24, v1.6.1
+
+fix:
+- (loadremote) firefox getElementById: global[o.name] -> o.name && global[o.name]
+
+
 2015.04.17, v1.6.0
 
 feature:
