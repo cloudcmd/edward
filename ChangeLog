@@ -1,3 +1,9 @@
+2015.05.29, v1.6.7
+
+fix:
+- (loadremote) pre overwrite when another module loads loadremote
+
+
 2015.05.28, v1.6.6
 
 fix:
