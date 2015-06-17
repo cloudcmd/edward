@@ -3,6 +3,7 @@
         "theme": "ace/theme/tomorrow_night_blue",
         "wrap": "free",
         "tabSize": 4,
+        "fontSize": 16,
         "useSoftTabs": true,
         "showInvisibles": true,
         "enableSnippets": false,
