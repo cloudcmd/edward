@@ -18,13 +18,13 @@
     "modules"
   ],
   "dependencies": {
-    "zipio": "~1.0.1",
     "daffy": "~1.0.3",
     "execon": "~1.2.0",
     "load": "~1.1.4",
     "emitify": "~1.2.0",
     "jsSHA": "~2.0.1",
     "loadremote": "~1.0.1",
-    "ace-builds": "~1.2.0"
+    "ace-builds": "~1.2.0",
+    "zipio": "~1.0.1"
   }
 }
