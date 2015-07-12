@@ -1,3 +1,9 @@
+2015.07.12, v1.9.0
+
+feature:
+- (edward) add support of external config ~/.edward.json
+
+
 2015.07.11, v1.8.1
 
 feature:
