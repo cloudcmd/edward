@@ -4927,6 +4927,11 @@ var JSHINT = (function() {
   prefix("typeof", (function() {
     var p = expression(150);
     this.first = p;
+    
+    if (!p) { // 'typeof' followed by nothing? Give up.
+      quit("E041", this.line || 0, this.character || 0);
+    }
+
     if (p.identifier) {
       p.forgiveUndef = true;
     }
