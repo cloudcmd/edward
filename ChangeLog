@@ -1,3 +1,9 @@
+2015.07.14, v1.9.4
+
+fix:
+- (ace) worker-javascript: pre("typeof") - Cannot read property identifier of undefined
+
+
 2015.07.13, v1.9.3
 
 fix:
