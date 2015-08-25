@@ -1,13 +1,13 @@
 2015.08.24, v2.0.0
 
 fix:
-- feature(edward) improve prefix support
-- fix(edward) getPath
+- (edward) improve prefix support
+- (edward) getPath
 
 feature:
-- feature(edward) improve prefix support
-- feature(package) bower v1.5.1
-- feature(package) restafary v1.5.0
+- (edward) improve prefix support
+- (package) bower v1.5.1
+- (package) restafary v1.5.0
 
 
 2015.08.11, v1.9.7
