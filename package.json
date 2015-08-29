@@ -1,6 +1,6 @@
 {
   "name": "edward",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "web editor based on Ace",
   "main": "lib/server.js",
   "repository": {
