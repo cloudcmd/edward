@@ -25,6 +25,7 @@
     "jsSHA": "~2.0.1",
     "ace-builds": "~1.2.0",
     "zipio": "~1.0.1",
-    "loadremote": "~1.0.1"
+    "loadremote": "~1.0.1",
+    "smalltalk": "~1.5.0"
   }
 }
