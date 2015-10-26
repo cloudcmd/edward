@@ -24,8 +24,8 @@
     "execon": "~1.2.7",
     "jsSHA": "~2.0.1",
     "load": "~1.1.4",
-    "smalltalk": "~1.5.2",
     "zipio": "~1.0.1",
-    "loadremote": "~1.1.1"
+    "loadremote": "~1.1.1",
+    "smalltalk": "~1.5.5"
   }
 }
