@@ -96,10 +96,10 @@ var supportedModes = {
     ADA:         ["ada|adb"],
     Apache_Conf: ["^htaccess|^htgroups|^htpasswd|^conf|htaccess|htgroups|htpasswd"],
     AsciiDoc:    ["asciidoc|adoc"],
-    Assembly_x86:["asm"],
+    Assembly_x86:["asm|a"],
     AutoHotKey:  ["ahk"],
     BatchFile:   ["bat|cmd"],
-    C_Cpp:       ["cpp|c|cc|cxx|h|hh|hpp"],
+    C_Cpp:       ["cpp|c|cc|cxx|h|hh|hpp|ino"],
     C9Search:    ["c9search_results"],
     Cirru:       ["cirru|cr"],
     Clojure:     ["clj|cljs"],
@@ -116,7 +116,7 @@ var supportedModes = {
     Dot:         ["dot"],
     Dummy:       ["dummy"],
     DummySyntax: ["dummy"],
-    Eiffel:      ["e"],
+    Eiffel:      ["e|ge"],
     EJS:         ["ejs"],
     Elixir:      ["ex|exs"],
     Elm:         ["elm"],
@@ -135,6 +135,7 @@ var supportedModes = {
     haXe:        ["hx"],
     HTML:        ["html|htm|xhtml"],
     HTML_Ruby:   ["erb|rhtml|html.erb"],
+    HTML_Elixir: ["eex|html.eex"],
     INI:         ["ini|conf|cfg|prefs"],
     Io:          ["io"],
     Jack:        ["jack"],
@@ -186,7 +187,7 @@ var supportedModes = {
     SASS:        ["sass"],
     SCAD:        ["scad"],
     Scala:       ["scala"],
-    Scheme:      ["scm|rkt"],
+    Scheme:      ["scm|sm|rkt|oak|scheme"],
     SCSS:        ["scss"],
     SH:          ["sh|bash|^.bashrc"],
     SJS:         ["sjs"],
@@ -198,12 +199,13 @@ var supportedModes = {
     SQLServer:   ["sqlserver"],
     Stylus:      ["styl|stylus"],
     SVG:         ["svg"],
+    Swift:       ["swift"],
     Tcl:         ["tcl"],
     Tex:         ["tex"],
     Text:        ["txt"],
     Textile:     ["textile"],
     Toml:        ["toml"],
-    Twig:        ["twig"],
+    Twig:        ["twig|swig"],
     Typescript:  ["ts|typescript|str"],
     Vala:        ["vala"],
     VBScript:    ["vbs|vb"],
@@ -223,6 +225,7 @@ var nameOverrides = {
     C_Cpp: "C and C++",
     coffee: "CoffeeScript",
     HTML_Ruby: "HTML (Ruby)",
+    HTML_Elixir: "HTML (Elixir)",
     FTL: "FreeMarker"
 };
 var modesByName = {};
@@ -418,7 +421,7 @@ module.exports.generateSettingsMenu = function generateSettingsMenu (editor) {
         });
         
         var el = topmenu.appendChild(document.createElement('div'));
-        var version = "1.2.0";
+        var version = "1.2.1";
         el.style.padding = "1em";
         el.textContent = "Ace version " + version;
         

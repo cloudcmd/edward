@@ -5,8 +5,8 @@
     "remote": "//cdn.socket.io/socket.io-{{ version }}.js"
 }, {
     "name": "ace",
-    "version": "1.2.0",
-    "local": "/modules/ace-builds/src-noconflict/ace.js",
+    "version": "1.2.1",
+    "local": "/modules/ace-builds/src-min-noconflict/ace.js",
     "remote": "//cdn.jsdelivr.net/ace/{{ version }}/noconflict/ace.js"
 }, {
     "name": "pako",

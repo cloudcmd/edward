@@ -3,4 +3,3 @@ npm-debug.log
 
 modules/ace-builds/src
 modules/ace-builds/src-min
-modules/ace-builds/src-min-noconflict
