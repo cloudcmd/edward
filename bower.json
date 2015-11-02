@@ -26,6 +26,6 @@
     "load": "~1.1.4",
     "zipio": "~1.0.1",
     "loadremote": "~1.1.1",
-    "smalltalk": "~1.6.0"
+    "smalltalk": "~1.6.1"
   }
 }
