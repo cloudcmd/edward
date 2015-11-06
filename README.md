@@ -53,6 +53,7 @@ Usage: `edward [filename]`
 | `Ctrl + g`            | go to line
 | `Ctrl + b`            | beautify js, css or html
 | `Ctrl + m`            | minify js, css or html
+| `Ctrl + e`            | evaluate (JavaScript only supported)
 
 For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts "Ace keyboard shortcuts").
 
