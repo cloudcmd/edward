@@ -18,7 +18,6 @@
     "modules"
   ],
   "dependencies": {
-    "ace-builds": "~1.2.1",
     "daffy": "~1.0.3",
     "emitify": "~1.3.0",
     "execon": "~1.2.7",
@@ -26,6 +25,7 @@
     "load": "~1.1.4",
     "zipio": "~1.0.1",
     "loadremote": "~1.1.1",
-    "smalltalk": "~1.6.1"
+    "smalltalk": "~1.6.1",
+    "ace-builds": "~1.2.2"
   }
 }
