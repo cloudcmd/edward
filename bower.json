@@ -26,6 +26,6 @@
     "zipio": "~1.0.1",
     "loadremote": "~1.1.1",
     "ace-builds": "~1.2.2",
-    "smalltalk": "~1.6.2"
+    "smalltalk": "~1.6.3"
   }
 }
