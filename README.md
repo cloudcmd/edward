@@ -67,7 +67,8 @@ For this purpuse API could be used.
 Middleware of `edward`. Options could be omitted.
 
 ```js
-var express = require('express'),
+var edward  = require('edward'),
+    express = require('express'),
     app     = express();
 
 app.use(edward({
