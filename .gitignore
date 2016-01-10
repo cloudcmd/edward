@@ -1,5 +1,5 @@
 node_modules
-npm-debug.log
+npm-debug.log*
 
 modules/ace-builds/src
 modules/ace-builds/src-min
