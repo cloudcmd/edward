@@ -12,13 +12,13 @@
                 'use strict';
                 
                 window.addEventListener('DOMContentLoaded', function domLoad() {
-                    edward('[data-name="js-edit"]', function(el) {
-                        edward.setOptions({
-                            fontSize: '16px',
-                            fontFamily: 'Droid Sans Mono'
-                        });
-                        
-                        edward.focus();
+                    edward('[data-name="js-edit"]', function(editor) {
+                        editor
+                            .focus()
+                            .setOptions({
+                                fontSize: '16px',
+                                fontFamily: 'Droid Sans Mono'
+                            });
                     });
                     
                     window.removeEventListener('DOMContentLoaded', domLoad);

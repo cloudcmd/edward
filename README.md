@@ -112,9 +112,10 @@ html, body, .edit {
 ```
 
 Minimal js:
+
 ```js
-edward('[data-name="js-edit"]', function(el) {
-    console.log('edward is ready');
+edward('[data-name="js-edit"]', function(editor) {
+    editor.setValue('Hello edward!');
 });
 ```
 For more information you could always look around into `assets` and `bin` directory.
