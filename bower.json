@@ -26,6 +26,6 @@
     "emitify": "~2.0.0",
     "ace-builds": "~1.2.3",
     "loadremote": "~1.2.0",
-    "smalltalk": "~1.6.7"
+    "smalltalk": "~1.6.8"
   }
 }
