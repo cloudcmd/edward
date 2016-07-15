@@ -23,8 +23,8 @@
     "zipio": "~1.0.1",
     "ace-builds": "~1.2.3",
     "loadremote": "~1.2.0",
-    "smalltalk": "~1.6.8",
     "jsSHA": "^2.1.0",
-    "emitify": "~2.1.1"
+    "emitify": "~2.1.1",
+    "smalltalk": "~2.0.0"
   }
 }
