@@ -24,7 +24,7 @@
     "loadremote": "~1.2.0",
     "jsSHA": "^2.1.0",
     "emitify": "~2.1.1",
-    "ace-builds": "1.2.4",
-    "smalltalk": "2.1.2"
+    "smalltalk": "2.1.2",
+    "ace-builds": "^1.2.5"
   }
 }
