@@ -1,13 +1,18 @@
 [{
+    "name": "requirejs",
+    "version": "2.3.2",
+    "local": "/modules/requirejs/require.js",
+    "remote": "//cdnjs.cloudflare.com/ajax/libs/require.js/{{ version }}/require.min.js"
+}, {
     "name": "socket",
     "version": "1.4.8",
     "local": "/socket.io/socket.io.js",
     "remote": "//cdn.socket.io/socket.io-{{ version }}.js"
 }, {
     "name": "ace",
-    "version": "1.2.4",
-    "local": "/modules/ace-builds/src-min-noconflict/ace.js",
-    "remote": "//cdn.jsdelivr.net/ace/{{ version }}/noconflict/ace.js"
+    "version": "1.2.5",
+    "local": "/modules/ace-builds/src-min/ace.js",
+    "remote": "//cdnjs.cloudflare.com/ajax/libs/ace/{{ version }}/ace.js"
 }, {
     "name": "pako",
     "version": "0.2.8",

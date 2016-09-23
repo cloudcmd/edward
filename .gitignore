@@ -1,5 +1,7 @@
 node_modules
 npm-debug.log*
 
+modules/ace-builds/src-min-noconflict
+modules/ace-builds/src-noconflict
 modules/ace-builds/src
-modules/ace-builds/src-min
+
