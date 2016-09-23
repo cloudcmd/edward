@@ -1,3 +1,14 @@
+2016.09.23, v3.2.6
+
+fix:
+- (client) auth emit before socket creation
+
+feature:
+- (modules) pako v1.0.3
+- (modules) online: ace v1.2.5: add requirejs, jsdelivr -> cdnjs
+- (modules) socket.io v1.4.8
+
+
 2016.08.29, v3.2.5
 
 feature:
