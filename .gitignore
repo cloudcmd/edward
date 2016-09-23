@@ -5,3 +5,6 @@ modules/ace-builds/src-min-noconflict
 modules/ace-builds/src-noconflict
 modules/ace-builds/src
 
+modules/pako/dist
+!modules/pako/dist/paco.min.js
+
