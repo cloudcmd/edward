@@ -87,8 +87,8 @@ app.listen(31337);
 Could be used with [socket.io](http://socket.io "Socket.io") to handle editor events with.
 
 ```js
-var io      = require('socket.io'),
-    socket  = io.listen(server);
+const io = require('socket.io'),
+const socket = io.listen(server);
 
 edward.listen(socket);
 ```
@@ -121,6 +121,14 @@ edward('[data-name="js-edit"]', function(editor) {
 });
 ```
 For more information you could always look around into `assets` and `bin` directory.
+
+## Environments
+
+In old `node.js` environments that supports `es5` only, `dword` could be used with:
+
+```js
+var edward = require('dword/legacy');
+```
 
 ## Related
 

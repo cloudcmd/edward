@@ -690,7 +690,7 @@
         var PREFIX      = this._PREFIX;
         var DIR         = this._DIR;
         var dir         = PREFIX + DIR + 'ace-builds/src-min/',
-            dirClient   = PREFIX + '/lib/client/',
+            dirClient   = PREFIX + '/client/',
             extensions  = this._Config.extensions,
             isEmmet     = extensions.emmet;
         
