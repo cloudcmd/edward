@@ -28,7 +28,8 @@
     "wisdom": "npm run build"
   },
   "bin": {
-    "edward": "bin/edward.js"
+    "edward": "bin/edward.js",
+    "edward_": "legacy/bin/edward.js"
   },
   "dependencies": {
     "ashify": "~1.0.1",
