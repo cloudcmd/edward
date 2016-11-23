@@ -8,3 +8,6 @@ modules/ace-builds/src
 modules/pako/dist
 !modules/pako/dist/paco.min.js
 
+server_
+legacy
+
