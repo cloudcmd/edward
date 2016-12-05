@@ -4,6 +4,7 @@
     ],
     
     "json": [
+        ".eslintrc",
         ".jshintrc",
         ".yaspellerrc",
         ".jscsrc",
