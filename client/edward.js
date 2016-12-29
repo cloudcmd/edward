@@ -42,6 +42,7 @@
         this._DIR             = '/modules/';
         this._story           = new Story();
         this._Emitter;
+        this._isKey = true;
         
         if (!callback)
             callback = options;
@@ -75,7 +76,20 @@
             this._writeHttp(path, result);
         };
     }
-        
+    
+    Edward.prototype.isKey = function() {
+        return this._isKey;
+    }
+    
+    Edward.prototype.disableKey = function() {
+        this._isKey = false;
+    }
+    
+    Edward.prototype.enableKey = function() {
+        this._isKey = true;
+        return this;
+    }
+    
     Edward.prototype._showMessageOnce = function(msg) {
         if (!this._showedOnce) {
             this.showMessage(msg);
@@ -132,6 +146,11 @@
     Edward.prototype._addCommands = function() {
         var edward      = this;
         var addKey      = this._addKey.bind(this);
+        var run = function(fn) {
+            return function() {
+                edward.isKey() && fn();
+            }
+        }
         var commands    = [{
                 name    : 'goToLine',
                 bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
@@ -141,33 +160,33 @@
             }, {
                 name    : 'save',
                 bindKey : { win: 'Ctrl-S',  mac: 'Command-S' },
-                exec    : function() {
+                exec    : run(function() {
                     edward.save();
-                }
+                })
             }, {
                 name    : 'saveMC',
                 bindKey : { win: 'F2',  mac: 'F2' },
-                exec    : function() {
+                exec    : run(function() {
                     edward.save();
-                }
+                })
             }, {
                 name    : 'beautify',
                 bindKey : { win: 'Ctrl-B',  mac: 'Command-B' },
-                exec    : function() {
+                exec    : run(function() {
                     edward.beautify();
-                }
+                })
             }, {
                 name    : 'minify',
                 bindKey : { win: 'Ctrl-M',  mac: 'Command-M' },
-                exec    : function() {
+                exec    : run(function() {
                     edward.minify();
-                }
+                })
             }, {
                 name    : 'evaluate',
                 bindKey : { win: 'Ctrl-E',  mac: 'Command-E' },
-                exec    : function() {
+                exec    : run(function() {
                     edward.evaluate();
-                }
+                })
             }];
         
         commands.forEach(addKey);
