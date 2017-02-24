@@ -23,9 +23,9 @@
     "loadremote": "~1.2.0",
     "jsSHA": "^2.1.0",
     "emitify": "~2.1.1",
-    "requirejs": "2.3.2",
     "zipio": "1.0.2",
     "ace-builds": "1.2.6",
-    "smalltalk": "2.2.0"
+    "smalltalk": "2.2.0",
+    "requirejs": "2.3.3"
   }
 }
