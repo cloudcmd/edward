@@ -21,7 +21,6 @@
     "commit": "4970d8e4c0861ed3ca7ab5092d4f9b1cb55a57d5"
   },
   "_source": "https://github.com/jrburke/requirejs-bower.git",
-  "_target": "^2.3.3",
-  "_originalSource": "requirejs",
-  "_direct": true
+  "_target": "2.3.3",
+  "_originalSource": "requirejs"
 }

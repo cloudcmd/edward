@@ -922,10 +922,10 @@
     };
     
     function getModulePath(name, lib) {
-        var path    = '',
-            libdir  = '/',
-            dir     = '/modules/';
-            
+        var path = '';
+        var libdir = '/';
+        var dir = '/modules/';
+        
         if (lib)
             libdir  = '/' + lib + '/';
         
@@ -941,19 +941,19 @@
         exec.series([
             function(callback) {
                 var obj     = {
-                        loadRemote  : getModulePath('loadremote', 'lib'),
-                        load        : getModulePath('load'),
-                        Emitify     : getModulePath('emitify', 'dist'),
-                        join        : '/join/join.js'
-                    },
-                    
-                    scripts = Object.keys(obj)
-                        .filter(function(name) {
-                            return !window[name];
-                        })
-                        .map(function(name) {
-                            return PREFIX + obj[name];
-                        });
+                    loadRemote  : getModulePath('loadremote', 'lib'),
+                    load        : getModulePath('load'),
+                    Emitify     : getModulePath('emitify.min', 'dist'),
+                    join        : '/join/join.js'
+                };
+                
+                var scripts = Object.keys(obj)
+                    .filter(function(name) {
+                        return !window[name];
+                    })
+                    .map(function(name) {
+                        return PREFIX + obj[name];
+                    });
                 
                 exec.if(!scripts.length, callback, function() {
                     loadScript(scripts, callback);
