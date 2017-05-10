@@ -24,8 +24,8 @@
     "jsSHA": "^2.1.0",
     "zipio": "1.0.2",
     "ace-builds": "1.2.6",
-    "smalltalk": "2.2.0",
     "requirejs": "2.3.3",
-    "emitify": "3.0.2"
+    "emitify": "3.0.2",
+    "smalltalk": "2.2.1"
   }
 }
