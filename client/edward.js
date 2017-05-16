@@ -309,13 +309,13 @@
     };
     
     Edward.prototype.isChanged        = function() {
-        var value   = this.getValue(),
-            isEqual = value === this._Value;
+        var value = this.getValue();
+        var isEqual = value === this._Value;
         
         return !isEqual;
     };
     
-    Edward.prototype.setValue         = function(value) {
+    Edward.prototype.setValue = function(value) {
         var session = this._getSession();
         
         session.setScrollTop(0);
@@ -328,7 +328,7 @@
         return this;
     };
     
-    Edward.prototype.setValueFirst    = function(name, value) {
+    Edward.prototype.setValueFirst = function(name, value) {
         var session     = this._getSession(),
             UndoManager = ace.require('ace/undomanager').UndoManager;
         
@@ -342,12 +342,12 @@
         return this;
     };
     
-    Edward.prototype.setOption        = function(name, value) {
+    Edward.prototype.setOption = function(name, value) {
         this._Ace.setOption(name, value);
         return this;
     };
     
-    Edward.prototype.setOptions       = function(options) {
+    Edward.prototype.setOptions = function(options) {
         this._setKeyMap(options);
         this._Ace.setOptions(options);
         return this;
