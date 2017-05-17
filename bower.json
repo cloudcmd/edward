@@ -26,6 +26,6 @@
     "ace-builds": "1.2.6",
     "requirejs": "2.3.3",
     "emitify": "3.0.2",
-    "smalltalk": "2.2.2"
+    "smalltalk": "2.3.1"
   }
 }
