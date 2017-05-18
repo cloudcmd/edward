@@ -1,3 +1,9 @@
+2017.05.18, v4.3.0
+
+feature:
+- (edward) setOption: preventOverwrite options
+
+
 2017.05.17, v4.2.12
 
 feature:
