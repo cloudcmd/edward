@@ -135,11 +135,18 @@
                 self._Ace.$blockScrolling = Infinity;
                 
                 load.json(self._PREFIX + '/edit.json', function(error, config) {
-                    var options = config.options;
+                    var options = config.options || {};
+                    var preventOverwrite = function() {
+                        Object.keys(self._Config.options).forEach(function(name) {
+                             options[name] = self._Config.options[name];
+                        });
+                    }
                     
                     fn();
+                    preventOverwrite();
                     
                     self._Config = config;
+                    
                     edward.setOptions(options);
                 });
             },
@@ -228,7 +235,7 @@
         this._Ace.commands.addCommand(options);
     };
         
-    Edward.prototype.addKeyMap        = function(keyMap) {
+    Edward.prototype.addKeyMap = function(keyMap) {
         var self = this;
         var map = [];
         
@@ -354,13 +361,21 @@
         
         preventOverwrite();
         
+        if (name === 'keyMap') {
+            this._setKeyMap({
+                keyMap: value
+            });
+            
+            return this;
+        }
+        
         this._Ace.setOption(name, value);
+        
         return this;
     };
     
     Edward.prototype.setOptions = function(options) {
         var self = this;
-        this._setKeyMap(options);
         
         Object.keys(options).forEach(function(name) {
             self.setOption(name, options[name]);
@@ -372,7 +387,10 @@
    Edward.prototype._setKeyMap = function(options) {
         var keyMap = options && options.keyMap;
         
-        if (keyMap && keyMap !== 'default')
+        if (keyMap === 'default')
+            keyMap = 'hash_handler';
+        
+        if (keyMap)
             this._Ace.setKeyboardHandler('ace/keyboard/' + keyMap);
         
         delete options.keyMap;
@@ -721,13 +739,13 @@
     };
     
     Edward.prototype._setEmmet = function() {
-        var self        = this;
-        var PREFIX      = this._PREFIX;
-        var DIR         = this._DIR;
-        var dir         = PREFIX + DIR + 'ace-builds/src-min/',
-            dirClient   = PREFIX + '/client/',
-            extensions  = this._Config.extensions,
-            isEmmet     = extensions.emmet;
+        var self = this;
+        var PREFIX = this._PREFIX;
+        var DIR = this._DIR;
+        var dir = PREFIX + DIR + 'ace-builds/src-min/';
+        var dirClient = PREFIX + '/client/';
+        var extensions = this._Config.extensions;
+        var isEmmet = extensions.emmet;
         
         if (isEmmet)
             exec.if(this._Emmet, function() {
