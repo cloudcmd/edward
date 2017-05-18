@@ -31,7 +31,11 @@
         this._Ace;
         this._Emmet;
         this._Value;
-        this._Config;
+        
+        this._Config = {
+            options: {}
+        };
+        
         this._Options;
         this._FileName;
         this._Modelist;
@@ -599,8 +603,8 @@
     };
     
     Edward.prototype._loadOptions = function(callback) {
-        var self    = this,
-            url     = this._PREFIX + '/options.json';
+        var self = this;
+        var url = this._PREFIX + '/options.json';
         
         if (self._Options)
             callback(null, self._Options);
