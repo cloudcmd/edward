@@ -117,9 +117,9 @@
                 });
             },
             function() {
-                self._Emitter     = Emitify();
-                self._Ace         = ace.edit(self._Element);
-                self._Modelist    = ace.require('ace/ext/modelist');
+                self._Emitter = Emitify();
+                self._Ace = ace.edit(self._Element);
+                self._Modelist = ace.require('ace/ext/modelist');
                 
                 self._Emitter.on('auth', function(username, password) {
                     self._socket.emit('auth', username, password);
@@ -128,7 +128,6 @@
                 ace.require('ace/ext/language_tools');
                 
                 self._addCommands();
-                
                 self._Ace.$blockScrolling = Infinity;
                 
                 load.json(self._PREFIX + '/edit.json', function(error, config) {
@@ -136,7 +135,7 @@
                     
                     fn();
                     
-                    self._Config     = config;
+                    self._Config = config;
                     edward.setOptions(options);
                 });
             },
@@ -144,8 +143,8 @@
     };
     
     Edward.prototype._addCommands = function() {
-        var edward      = this;
-        var addKey      = this._addKey.bind(this);
+        var edward = this;
+        var addKey = this._addKey.bind(this);
         var run = function(fn) {
             return function() {
                 edward.isKey() && fn();
@@ -343,13 +342,26 @@
     };
     
     Edward.prototype.setOption = function(name, value) {
+        var self = this;
+        
+        var preventOverwrite = function() {
+            self._Config.options[name] = value;
+        };
+        
+        preventOverwrite();
+        
         this._Ace.setOption(name, value);
         return this;
     };
     
     Edward.prototype.setOptions = function(options) {
+        var self = this;
         this._setKeyMap(options);
-        this._Ace.setOptions(options);
+        
+        Object.keys(options).forEach(function(name) {
+            self.setOption(name, options[name]);
+        });
+        
         return this;
     };
    
