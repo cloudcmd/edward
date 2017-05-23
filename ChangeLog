@@ -1,3 +1,14 @@
+2017.05.23, v4.4.0
+
+fix:
+- (client) emitify
+
+feature:
+- (package) add eslint
+- (edward) minify: false
+- (server) storage -> fullstore
+
+
 2017.05.18, v4.3.2
 
 fix:
