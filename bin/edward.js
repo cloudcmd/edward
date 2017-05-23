@@ -51,6 +51,7 @@ function main(name) {
     
     app .use(express.static(DIR))
         .use(edward({
+            minify: false,
             diff: true,
             zip: true
         }));
