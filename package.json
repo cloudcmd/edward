@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/cloudcmd/edward",
   "scripts": {
+    "lint": "redrun lint:*",
+    "lint:bin": "eslint --rule 'no-console:0' bin",
+    "lint:lib": "eslint lib",
     "build:server": "redrun 6to5:*",
     "watch:server": "nodemon -w server -x bin/dword.js package.json",
     "6to5:lib": "babel server -d server_",
@@ -51,6 +54,7 @@
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-es2015": "^6.16.0",
     "bower": "^1.5.1",
-    "bupdate": "^1.0.4"
+    "bupdate": "^1.0.4",
+    "eslint": "^3.19.0"
   }
 }
