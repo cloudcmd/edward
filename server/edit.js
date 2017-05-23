@@ -11,27 +11,20 @@ module.exports = (req, res, next) => {
     
     readEdit((error, data) => {
         if (error)
-            res.status(404)
+            return res.status(404)
                 .send(error.message);
-        else
-            res .type('json')
-                .send(data);
+        
+        res .type('json')
+            .send(data);
     });
 }
 
 function replace(from, to) {
-    Object.keys(from).forEach(function(name) {
-        to[name] = from[name];
-    });
+    return Object.assign(to, from);
 }
 
 function copy(from) {
-    return Object
-        .keys(from)
-        .reduce(function(value, name) {
-            value[name] = from[name];
-            return value;
-        }, {});
+    return Object.assign({}, from);
 }
 
 function readEdit(callback) {
@@ -41,13 +34,12 @@ function readEdit(callback) {
         const data = copy(Edit);
         
         if (!error)
-            replace(edit, data);
-        else if (error.code !== 'ENOENT')
-            error = Error(`edward --config ${homePath}: ${error.message}`);
-        else
-            error = null;
+            return callback(null, replace(edit, data));
         
-        callback(error, data);
+        if (error.code !== 'ENOENT')
+            return callback(Error(`edward --config ${homePath}: ${error.message}`));
+        
+        callback(null, data);
     });
 }
 
