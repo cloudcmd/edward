@@ -10,7 +10,7 @@ const currify = require('currify/legacy');
 const mollify = require('mollify');
 const join = require('join-io');
 
-const storage = require('./storage');
+const storage = require('fullstore/legacy');
 const editFn = require('./edit');
 
 const Router = express.Router;
