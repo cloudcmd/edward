@@ -12,6 +12,8 @@
 
 const exec = require('execon');
 
+window.exec = window.exec || exec;
+
 const Story = require('./story');
 const _clipboard = require('./_clipboard');
 const _setEmmet = require('./_set-emmet');
