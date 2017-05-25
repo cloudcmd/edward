@@ -1,3 +1,10 @@
+2017.05.25, v4.5.1
+
+feature:
+- (npmignore) add bower.json
+- (edward) add execon from npm
+
+
 2017.05.25, v4.5.0
 
 fix:
