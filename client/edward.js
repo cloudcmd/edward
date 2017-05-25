@@ -12,6 +12,7 @@
 'use strict';
 
 const Story = require('./story');
+const _clipboard = require('./_clipboard');
 
 module.exports = (el, options, callback) => {
     Edward(el, options, callback);
@@ -38,8 +39,8 @@ function Edward(el, options, callback) {
     this._ElementMsg;
     this._JSHintConfig;
     this._Ext;
-    this._TITLE           = 'Edward';
-    this._DIR             = '/modules/';
+    this._TITLE = 'Edward';
+    this._DIR = '/modules/';
     this._story = Story();
     this._Emitter;
     this._isKey = true;
@@ -56,22 +57,22 @@ function Edward(el, options, callback) {
     
     this._Element = el || document.body;
     
-    onDrop      = this._onDrop.bind(this);
-    onDragOver  = this._onDragOver.bind(this);
+    onDrop = this._onDrop.bind(this);
+    onDragOver = this._onDragOver.bind(this);
     
     this._Element.addEventListener('drop', onDrop);
     this._Element.addEventListener('dragover', onDragOver);
     
-    loadScript(this._PREFIX + '/modules/execon/lib/exec.js', function() {
-        self._init(function() {
-            callback(self);
+    loadScript(this._PREFIX + '/modules/execon/lib/exec.js', () => {
+        this._init(() => {
+            callback(this);
         });
     });
     
     this._patch = function(path, patch) {
         this._patchHttp(path, patch);
     };
-
+    
     this._write = function(path, result) {
         this._writeHttp(path, result);
     };
@@ -100,10 +101,10 @@ Edward.prototype._showMessageOnce = function(msg) {
 function empty() {}
 
 Edward.prototype._init = function(fn) {
-    var self    = this;
-    var edward  = this;
-    var loadFiles = this._loadFiles.bind(this);
-    var initSocket = this._initSocket.bind(this);
+    const self = this;
+    const edward = this;
+    const loadFiles = this._loadFiles.bind(this);
+    const initSocket = this._initSocket.bind(this);
     
     exec.series([
         loadFiles,
@@ -130,10 +131,10 @@ Edward.prototype._init = function(fn) {
             self._addCommands();
             self._Ace.$blockScrolling = Infinity;
             
-            load.json(self._PREFIX + '/edit.json', function(error, config) {
-                var options = config.options || {};
-                var preventOverwrite = function() {
-                    Object.keys(self._Config.options).forEach(function(name) {
+            load.json(self._PREFIX + '/edit.json', (error, config) => {
+                const options = config.options || {};
+                const preventOverwrite = () => {
+                    Object.keys(self._Config.options).forEach((name) => {
                          options[name] = self._Config.options[name];
                     });
                 }
@@ -150,47 +151,47 @@ Edward.prototype._init = function(fn) {
 };
 
 Edward.prototype._addCommands = function() {
-    var edward = this;
-    var addKey = this._addKey.bind(this);
-    var run = function(fn) {
-        return function() {
+    const edward = this;
+    const addKey = this._addKey.bind(this);
+    const run = (fn) => {
+        return () => {
             edward.isKey() && fn();
         }
     }
-    var commands    = [{
+    const commands    = [{
             name    : 'goToLine',
             bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
-            exec    : function () {
+            exec    : () => {
                 edward.goToLine();
             }
         }, {
             name    : 'save',
             bindKey : { win: 'Ctrl-S',  mac: 'Command-S' },
-            exec    : run(function() {
+            exec    : run(() => {
                 edward.save();
             })
         }, {
             name    : 'saveMC',
             bindKey : { win: 'F2',  mac: 'F2' },
-            exec    : run(function() {
+            exec    : run(() => {
                 edward.save();
             })
         }, {
             name    : 'beautify',
             bindKey : { win: 'Ctrl-B',  mac: 'Command-B' },
-            exec    : run(function() {
+            exec    : run(() => {
                 edward.beautify();
             })
         }, {
             name    : 'minify',
             bindKey : { win: 'Ctrl-M',  mac: 'Command-M' },
-            exec    : run(function() {
+            exec    : run(() => {
                 edward.minify();
             })
         }, {
             name    : 'evaluate',
             bindKey : { win: 'Ctrl-E',  mac: 'Command-E' },
-            exec    : run(function() {
+            exec    : run(() => {
                 edward.evaluate();
             })
         }];
@@ -199,30 +200,27 @@ Edward.prototype._addCommands = function() {
 };
     
 Edward.prototype.evaluate = function() {
-    var edward  = this,
-        focus   = edward.focus.bind(this),
-        value,
-        msg,
-        isJS    = /\.js$/.test(this._FileName);
+    const edward = this;
+    const focus = edward.focus.bind(this);
+    const isJS = /\.js$/.test(this._FileName);
     
-    if (!isJS) {
-        msg = 'Evaluation supported for JavaScript only';
-    } else {
-        value = edward.getValue();
-        msg = exec.try(Function(value));
-    }
+    if (!isJS)
+        return smalltalk.alert(this._TITLE, 'Evaluation supported for JavaScript only')
+            .then(focus);
+    
+    const value = edward.getValue();
+    const msg = exec.try(Function(value));
     
     msg && smalltalk.alert(this._TITLE, msg)
         .then(focus);
 };
-    
+
 function createMsg() {
-    var msg,
-        wrapper = document.createElement('div'),
-        html    = '<div class="edward-msg">/div>';
+    const wrapper = document.createElement('div');
+    const html = '<div class="edward-msg">/div>';
     
     wrapper.innerHTML = html;
-    msg = wrapper.firstChild;
+    const msg = wrapper.firstChild;
     
     return msg;
 }
@@ -232,20 +230,20 @@ Edward.prototype._addKey = function(options) {
 };
     
 Edward.prototype.addKeyMap = function(keyMap) {
-    var self = this;
-    var map = [];
+    const self = this;
+    const map = [];
     
     if (typeof map !== 'object')
         throw Error('map should be object!');
     
-    map = Object.keys(keyMap).map(function(name, i) {
-        var key = {
+    map = Object.keys(keyMap).map((name, i) => {
+        const key = {
             name: String(Math.random()) + i,
             bindKey : {
                 win : name,
                 mac : name.replace('Ctrl', 'Command')
             },
-            exec    : keyMap[name]
+            exec: keyMap[name]
         };
         
         return key;
@@ -256,73 +254,80 @@ Edward.prototype.addKeyMap = function(keyMap) {
     return this;
 };
 
-Edward.prototype.goToLine         = function() {
-    var self    = this,
-        msg     = 'Enter line number:',
-        cursor  = self.getCursor(),
-        number  = cursor.row + 1;
-        
-    smalltalk.prompt(this._TITLE, msg, number).then(function(line) {
-        self._Ace.gotoLine(line);
-    }).catch(empty).then(function() {
-        self._Ace.focus();
-    });
+Edward.prototype.goToLine = function() {
+    const self = this;
+    const msg = 'Enter line number:';
+    const cursor = self.getCursor();
+    const number = cursor.row + 1;
+    
+    const gotToLine = (line) => {
+        this._Ace.gotoLine(line);
+    };
+    
+    const focus = () => {
+        this._Ace.focus();
+    }
+    
+    smalltalk.prompt(this._TITLE, msg, number)
+        .then(goToLine)
+        .catch(empty)
+        .then(focus)
     
     return this;
 };
 
-Edward.prototype.moveCursorTo     = function(row, column) {
+Edward.prototype.moveCursorTo = function(row, column) {
     this._Ace.moveCursorTo(row, column);
     return this;
 };
 
-Edward.prototype.refresh          = function() {
+Edward.prototype.refresh = function() {
     this._Ace.resize();
     return this;
 };
 
-Edward.prototype.focus            = function() {
+Edward.prototype.focus = function() {
     this._Ace.focus();
     return this;
 };
 
-Edward.prototype.remove           = function(direction) {
+Edward.prototype.remove = function(direction) {
     this._Ace.remove(direction);
     return this;
 };
 
-Edward.prototype.getCursor        = function() {
+Edward.prototype.getCursor = function() {
     return this._Ace.selection.getCursor();
 };
 
-Edward.prototype.getValue         = function() {
+Edward.prototype.getValue = function() {
     return this._Ace.getValue();
 };
 
-Edward.prototype.on               = function(event, fn) {
+Edward.prototype.on = function(event, fn) {
     this._Emitter.on(event, fn);
     return this;
 };
 
-Edward.prototype.once             = function(event, fn) {
+Edward.prototype.once = function(event, fn) {
     this._Emitter.once(event, fn);
     return this;
 };
 
-Edward.prototype.emit             = function(event) {
+Edward.prototype.emit = function(event) {
     this._Emitter.emit.apply(this._Emitter, arguments);
     return this;
 };
 
-Edward.prototype.isChanged        = function() {
-    var value = this.getValue();
-    var isEqual = value === this._Value;
+Edward.prototype.isChanged = function() {
+    const value = this.getValue();
+    const isEqual = value === this._Value;
     
     return !isEqual;
 };
 
 Edward.prototype.setValue = function(value) {
-    var session = this._getSession();
+    const session = this._getSession();
     
     session.setScrollTop(0);
     
@@ -335,8 +340,8 @@ Edward.prototype.setValue = function(value) {
 };
 
 Edward.prototype.setValueFirst = function(name, value) {
-    var session     = this._getSession(),
-        UndoManager = ace.require('ace/undomanager').UndoManager;
+    const session = this._getSession();
+    const UndoManager = ace.require('ace/undomanager').UndoManager;
     
     this._FileName  = name;
     this._Value     = value;
@@ -351,7 +356,7 @@ Edward.prototype.setValueFirst = function(name, value) {
 Edward.prototype.setOption = function(name, value) {
     var self = this;
     
-    var preventOverwrite = function() {
+    const preventOverwrite = function() {
         self._Config.options[name] = value;
     };
     
@@ -371,17 +376,15 @@ Edward.prototype.setOption = function(name, value) {
 };
 
 Edward.prototype.setOptions = function(options) {
-    var self = this;
-    
-    Object.keys(options).forEach(function(name) {
-        self.setOption(name, options[name]);
+    Object.keys(options).forEach((name) => {
+        this.setOption(name, options[name]);
     });
     
     return this;
 };
 
 Edward.prototype._setKeyMap = function(options) {
-    var keyMap = options && options.keyMap;
+    let keyMap = options && options.keyMap;
     
     if (keyMap === 'default')
         keyMap = 'hash_handler';
@@ -393,12 +396,12 @@ Edward.prototype._setKeyMap = function(options) {
 };
 
 Edward.prototype._setUseOfWorker = function(mode) {
-    var isMatch,
-        session = this._getSession(),
-        isStr   = typeof mode === 'string',
-        regStr  = 'coffee|css|html|javascript|json|lua|php|xquery',
-        regExp  = new RegExp(regStr);
+    const session = this._getSession();
+    const isStr = typeof mode === 'string';
+    const regStr = 'coffee|css|html|javascript|json|lua|php|xquery';
+    const regExp = new RegExp(regStr);
     
+    let isMatch;
     if (isStr)
         isMatch = regExp.test(mode);
     
@@ -407,54 +410,52 @@ Edward.prototype._setUseOfWorker = function(mode) {
     return this;
 };
 
-Edward.prototype.setMode          = function(mode) {
-    var ext,
-        modesByName = this._Modelist.modesByName;
-        
-    if (modesByName[mode]) {
-        ext = modesByName[mode].extensions.split('|')[0];
-        this.setModeForPath('.' + ext);
-    }
+Edward.prototype.setMode = function(mode) {
+    const modesByName = this._Modelist.modesByName;
+    
+    if (!modesByName[mode])
+        return this;
+    
+    const ext = modesByName[mode].extensions.split('|')[0];
+    this.setModeForPath('.' + ext);
     
     return this;
 };
 
-Edward.prototype.setModeForPath   = function(path) {
-    var mode, htmlMode, jsMode, isHTML, isJS,
-        self        = this,
-        session     = this._getSession(),
-        modesByName = this._Modelist.modesByName,
-        name        = path.split('/').pop();
+Edward.prototype.setModeForPath = function(path) {
+    const session = this._getSession();
+    const modesByName = this._Modelist.modesByName;
+    const name = path.split('/').pop();
     
-    this._addExt(name, function(name) {
-        mode        = self._Modelist.getModeForPath(name).mode;
-        htmlMode    = modesByName.html.mode;
-        jsMode      = modesByName.javascript.mode;
+    this._addExt(name, (name) => {
+        const mode = this._Modelist.getModeForPath(name).mode;
+        const htmlMode = modesByName.html.mode;
+        const jsMode = modesByName.javascript.mode;
         
-        isHTML      = mode === htmlMode;
-        isJS        = mode === jsMode;
-            
-        session.setMode(mode, function() {
-            self._setUseOfWorker(mode);
+        const isHTML = mode === htmlMode;
+        const isJS = mode === jsMode;
+        
+        session.setMode(mode, () => {
+            this._setUseOfWorker(mode);
             
             if (isHTML)
-                self._setEmmet();
+                this._setEmmet();
             
             if (isJS && session.getUseWorker())
-                self._setJsHintConfig();
+                this._setJsHintConfig();
         });
     });
     
     return this;
 };
 
-Edward.prototype.selectAll    = function() {
+Edward.prototype.selectAll = function() {
     this._Ace.selectAll();
     return this;
 };
 
 Edward.prototype.copyToClipboard = function() {
-    var msg = 'Could not copy, use &ltCtrl&gt + &ltС&gt insted!';
+    const msg = 'Could not copy, use &ltCtrl&gt + &ltС&gt insted!';
     
     if (!this._clipboard('copy'))
         smalltalk.alert(this._TITLE, msg);
@@ -463,7 +464,7 @@ Edward.prototype.copyToClipboard = function() {
 };
 
 Edward.prototype.cutToClipboard = function() {
-    var msg = 'Could not cut, use &ltCtrl&gt + &ltX&gt insted!';
+    const msg = 'Could not cut, use &ltCtrl&gt + &ltX&gt insted!';
     
     if (!this._clipboard('cut'))
         smalltalk.alert(this._TITLE, msg);
@@ -474,7 +475,7 @@ Edward.prototype.cutToClipboard = function() {
 };
 
 Edward.prototype.pasteFromClipboard = function() {
-    var msg = 'Could not paste, use &ltCtrl&gt + &ltV&gt insted!';
+    const msg = 'Could not paste, use &ltCtrl&gt + &ltV&gt insted!';
     
     if (!this._clipboard('paste'))
         smalltalk.alert(this._TITLE, msg);
@@ -482,42 +483,7 @@ Edward.prototype.pasteFromClipboard = function() {
     return this;
 };
 
-Edward.prototype._clipboard = function(cmd) {
-    var result,
-        value,
-        NAME        = 'editor-clipboard',
-        body        = document.body,
-        textarea    = document.createElement('textarea');
-    
-    if (!/^cut|copy|paste$/.test(cmd))
-        throw Error('cmd could be "paste", "cut" or "copy" only!');
-    
-    body.appendChild(textarea);
-    
-    if (cmd === 'paste') {
-        textarea.focus();
-        result = document.execCommand(cmd);
-        value = textarea.value;
-        
-        if (!result) {
-            this._showMessageOnce('Could not paste from clipboard. Inner buffer used.');
-            result  = true;
-            value   = this._story.getData(NAME);
-        }
-        
-        if (value)
-            this._Ace.insert(value);
-    } else {
-        textarea.value = this._Ace.getSelectedText();
-        this._story.setData(this._NAME, textarea.value);
-        textarea.select();
-        result = document.execCommand(cmd);
-    }
-    
-    body.removeChild(textarea);
-    
-    return result;
-};
+Edward.prototype._clipboard = _clipboard;
 
 Edward.prototype._getSession = function() {
     return this._Ace.getSession();
@@ -900,17 +866,16 @@ Edward.prototype._initSocket = function(error) {
 };
 
 Edward.prototype._readWithFlag = function(flag) {
-    var self    = this;
-    var edward  = this;
-    var path    = this._FileName + '?' + flag;
+    const edward = this;
+    const path = this._FileName + '?' + flag;
     
-    restafary.read(path, function(error, data) {
+    restafary.read(path, (error, data) => {
         if (error)
-            smalltalk.alert(self._TITLE, error);
-        else
-            edward
-                .setValue(data)
-                .moveCursorTo(0, 0);
+            return smalltalk.alert(this._TITLE, error);
+        
+        edward
+            .setValue(data)
+            .moveCursorTo(0, 0);
     });
 };
 
@@ -920,8 +885,8 @@ Edward.prototype._readWithFlag = function(flag) {
  * to upload file from download bar
  */
 Edward.prototype._onDragOver = function(event) {
-    var dataTransfer    = event.dataTransfer,
-        effectAllowed   = dataTransfer.effectAllowed;
+    const dataTransfer = event.dataTransfer;
+    const effectAllowed = dataTransfer.effectAllowed;
     
     if (/move|linkMove/.test(effectAllowed))
         dataTransfer.dropEffect = 'move';
@@ -932,80 +897,77 @@ Edward.prototype._onDragOver = function(event) {
 };
 
 Edward.prototype._onDrop = function(event) {
-    var edward = this;
-    var reader, files,
-        onLoad   =  function(event) {
-            var data    = event.target.result;
-            
-            edward.setValue(data);
-        };
+    const edward = this;
+    const onLoad = ({target}) => {
+        const {result} = target;
+        
+        edward.setValue(result);
+    };
     
     event.preventDefault();
     
-    files   = event.dataTransfer.files;
+    const files = [...event.dataTransfer.files];
     
-    [].forEach.call(files, function(file) {
-        reader  = new FileReader();
+    files.forEach((file) => {
+        const reader = new FileReader();
         reader.addEventListener('load', onLoad);
         reader.readAsBinaryString(file);
     });
 };
 
-function getModulePath(name, lib, ext) {
-    ext = ext || '.js';
-    
-    var libdir = '/';
-    var dir = '/modules/';
+function getModulePath(name, lib, ext = '.js') {
+    let libdir = '/';
+    const dir = '/modules/';
     
     if (lib)
         libdir  = '/' + lib + '/';
     
-    var path = dir + name + libdir + name + ext;
+    const path = dir + name + libdir + name + ext;
     
     return path;
 }
 
 Edward.prototype._loadFiles = function(callback) {
-    var PREFIX  = this._PREFIX;
-    var DIR     = this._DIR;
+    const PREFIX = this._PREFIX;
+    const DIR = this._DIR;
     
     exec.series([
         function(callback) {
-            var obj     = {
+            const obj     = {
                 loadRemote  : getModulePath('loadremote', 'lib'),
                 load        : getModulePath('load'),
                 Emitify     : getModulePath('emitify', 'dist', '.min.js'),
                 join        : '/join/join.js'
             };
             
-            var scripts = Object.keys(obj)
-                .filter(function(name) {
+            const scripts = Object.keys(obj)
+                .filter((name) => {
                     return !window[name];
                 })
-                .map(function(name) {
+                .map((name) => {
                     return PREFIX + obj[name];
                 });
             
-            exec.if(!scripts.length, callback, function() {
+            exec.if(!scripts.length, callback, () => {
                 loadScript(scripts, callback);
             });
         },
         
         function(callback) {
-            var names,
-                name        = 'smalltalk',
-                is          = window.Promise,
-                js          = '.min.js',
-                jsName      = is ? js : '.poly' + js,
-                dir         = '/modules/' + name + '/dist/',
-                isFlex      = function() {
-                    return document.body.style.flex !== 'undefined';
-                };
+            const name = 'smalltalk';
+            const is = window.Promise;
+            const js = '.min.js';
+            const dir = '/modules/' + name + '/dist/';
+            const isFlex = () => {
+                return document.body.style.flex !== undefined;
+            };
+            
+            let jsName = is ? js : '.poly' + js;
             
             if (!isFlex())
                 jsName = '.native' + jsName;
             
-            names = [jsName, '.min.css'].map(function(ext) {
+            const names = [jsName, '.min.css'].map((ext) => {
                 return PREFIX + dir + name + ext;
             });
             
@@ -1017,20 +979,19 @@ Edward.prototype._loadFiles = function(callback) {
         },
         
         function(callback) {
-            var css     = PREFIX + '/css/edward.css',
-                js      = PREFIX + '/restafary.js',
-                ace     = DIR + 'ace-builds/src-min/',
-                
-                url     = PREFIX + join([
-                    'language_tools',
-                    'searchbox',
-                    'modelist'
-                ].map(function(name) {
-                    return 'ext-' + name;
-                })
-                .map(function(name) {
-                    return ace + name + '.js';
-                }));
+            const css = PREFIX + '/css/edward.css';
+            const js = PREFIX + '/restafary.js';
+            const ace = DIR + 'ace-builds/src-min/';
+            const url = PREFIX + join([
+                'language_tools',
+                'searchbox',
+                'modelist'
+            ].map((name) => {
+                return 'ext-' + name;
+            })
+            .map((name) => {
+                return ace + name + '.js';
+            }));
             
             load.parallel([url, js, css], callback);
         },

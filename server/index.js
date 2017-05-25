@@ -97,11 +97,11 @@ function serve(options, req, res, next) {
     
     req.url = req.url.replace(prefix, '');
     
-    if (isDev)
-        req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
-    
     if (/^\/edward\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
+    
+    if (isDev)
+        req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
     
     next();
 }

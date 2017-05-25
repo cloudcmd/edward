@@ -37,7 +37,6 @@ module.exports = {
     devtool,
     entry: {
         edward: `${dir}/edward.js`,
-        emmet: `${dir}/emmet.js`,
     },
     output: {
         library: 'edward',
