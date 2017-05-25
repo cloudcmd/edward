@@ -654,11 +654,15 @@ Edward.prototype._zip = function(value, callback) {
 };
 
 Edward.prototype._setEmmet = function() {
-    const PREFIX = this._PREFIX;
-    const DIR = this._DIR;
-    const dir = PREFIX + DIR + 'ace-builds/src-min/';
-    const dirVendor = `${PREFIX}/vendor/`;
-    const extensions = this._Config.extensions;
+    const {
+        _DIR,
+        _PREFIX,
+    } = this
+    
+    const dir = _DIR + 'ace-builds/src-min/';
+    const dirVendor = '/vendor/';
+    
+    const {extensions} = this._Config;
     const isEmmet = extensions.emmet;
     
     if (!isEmmet)
@@ -667,7 +671,7 @@ Edward.prototype._setEmmet = function() {
     exec.if(this._Emmet, () => {
         this.setOption('enableEmmet', true);
     }, (callback) => {
-        const url = PREFIX + join([
+        const url = _PREFIX + join([
             dirVendor + 'emmet.js',
             dir + 'ext-emmet.js'
         ]);
