@@ -1,3 +1,10 @@
+2017.05.25, v4.5.2
+
+fix:
+- (edit) emmet: disable by default
+- (edward) window.exec
+
+
 2017.05.25, v4.5.1
 
 feature:
