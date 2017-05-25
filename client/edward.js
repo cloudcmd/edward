@@ -134,7 +134,7 @@ Edward.prototype._init = function(fn) {
                 const options = config.options || {};
                 const preventOverwrite = () => {
                     Object.keys(self._Config.options).forEach((name) => {
-                         options[name] = self._Config.options[name];
+                        options[name] = self._Config.options[name];
                     });
                 }
                 
@@ -158,42 +158,42 @@ Edward.prototype._addCommands = function() {
         }
     }
     const commands    = [{
-            name    : 'goToLine',
-            bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
-            exec    : () => {
-                edward.goToLine();
-            }
-        }, {
-            name    : 'save',
-            bindKey : { win: 'Ctrl-S',  mac: 'Command-S' },
-            exec    : run(() => {
-                edward.save();
-            })
-        }, {
-            name    : 'saveMC',
-            bindKey : { win: 'F2',  mac: 'F2' },
-            exec    : run(() => {
-                edward.save();
-            })
-        }, {
-            name    : 'beautify',
-            bindKey : { win: 'Ctrl-B',  mac: 'Command-B' },
-            exec    : run(() => {
-                edward.beautify();
-            })
-        }, {
-            name    : 'minify',
-            bindKey : { win: 'Ctrl-M',  mac: 'Command-M' },
-            exec    : run(() => {
-                edward.minify();
-            })
-        }, {
-            name    : 'evaluate',
-            bindKey : { win: 'Ctrl-E',  mac: 'Command-E' },
-            exec    : run(() => {
-                edward.evaluate();
-            })
-        }];
+        name    : 'goToLine',
+        bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
+        exec    : () => {
+            edward.goToLine();
+        }
+    }, {
+        name    : 'save',
+        bindKey : { win: 'Ctrl-S',  mac: 'Command-S' },
+        exec    : run(() => {
+            edward.save();
+        })
+    }, {
+        name    : 'saveMC',
+        bindKey : { win: 'F2',  mac: 'F2' },
+        exec    : run(() => {
+            edward.save();
+        })
+    }, {
+        name    : 'beautify',
+        bindKey : { win: 'Ctrl-B',  mac: 'Command-B' },
+        exec    : run(() => {
+            edward.beautify();
+        })
+    }, {
+        name    : 'minify',
+        bindKey : { win: 'Ctrl-M',  mac: 'Command-M' },
+        exec    : run(() => {
+            edward.minify();
+        })
+    }, {
+        name    : 'evaluate',
+        bindKey : { win: 'Ctrl-E',  mac: 'Command-E' },
+        exec    : run(() => {
+            edward.evaluate();
+        })
+    }];
     
     commands.forEach(addKey);
 };
@@ -258,7 +258,7 @@ Edward.prototype.goToLine = function() {
     const cursor = self.getCursor();
     const number = cursor.row + 1;
     
-    const gotToLine = (line) => {
+    const goToLine = (line) => {
         this._Ace.gotoLine(line);
     };
     
@@ -312,7 +312,7 @@ Edward.prototype.once = function(event, fn) {
     return this;
 };
 
-Edward.prototype.emit = function(event) {
+Edward.prototype.emit = function() {
     this._Emitter.emit.apply(this._Emitter, arguments);
     return this;
 };
@@ -525,8 +525,8 @@ Edward.prototype.sha = function(callback) {
 };
 
 Edward.prototype.beautify = function() {
-   this._readWithFlag('beautify');
-   return this;
+    this._readWithFlag('beautify');
+    return this;
 };
 
 Edward.prototype.minify = function() {
@@ -583,7 +583,7 @@ Edward.prototype._onSave = function(error, text) {
         
         dword.sha(function(error, hash) {
             if (error)
-                console.error(error);
+                return console.error(error);
             
             self._story.setData(FileName, Value)
                  .setHash(FileName, hash);
@@ -626,11 +626,11 @@ Edward.prototype._diff = function(newValue, callback) {
 Edward.prototype._loadDiff = function(callback) {
     var DIR = this._DIR;
     var url = this._PREFIX + join([
-            'google-diff-match-patch/diff_match_patch.js',
-            'daffy/lib/daffy.js'
-        ].map(function(name) {
-            return DIR + name;
-        }));
+        'google-diff-match-patch/diff_match_patch.js',
+        'daffy/lib/daffy.js'
+    ].map(function(name) {
+        return DIR + name;
+    }));
     
     load.js(url, callback);
 };
@@ -671,12 +671,12 @@ Edward.prototype._setJsHintConfig = function(callback) {
     
     exec.if(this._JSHintConfig, func, function() {
         load.json(JSHINT_PATH, function(error, json) {
-                if (error)
-                    smalltalk.alert(self._TITLE, error);
-                else
+            if (error)
+                smalltalk.alert(self._TITLE, error);
+            else
                     self._JSHintConfig = json;
                 
-                func();
+            func();
         });
     });
 };

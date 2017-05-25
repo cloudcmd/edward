@@ -1,3 +1,6 @@
+'use strict';
+
+/* global exec */
 module.exports = function() {
     const value = this.getValue();
     

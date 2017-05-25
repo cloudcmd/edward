@@ -1,5 +1,10 @@
 'use strict';
 
+/* global exec */
+/* global ace */
+/* global load */
+/* global join */
+
 module.exports = function() {
     const {
         _DIR,
