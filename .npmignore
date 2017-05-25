@@ -1,3 +1,4 @@
 .*
 !.jshintrc
+.webpack.config.js
 
