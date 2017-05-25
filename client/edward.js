@@ -1,6 +1,5 @@
 /* global smalltalk */
 /* global ace */
-/* global exec */
 /* global load */
 /* global io */
 /* global join */
@@ -10,6 +9,8 @@
 /* global loadRemote */
 
 'use strict';
+
+const exec = require('execon');
 
 const Story = require('./story');
 const _clipboard = require('./_clipboard');
@@ -62,10 +63,8 @@ function Edward(el, options, callback) {
     this._Element.addEventListener('drop', onDrop);
     this._Element.addEventListener('dragover', onDragOver);
     
-    loadScript(this._PREFIX + '/modules/execon/lib/exec.js', () => {
-        this._init(() => {
-            callback(this);
-        });
+    this._init(() => {
+        callback(this);
     });
     
     this._patch = function(path, patch) {

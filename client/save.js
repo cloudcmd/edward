@@ -1,6 +1,7 @@
 'use strict';
 
-/* global exec */
+const exec = require('execon');
+
 module.exports = function() {
     const value = this.getValue();
     

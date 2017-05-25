@@ -65,6 +65,7 @@
     "babel-preset-es2015": "^6.16.0",
     "emmet": "^1.6.3",
     "eslint": "^3.19.0",
+    "execon": "^1.2.9",
     "nodemon": "^1.11.0",
     "webpack": "^2.6.0"
   }

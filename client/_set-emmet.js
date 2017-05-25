@@ -1,6 +1,7 @@
 'use strict';
 
-/* global exec */
+const exec = require('execon');
+
 /* global ace */
 /* global load */
 /* global join */
