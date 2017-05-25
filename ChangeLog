@@ -1,3 +1,15 @@
+2017.05.25, v4.5.0
+
+fix:
+- (edward) _setEmmet
+
+feature:
+- (_set_emmet) add
+- (emmet) mv to vendor
+- (save) add
+- (edward) add webpack
+
+
 2017.05.23, v4.4.1
 
 feature:
