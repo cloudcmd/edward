@@ -13,6 +13,7 @@
 
 const Story = require('./story');
 const _clipboard = require('./_clipboard');
+const _setEmmet = require('./_set-emmet');
 const save = require('./save');
 
 module.exports = (el, options, callback) => {
@@ -653,37 +654,7 @@ Edward.prototype._zip = function(value, callback) {
     });
 };
 
-Edward.prototype._setEmmet = function() {
-    const {
-        _DIR,
-        _PREFIX,
-    } = this
-    
-    const dir = _DIR + 'ace-builds/src-min/';
-    const dirVendor = '/vendor/';
-    
-    const {extensions} = this._Config;
-    const isEmmet = extensions.emmet;
-    
-    if (!isEmmet)
-        return;
-    
-    exec.if(this._Emmet, () => {
-        this.setOption('enableEmmet', true);
-    }, (callback) => {
-        const url = _PREFIX + join([
-            dirVendor + 'emmet.js',
-            dir + 'ext-emmet.js'
-        ]);
-        
-        load.js(url, () => {
-            this._Emmet = ace.require('ace/ext/emmet');
-            this._Emmet.setCore(window.emmet);
-            
-            callback();
-        });
-    });
-};
+Edward.prototype._setEmmet = _setEmmet;
 
 Edward.prototype._setJsHintConfig = function(callback) {
     var self        = this;
