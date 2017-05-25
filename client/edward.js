@@ -13,15 +13,13 @@
 
 const Story = require('./story');
 const _clipboard = require('./_clipboard');
+const save = require('./save');
 
 module.exports = (el, options, callback) => {
     Edward(el, options, callback);
 }
 
 function Edward(el, options, callback) {
-    var onDrop, onDragOver;
-    var self = this;
-    
     if (!(this instanceof Edward))
         return new Edward(el, options, callback);
     
@@ -57,8 +55,8 @@ function Edward(el, options, callback) {
     
     this._Element = el || document.body;
     
-    onDrop = this._onDrop.bind(this);
-    onDragOver = this._onDragOver.bind(this);
+    const onDrop = this._onDrop.bind(this);
+    const onDragOver = this._onDragOver.bind(this);
     
     this._Element.addEventListener('drop', onDrop);
     this._Element.addEventListener('dragover', onDragOver);
@@ -354,10 +352,8 @@ Edward.prototype.setValueFirst = function(name, value) {
 };
 
 Edward.prototype.setOption = function(name, value) {
-    var self = this;
-    
-    const preventOverwrite = function() {
-        self._Config.options[name] = value;
+    const preventOverwrite = () => {
+        this._Config.options[name] = value;
     };
     
     preventOverwrite();
@@ -490,8 +486,6 @@ Edward.prototype._getSession = function() {
 };
 
 Edward.prototype.showMessage = function(text) {
-    var self = this;
-    
     var HIDE_TIME   = 2000;
     
     if (!this._ElementMsg) {
@@ -502,23 +496,24 @@ Edward.prototype.showMessage = function(text) {
     this._ElementMsg.textContent = text;
     this._ElementMsg.hidden = false;
     
-    setTimeout(function() {
-        self._ElementMsg.hidden = true;
+    setTimeout(() => {
+        this._ElementMsg.hidden = true;
     }, HIDE_TIME);
     
     return this;
 };
 
-Edward.prototype.sha          = function(callback) {
+Edward.prototype.sha = function(callback) {
     var self    = this;
     var url     = this._PREFIX + this._DIR + 'jsSHA/src/sha.js';
     
     load.js(url, function() {
-        var shaObj, hash, error,
-            value   = self.getValue();
+        let hash;
         
-        error = exec.try(function() {
-            shaObj  = new window.jsSHA('SHA-1', 'TEXT');
+        const value = self.getValue();
+        
+        const error = exec.try(() => {
+            const shaObj = new window.jsSHA('SHA-1', 'TEXT');
             shaObj.update(value);
             hash    = shaObj.getHash('HEX');
         });
@@ -539,48 +534,7 @@ Edward.prototype.minify = function() {
     return this;
 };
 
-Edward.prototype.save = function() {
-    var self    = this;
-    var value   = this.getValue();
-    
-    this._loadOptions(function(error, config) {
-        var isDiff      = config.diff,
-            isZip       = config.zip,
-            doDiff      = self._doDiff.bind(self);
-        
-        exec.if(!isDiff, function(patch) {
-            var query           = '',
-                patchLength     = patch && patch.length || 0,
-                length          = self._Value.length,
-                isLessMaxLength = length < self._MAX_FILE_SIZE,
-                isLessLength    = isLessMaxLength && patchLength < length,
-                isStr           = typeof patch === 'string',
-                isPatch         = patch && isStr && isLessLength;
-            
-            self._Value               = value;
-            
-            exec.if(!isZip || isPatch, function(equal, data) {
-                var result  = data || self._Value;
-                
-                if (isPatch)
-                    self._patch(self._FileName, patch);
-                else
-                    self._write(self._FileName + query, result);
-            }, function(func) {
-                self._zip(value, function(error, data) {
-                    if (error)
-                        console.error(error);
-                    
-                    query = '?unzip';
-                    func(null, data);
-                });
-            });
-            
-        }, exec.with(doDiff, self._FileName));
-    });
-    
-    return this;
-};
+Edward.prototype.save = save;
 
 Edward.prototype._loadOptions = function(callback) {
     var self = this;
@@ -1004,28 +958,34 @@ Edward.prototype._loadFiles = function(callback) {
 };
 
 function loadScript(srcs, callback) {
-    var i,
-        func    = function() {
-            --i;
-            
-            if (!i)
-                callback();
-        };
+    const func = () => {
+        --i;
+        
+        if (!i)
+            callback();
+    };
     
-    if (typeof srcs === 'string')
-        srcs = [srcs];
+    const toArray = (value) => {
+        if (typeof value === 'string')
+            return [value];
+        
+        return value;
+    };
     
-    i = srcs.length;
+    const array = toArray(srcs);
+    let i = array.length;
     
-    srcs.forEach(function(src) {
-        var element = document.createElement('script');
-    
+    array.map((src) => {
+        const element = document.createElement('script');
+         
         element.src = src;
         element.addEventListener('load', function load() {
             func();
             element.removeEventListener('load', load);
         });
-    
+        
+        return element;
+    }).forEach((element) => {
         document.body.appendChild(element);
     });
 }
