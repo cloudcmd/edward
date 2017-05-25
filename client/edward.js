@@ -226,15 +226,14 @@ function createMsg() {
 Edward.prototype._addKey = function(options) {
     this._Ace.commands.addCommand(options);
 };
-    
+
 Edward.prototype.addKeyMap = function(keyMap) {
     const self = this;
-    const map = [];
     
-    if (typeof map !== 'object')
+    if (typeof keyMap !== 'object')
         throw Error('map should be object!');
     
-    map = Object.keys(keyMap).map((name, i) => {
+    const map = Object.keys(keyMap).map((name, i) => {
         const key = {
             name: String(Math.random()) + i,
             bindKey : {
@@ -655,32 +654,31 @@ Edward.prototype._zip = function(value, callback) {
 };
 
 Edward.prototype._setEmmet = function() {
-    var self = this;
-    var PREFIX = this._PREFIX;
-    var DIR = this._DIR;
-    var dir = PREFIX + DIR + 'ace-builds/src-min/';
-    var dirClient = PREFIX + '/client/';
-    var extensions = this._Config.extensions;
-    var isEmmet = extensions.emmet;
+    const PREFIX = this._PREFIX;
+    const DIR = this._DIR;
+    const dir = PREFIX + DIR + 'ace-builds/src-min/';
+    const dirVendor = `${PREFIX}/vendor/`;
+    const extensions = this._Config.extensions;
+    const isEmmet = extensions.emmet;
     
-    if (isEmmet)
-        exec.if(this._Emmet, function() {
-            this.setOption('enableEmmet', true);
-        }, function(callback) {
-            var url;
+    if (!isEmmet)
+        return;
+    
+    exec.if(this._Emmet, () => {
+        this.setOption('enableEmmet', true);
+    }, (callback) => {
+        const url = PREFIX + join([
+            dirVendor + 'emmet.js',
+            dir + 'ext-emmet.js'
+        ]);
+        
+        load.js(url, () => {
+            this._Emmet = ace.require('ace/ext/emmet');
+            this._Emmet.setCore(window.emmet);
             
-            url = PREFIX + join([
-                dirClient   + 'emmet.js',
-                dir         + 'ext-emmet.js'
-            ]);
-            
-            load.js(url, function() {
-                self._Emmet = ace.require('ace/ext/emmet');
-                self._Emmet.setCore(window.emmet);
-                
-                callback();
-            });
+            callback();
         });
+    });
 };
 
 Edward.prototype._setJsHintConfig = function(callback) {
