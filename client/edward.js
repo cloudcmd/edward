@@ -719,78 +719,75 @@ function getHost() {
 }
 
 Edward.prototype._initSocket = function(error) {
-    var socket,
-        self            = this,
-        edward          = this,
-        href            = getHost(),
-        FIVE_SECONDS    = 5000,
-        patch    = function(name, data) {
-            socket.emit('patch', name, data);
-        };
+    const edward = this;
+    const href = getHost();
+    const FIVE_SECONDS = 5000;
+    const patch = (name, data) => {
+        socket.emit('patch', name, data);
+    };
+    
+    if (error)
+        return;
+   
+    const socket = io.connect(href + this._PREFIX, {
+        'max reconnection attempts' : Math.pow(2, 32),
+        'reconnection limit'        : FIVE_SECONDS,
+        path                        : this._SOCKET_PATH + '/socket.io'
+    });
+    
+    this._socket = socket;
+    
+    socket.on('reject', () => {
+        this.emit('reject');
+    });
+    
+    socket.on('connect', () => {
+        edward._patch = patch;
+    });
+    
+    socket.on('message', (msg) => {
+        this._onSave(null, msg);
+    });
+    
+    socket.on('file', (name, data) => {
+        edward.setModeForPath(name)
+            .setValueFirst(name, data)
+            .moveCursorTo(0, 0);
+    });
+    
+    socket.on('patch', (name, data, hash) => {
+        if (name !== self._FileName)
+            return;
         
-    if (!error) {
-        socket  = io.connect(href + this._PREFIX, {
-            'max reconnection attempts' : Math.pow(2, 32),
-            'reconnection limit'        : FIVE_SECONDS,
-            path                        : this._SOCKET_PATH + '/socket.io'
-        });
-        
-        self._socket = socket;
-        
-        socket.on('reject', function() {
-            self.emit('reject');
-        });
-        
-        socket.on('connect', function() {
-            edward._patch = patch;
-        });
-        
-        socket.on('message', function(msg) {
-            self._onSave(null, msg);
-        });
-        
-        socket.on('file', function(name, data) {
-            edward.setModeForPath(name)
-                .setValueFirst(name, data)
-                .moveCursorTo(0, 0);
-        });
-        
-        socket.on('patch', function(name, data, hash) {
-            if (name !== self._FileName)
-                return;
+        this._loadDiff((error) => {
+            if (error)
+                return console.error(error);
             
-            self._loadDiff(function(error) {
-                var cursor, value;
+            if (hash !== self._story.getHash(name))
+                return;
                 
-                if (error)
-                    return console.error(error);
+            const cursor = edward.getCursor();
+            const value = edward.getValue();
+            const result = daffy.applyPatch(value, data);
+            
+            edward.setValue(result);
+            
+            edward.sha((error, hash) => {
+                this._story.setData(name, value)
+                    .setHash(name, hash);
                 
-                if (hash !== self._story.getHash(name))
-                    return;
-                    
-                cursor  = edward.getCursor(),
-                value   = edward.getValue();
-                value   = daffy.applyPatch(value, data);
-                
-                edward.setValue(value);
-                
-                edward.sha(function(error, hash) {
-                    self._story.setData(name, value)
-                         .setHash(name, hash);
-                    
-                    edward.moveCursorTo(cursor.row, cursor.column);
-                });
+                edward.moveCursorTo(cursor.row, cursor.column);
             });
         });
-        
-        socket.on('disconnect', function() {
-            edward.save.patch = self._patchHttp;
-        });
-        
-        socket.on('err', function(error) {
-            smalltalk.alert(self._TITLE, error);
-        });
-    }
+    });
+    
+    socket.on('disconnect', () => {
+        edward.save.patch = self._patchHttp;
+    });
+    
+    socket.on('err', (error) => {
+        smalltalk.alert(self._TITLE, error);
+    });
 };
 
 Edward.prototype._readWithFlag = function(flag) {
