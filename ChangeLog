@@ -1,3 +1,11 @@
+2017.06.06, v4.5.3
+
+feature:
+- (_init-socket) add
+- (gitignore) add package-lock.json
+- (travis) node_js: 8
+
+
 2017.05.25, v4.5.2
 
 fix:
