@@ -588,7 +588,7 @@ Edward.prototype._onSave = function(error, text) {
                 return console.error(error);
             
             self._story.setData(FileName, Value)
-                 .setHash(FileName, hash);
+                .setHash(FileName, hash);
         });
         
         self._Emitter.emit('save', Value.length);
@@ -676,7 +676,7 @@ Edward.prototype._setJsHintConfig = function(callback) {
             if (error)
                 smalltalk.alert(self._TITLE, error);
             else
-                    self._JSHintConfig = json;
+                self._JSHintConfig = json;
                 
             func();
         });
@@ -836,9 +836,9 @@ Edward.prototype._loadFiles = function(callback) {
             ].map((name) => {
                 return 'ext-' + name;
             })
-            .map((name) => {
-                return ace + name + '.js';
-            }));
+                .map((name) => {
+                    return ace + name + '.js';
+                }));
             
             load.parallel([url, js, css], callback);
         },
