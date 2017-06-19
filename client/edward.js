@@ -102,48 +102,47 @@ Edward.prototype._showMessageOnce = function(msg) {
 function empty() {}
 
 Edward.prototype._init = function(fn) {
-    const self = this;
     const edward = this;
     const loadFiles = this._loadFiles.bind(this);
     const initSocket = _initSocket.bind(this);
     
     exec.series([
         loadFiles,
-        function(callback) {
+        (callback) => {
             loadRemote('socket', {
                 name : 'io',
-                prefix: self._SOCKET_PATH,
-            }, function(error) {
+                prefix: this._SOCKET_PATH,
+            }, (error) => {
                 !error && initSocket();
                 callback();
             });
         },
-        function() {
-            self._Emitter = Emitify();
-            self._Ace = ace.edit(self._Element);
-            self._Modelist = ace.require('ace/ext/modelist');
+        () => {
+            this._Emitter = Emitify();
+            this._Ace = ace.edit(this._Element);
+            this._Modelist = ace.require('ace/ext/modelist');
             
-            self._Emitter.on('auth', function(username, password) {
-                self._socket.emit('auth', username, password);
+            this._Emitter.on('auth', (username, password) => {
+                this._socket.emit('auth', username, password);
             });
             
             ace.require('ace/ext/language_tools');
             
-            self._addCommands();
-            self._Ace.$blockScrolling = Infinity;
+            this._addCommands();
+            this._Ace.$blockScrolling = Infinity;
             
-            load.json(self._PREFIX + '/edit.json', (error, config) => {
+            load.json(this._PREFIX + '/edit.json', (error, config) => {
                 const options = config.options || {};
                 const preventOverwrite = () => {
-                    Object.keys(self._Config.options).forEach((name) => {
-                        options[name] = self._Config.options[name];
+                    Object.keys(this._Config.options).forEach((name) => {
+                        options[name] = this._Config.options[name];
                     });
                 }
                 
                 fn();
                 preventOverwrite();
                 
-                self._Config = config;
+                this._Config = config;
                 
                 edward.setOptions(options);
             });
@@ -231,8 +230,6 @@ Edward.prototype._addKey = function(options) {
 };
 
 Edward.prototype.addKeyMap = function(keyMap) {
-    const self = this;
-    
     if (typeof keyMap !== 'object')
         throw Error('map should be object!');
     
@@ -249,15 +246,14 @@ Edward.prototype.addKeyMap = function(keyMap) {
         return key;
     });
     
-    map.forEach(self._addKey());
+    map.forEach(this._addKey());
     
     return this;
 };
 
 Edward.prototype.goToLine = function() {
-    const self = this;
     const msg = 'Enter line number:';
-    const cursor = self.getCursor();
+    const cursor = this.getCursor();
     const number = cursor.row + 1;
     
     const goToLine = (line) => {
@@ -488,7 +484,7 @@ Edward.prototype._getSession = function() {
 };
 
 Edward.prototype.showMessage = function(text) {
-    var HIDE_TIME   = 2000;
+    const HIDE_TIME = 2000;
     
     if (!this._ElementMsg) {
         this._ElementMsg = createMsg();
@@ -506,18 +502,17 @@ Edward.prototype.showMessage = function(text) {
 };
 
 Edward.prototype.sha = function(callback) {
-    var self    = this;
-    var url     = this._PREFIX + this._DIR + 'jsSHA/src/sha.js';
+    const url = this._PREFIX + this._DIR + 'jsSHA/src/sha.js';
     
-    load.js(url, function() {
+    load.js(url, () => {
         let hash;
         
-        const value = self.getValue();
+        const value = this.getValue();
         
         const error = exec.try(() => {
             const shaObj = new window.jsSHA('SHA-1', 'TEXT');
             shaObj.update(value);
-            hash    = shaObj.getHash('HEX');
+            hash = shaObj.getHash('HEX');
         });
         
         callback(error, hash);
@@ -539,68 +534,67 @@ Edward.prototype.minify = function() {
 Edward.prototype.save = save;
 
 Edward.prototype._loadOptions = function(callback) {
-    var self = this;
-    var url = this._PREFIX + '/options.json';
+    const url = this._PREFIX + '/options.json';
     
-    if (self._Options)
-        callback(null, self._Options);
-    else
-        load.json(url, function(error, data) {
-            self._Options = data;
-            callback(error, data);
-        });
+    if (this._Options)
+        return callback(null, this._Options);
+    
+    load.json(url, (error, data) => {
+        this._Options = data;
+        callback(error, data);
+    });
 };
     
 Edward.prototype._patchHttp = function(path, patch) {
-    var onSave = this._onSave.bind(this);
+    const onSave = this._onSave.bind(this);
     restafary.patch(path, patch, onSave);
 };
 
 Edward.prototype._writeHttp = function(path, result) {
-    var onSave = this._onSave.bind(this);
+    const onSave = this._onSave.bind(this);
     restafary.write(path, result, onSave);
 };
 
 Edward.prototype._onSave = function(error, text) {
-    var self        = this,
-        dword       = this,
-        Value       = self._Value,
-        FileName    = self._FileName,
-        msg         = 'Try again?';
-        
+    const edward = this;
+    
+    const Value = this._Value;
+    const FileName = this._FileName;
+    let msg = 'Try again?';
+    
     if (error) {
         if (error.message)
             msg = error.message + '\n' + msg;
         else
             msg = 'Can\'t save.' + msg;
         
-        smalltalk.confirm(this._TITLE, msg).then(function() {
-            var onSave = self._onSave.bind(self);
-            restafary.write(self._FileName, self._Value, onSave);
-        }).catch(empty).then(function(){
-            dword.focus();
-        });
-    } else {
-        dword.showMessage(text);
+        const onSave = this._onSave.bind(this);
         
-        dword.sha(function(error, hash) {
-            if (error)
-                return console.error(error);
-            
-            self._story.setData(FileName, Value)
-                .setHash(FileName, hash);
+        return smalltalk.confirm(this._TITLE, msg).then(() => {
+            restafary.write(this._FileName, this._Value, onSave);
+        }).catch(empty).then(()=> {
+            edward.focus();
         });
-        
-        self._Emitter.emit('save', Value.length);
     }
+    
+    edward.showMessage(text);
+    
+    edward.sha((error, hash) => {
+        if (error)
+            return console.error(error);
+    
+        this._story.setData(FileName, Value)
+            .setHash(FileName, hash);
+    });
+
+    this._Emitter.emit('save', Value.length);
 };
 
 Edward.prototype._doDiff = function(path, callback) {
-    var self    = this;
-    var value   = this.getValue();
+    const value = this.getValue();
     
-    this._diff(value, function(patch) {
-        self._story.checkHash(path, function(error, equal) {
+    this._diff(value, (patch) => {
+        this._story.checkHash(path, (error, equal) => {
             if (!equal)
                 patch = '';
             
@@ -610,27 +604,22 @@ Edward.prototype._doDiff = function(path, callback) {
 };
 
 Edward.prototype._diff = function(newValue, callback) {
-    var self = this;
-    
-    this._loadDiff(function(error) {
-        var patch;
+    this._loadDiff((error) => {
+        if (error)
+            return smalltalk.alert(this._TITLE, error);
         
-        if (error) {
-            smalltalk.alert(self._TITLE, error);
-        } else {
-            self._Value   = self._story.getData(self._FileName);
-            patch   = daffy.createPatch(self._Value, newValue);
-            callback(patch);
-        }
+        this._Value = this._story.getData(this._FileName);
+        const patch = daffy.createPatch(this._Value, newValue);
+        callback(patch);
     });
 };
 
 Edward.prototype._loadDiff = function(callback) {
-    var DIR = this._DIR;
-    var url = this._PREFIX + join([
+    const DIR = this._DIR;
+    const url = this._PREFIX + join([
         'google-diff-match-patch/diff_match_patch.js',
         'daffy/lib/daffy.js'
-    ].map(function(name) {
+    ].map((name) => {
         return DIR + name;
     }));
     
@@ -638,75 +627,72 @@ Edward.prototype._loadDiff = function(callback) {
 };
 
 Edward.prototype._zip = function(value, callback) {
-    var self = this;
+    const prefix = this._PREFIX;
     
     exec.parallel([
-        function(callback) {
-            var url = self._PREFIX + self._DIR + 'zipio/lib/zipio.js';
+        (callback) => {
+            const url = prefix + this._DIR + 'zipio/lib/zipio.js';
             load.js(url, callback);
         },
-        function(callback) {
-            loadRemote('pako', {prefix: self._PREFIX}, callback);
+        (callback) => {
+            loadRemote('pako', {prefix}, callback);
         }
-    ], function(error) {
+    ], (error) => {
         if (error)
-            smalltalk.alert(self._TITLE, error);
-        else
-            global.zipio(value, callback);
+            return smalltalk.alert(this._TITLE, error);
+        
+        global.zipio(value, callback);
     });
 };
 
 Edward.prototype._setEmmet = _setEmmet;
 
 Edward.prototype._setJsHintConfig = function(callback) {
-    var self        = this;
-    var JSHINT_PATH = this._PREFIX + '/jshint.json',
-        func        = function() {
-            var session = self._getSession(),
-                worker  = session.$worker;
+    const JSHINT_PATH = this._PREFIX + '/jshint.json',
+        func = () => {
+            const session = this._getSession();
+            const worker = session.$worker;
             
             if (worker)
-                worker.send('changeOptions', [self._JSHintConfig]);
+                worker.send('changeOptions', [this._JSHintConfig]);
             
             exec(callback);
         };
     
-    exec.if(this._JSHintConfig, func, function() {
-        load.json(JSHINT_PATH, function(error, json) {
+    exec.if(this._JSHintConfig, func, () => {
+        load.json(JSHINT_PATH, (error, json) => {
             if (error)
-                smalltalk.alert(self._TITLE, error);
+                smalltalk.alert(this._TITLE, error);
             else
-                self._JSHintConfig = json;
-                
+                this._JSHintConfig = json;
+            
             func();
         });
     });
 };
 
 Edward.prototype._addExt = function(name, fn) {
-    var self = this;
+    if (this._Ext)
+        return add(null, this._Ext);
     
-    if (!this._Ext)
-        load.json(this._PREFIX + '/json/ext.json', function(error, data) {
-            self._Ext = data;
-            add(error, self._Ext);
-        });
-    else
-        add(null, this._Ext);
+    load.json(this._PREFIX + '/json/ext.json', (error, data) => {
+        this._Ext = data;
+        add(error, this._Ext);
+    });
     
     function add(error, exts) {
         if (error)
-            console.error(Error('Could not load ext.json!'));
-        else
-            Object.keys(exts).some(function(ext) {
-                var arr = exts[ext],
-                    is  = ~arr.indexOf(name);
-                
-                if (is)
-                    name += '.' + ext;
-                
-                return is;
-            });
+            return console.error(Error('Could not load ext.json!'));
+        
+        Object.keys(exts).some((ext) => {
+            const arr = exts[ext];
+            const is = ~arr.indexOf(name);
+            
+            if (is)
+                name += '.' + ext;
+            
+            return is;
+        });
         
         fn(name);
     }
