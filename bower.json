@@ -22,9 +22,9 @@
     "loadremote": "~1.2.0",
     "jsSHA": "^2.1.0",
     "zipio": "1.0.2",
-    "ace-builds": "1.2.6",
     "requirejs": "2.3.3",
     "emitify": "3.1.0",
-    "smalltalk": "2.4.0"
+    "smalltalk": "2.4.0",
+    "ace-builds": "1.2.7"
   }
 }
