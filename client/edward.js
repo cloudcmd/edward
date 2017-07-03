@@ -586,7 +586,7 @@ Edward.prototype._onSave = function(error, text) {
         this._story.setData(FileName, Value)
             .setHash(FileName, hash);
     });
-
+    
     this._Emitter.emit('save', Value.length);
 };
 
