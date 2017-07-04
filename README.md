@@ -72,7 +72,6 @@ const express = require('express');
 const app = express();
 
 app.use(edward({
-    minify  : true,  /* default */
     online  : true,  /* default */
     diff    : true,  /* default */
     zip     : true,  /* default */
