@@ -9,6 +9,8 @@
 
 'use strict';
 
+require('../css/edward.css');
+
 const exec = require('execon');
 
 window.exec = window.exec || exec;
@@ -812,7 +814,6 @@ Edward.prototype._loadFiles = function(callback) {
         },
         
         function(callback) {
-            const css = PREFIX + '/css/edward.css';
             const js = PREFIX + '/restafary.js';
             const ace = DIR + 'ace-builds/src-min/';
             const url = PREFIX + join([
@@ -822,11 +823,11 @@ Edward.prototype._loadFiles = function(callback) {
             ].map((name) => {
                 return 'ext-' + name;
             })
-                .map((name) => {
-                    return ace + name + '.js';
-                }));
+            .map((name) => {
+                return ace + name + '.js';
+            }));
             
-            load.parallel([url, js, css], callback);
+            load.parallel([url, js], callback);
         },
         
         function() {
