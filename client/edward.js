@@ -612,25 +612,6 @@ Edward.prototype._diff = function(newValue, callback) {
     callback(patch);
 };
 
-Edward.prototype._zip = function(value, callback) {
-    const prefix = this._PREFIX;
-    
-    exec.parallel([
-        (callback) => {
-            const url = prefix + this._DIR + 'zipio/lib/zipio.js';
-            load.js(url, callback);
-        },
-        (callback) => {
-            loadRemote('pako', {prefix}, callback);
-        }
-    ], (error) => {
-        if (error)
-            return smalltalk.alert(this._TITLE, error);
-        
-        global.zipio(value, callback);
-    });
-};
-
 Edward.prototype._setEmmet = _setEmmet;
 
 Edward.prototype._setJsHintConfig = function(callback) {

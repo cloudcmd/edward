@@ -1,6 +1,7 @@
 'use strict';
 
 const exec = require('execon');
+const zipio = require('zipio');
 
 module.exports = function() {
     const value = this.getValue();
@@ -30,7 +31,7 @@ module.exports = function() {
                 
                 this._write(this._FileName + query, result);
             }, (func) => {
-                this._zip(value, (error, data) => {
+                zipio(value, (error, data) => {
                     if (error)
                         console.error(error);
                     
