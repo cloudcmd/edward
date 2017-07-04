@@ -5,12 +5,12 @@
 /* global restafary */
 /* global Emitify */
 /* global loadRemote */
-/* global daffy */
 
 'use strict';
 
 require('../css/edward.css');
 
+const daffy = require('daffy');
 const exec = require('execon');
 
 window.exec = window.exec || exec;
@@ -606,26 +606,10 @@ Edward.prototype._doDiff = function(path, callback) {
 };
 
 Edward.prototype._diff = function(newValue, callback) {
-    this._loadDiff((error) => {
-        if (error)
-            return smalltalk.alert(this._TITLE, error);
-        
-        this._Value = this._story.getData(this._FileName);
-        const patch = daffy.createPatch(this._Value, newValue);
-        callback(patch);
-    });
-};
-
-Edward.prototype._loadDiff = function(callback) {
-    const DIR = this._DIR;
-    const url = this._PREFIX + join([
-        'google-diff-match-patch/diff_match_patch.js',
-        'daffy/lib/daffy.js'
-    ].map((name) => {
-        return DIR + name;
-    }));
+    this._Value = this._story.getData(this._FileName);
+    const patch = daffy.createPatch(this._Value, newValue);
     
-    load.js(url, callback);
+    callback(patch);
 };
 
 Edward.prototype._zip = function(value, callback) {
