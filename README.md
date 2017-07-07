@@ -126,7 +126,7 @@ For more information you could always look around into `assets` and `bin` direct
 In old `node.js` environments that supports `es5` only, `dword` could be used with:
 
 ```js
-var edward = require('dword/legacy');
+var edward = require('edward/legacy');
 ```
 
 ## Related
