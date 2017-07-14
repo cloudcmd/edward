@@ -29,15 +29,14 @@
     "lint:client": "eslint --env browser --rule 'no-console:0' client",
     "lint:server": "eslint server",
     "watch:server": "npm run watcher -- bin/edward.js package.json",
-    "build": "redrun build:* legacy:*",
+    "build": "redrun build:*",
     "build:client": "webpack --progress",
     "build:client:dev": "NODE_ENV=development redrun build:client",
     "watcher": "nodemon -w client -w server --exec",
     "watch:lint": "npm run watcher -- 'npm run lint'",
     "watch:client": "redrun build:client -- --watch",
     "watch:client:dev": "redrun build:client:dev -- --watch",
-    "wisdom": "npm run build",
-    "legacy:index": "echo \"module.exports = require('../server_');\" > legacy/index.js"
+    "wisdom": "npm run build"
   },
   "bin": {
     "edward": "bin/edward.js"
@@ -54,7 +53,7 @@
     "rendy": "^1.1.0",
     "restafary": "^2.0.0",
     "socket-file": "^1.3.0",
-    "socket.io": "^1.0.0"
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
