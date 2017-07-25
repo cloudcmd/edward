@@ -20,9 +20,9 @@
     "load": "~1.1.4",
     "loadremote": "~1.2.0",
     "jsSHA": "^2.1.0",
-    "requirejs": "2.3.3",
     "emitify": "3.1.0",
     "ace-builds": "1.2.8",
-    "smalltalk": "2.4.1"
+    "smalltalk": "2.4.1",
+    "requirejs": "2.3.4"
   }
 }
