@@ -1,3 +1,11 @@
+2017.09.22, v6.0.3
+
+feature:
+- (bower) smalltalk v2.4.2
+- (package) babel-preset-es2015 -> babel-preset-env
+- (bower) requirejs v2.3.5
+
+
 2017.07.25, v6.0.2
 
 feature:
