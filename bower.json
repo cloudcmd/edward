@@ -22,7 +22,7 @@
     "jsSHA": "^2.1.0",
     "emitify": "3.1.0",
     "ace-builds": "1.2.8",
-    "smalltalk": "2.4.1",
-    "requirejs": "2.3.5"
+    "requirejs": "2.3.5",
+    "smalltalk": "2.4.2"
   }
 }
