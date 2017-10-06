@@ -1,9 +1,4 @@
 [{
-    "name": "requirejs",
-    "version": "2.3.2",
-    "local": "/modules/requirejs/require.js",
-    "remote": "//cdnjs.cloudflare.com/ajax/libs/require.js/{{ version }}/require.min.js"
-}, {
     "name": "socket",
     "version": "2.0.3",
     "local": "/socket.io/socket.io.js",
