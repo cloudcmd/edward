@@ -13,6 +13,7 @@
     },
     
     "extensions": {
-        "emmet": false
+        "emmet1": false,
+        "emmet": true
     }
 }

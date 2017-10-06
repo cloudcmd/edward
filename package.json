@@ -30,6 +30,7 @@
     "lint:server": "eslint server",
     "watch:server": "npm run watcher -- bin/edward.js package.json",
     "build": "redrun build:*",
+    "prebuild": "rimraf dist*",
     "build:client": "webpack --progress",
     "build:client:dev": "NODE_ENV=development redrun build:client",
     "watcher": "nodemon -w client -w server --exec",
@@ -65,7 +66,9 @@
     "emmet": "^1.6.3",
     "eslint": "^4.0.0",
     "execon": "^1.2.9",
+    "load.js": "^1.1.4",
     "nodemon": "^1.11.0",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.19.0",
     "webpack": "^3.0.0",
     "zipio": "^1.0.2"

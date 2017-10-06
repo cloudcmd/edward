@@ -1,9 +1,9 @@
 'use strict';
 
 const exec = require('execon');
+const load = require('load.js');
 
 /* global ace */
-/* global load */
 /* global join */
 
 module.exports = function() {

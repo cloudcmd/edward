@@ -1,6 +1,5 @@
 /* global smalltalk */
 /* global ace */
-/* global load */
 /* global join */
 /* global restafary */
 /* global Emitify */
@@ -12,7 +11,9 @@ require('../css/edward.css');
 
 const daffy = require('daffy');
 const exec = require('execon');
+const load = require('load.js');
 
+window.load = window.load || load;
 window.exec = window.exec || exec;
 
 const Story = require('./story');
@@ -735,7 +736,6 @@ Edward.prototype._loadFiles = function(callback) {
         function(callback) {
             const obj     = {
                 loadRemote  : getModulePath('loadremote', 'lib'),
-                load        : getModulePath('load'),
                 Emitify     : getModulePath('emitify', 'dist', '.min.js'),
                 join        : '/join/join.js'
             };
@@ -749,7 +749,7 @@ Edward.prototype._loadFiles = function(callback) {
                 });
             
             exec.if(!scripts.length, callback, () => {
-                loadScript(scripts, callback);
+                load.parallel(scripts, callback);
             });
         },
         
@@ -801,37 +801,4 @@ Edward.prototype._loadFiles = function(callback) {
         }
     ]);
 };
-
-function loadScript(srcs, callback) {
-    const func = () => {
-        --i;
-        
-        if (!i)
-            callback();
-    };
-    
-    const toArray = (value) => {
-        if (typeof value === 'string')
-            return [value];
-        
-        return value;
-    };
-    
-    const array = toArray(srcs);
-    let i = array.length;
-    
-    array.map((src) => {
-        const element = document.createElement('script');
-         
-        element.src = src;
-        element.addEventListener('load', function load() {
-            func();
-            element.removeEventListener('load', load);
-        });
-        
-        return element;
-    }).forEach((element) => {
-        document.body.appendChild(element);
-    });
-}
 
