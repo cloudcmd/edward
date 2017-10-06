@@ -17,6 +17,7 @@ const Router = express.Router;
 const rootStorage = storage();
 const optionsStorage = storage();
 
+const edward = currify(_edward);
 const optionsFn = currify(configFn);
 const restafaryFn = currify(_restafaryFn);
 const joinFn = currify(_joinFn);
@@ -43,7 +44,7 @@ module.exports = (options) => {
     const prefix = options.prefix || '/edward';
     
     router.route(prefix + '/*')
-        .get(edward(options))
+        .get(edward(prefix))
         .get(optionsFn(options))
         .get(editFn)
         .get(modulesFn)
@@ -80,13 +81,7 @@ function checkOption(isOption) {
     return isOption;
 }
 
-function edward(options) {
-    return serve.bind(null, options);
-}
-
-function serve(options, req, res, next) {
-    const o = options || {};
-    const prefix = o.prefix || '/edward';
+function _edward(prefix, req, res, next) {
     const url = req.url
     
     if (url.indexOf(prefix))
