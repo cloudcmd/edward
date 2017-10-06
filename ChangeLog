@@ -1,3 +1,10 @@
+2017.10.06, v6.0.5
+
+feature:
+- (bower) rm unused requirejs
+- (package) add load.js from npm
+
+
 2017.10.06, v6.0.4
 
 fix:

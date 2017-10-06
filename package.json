@@ -1,6 +1,6 @@
 {
   "name": "edward",
-  "version": "6.0.4",
+  "version": "6.0.5",
   "description": "web editor based on Ace",
   "main": "server/index.js",
   "repository": {
@@ -63,7 +63,6 @@
     "clean-css-loader": "^0.1.2",
     "css-loader": "^0.28.4",
     "daffy": "^1.0.3",
-    "emmet": "^1.6.3",
     "eslint": "^4.0.0",
     "execon": "^1.2.9",
     "load.js": "^1.1.4",
