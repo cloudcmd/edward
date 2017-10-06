@@ -1,3 +1,13 @@
+2017.10.06, v6.0.4
+
+fix:
+- feature(edward) serve options -> edward prefix
+
+feature:
+- (edward) serve options -> edward prefix
+- (package) style-loader v0.19.0
+
+
 2017.09.22, v6.0.3
 
 feature:
