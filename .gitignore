@@ -9,6 +9,7 @@ modules/ace-builds/src-min-noconflict
 modules/ace-builds/src-noconflict
 modules/ace-builds/src
 
+modules/load
 modules/execon
 
 modules/pako/dist

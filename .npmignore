@@ -3,6 +3,7 @@
 webpack.config.js
 bower.json
 
+modules/load
 modules/execon
 modules/ace-builds
 !modules/ace-builds/src-min
