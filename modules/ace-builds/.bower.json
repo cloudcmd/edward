@@ -25,7 +25,6 @@
     "commit": "ba3b91e04a5aa559d56ac70964f9054baa0f4caf"
   },
   "_source": "https://github.com/ajaxorg/ace-builds.git",
-  "_target": "^1.2.9",
-  "_originalSource": "ace-builds",
-  "_direct": true
+  "_target": "1.2.9",
+  "_originalSource": "ace-builds"
 }
