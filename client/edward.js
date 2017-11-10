@@ -12,6 +12,7 @@ require('../css/edward.css');
 const daffy = require('daffy');
 const exec = require('execon');
 const load = require('load.js');
+const wraptile = require('wraptile/legacy');
 
 window.load = window.load || load;
 window.exec = window.exec || exec;
@@ -156,47 +157,38 @@ Edward.prototype._init = function(fn) {
 Edward.prototype._addCommands = function() {
     const edward = this;
     const addKey = this._addKey.bind(this);
-    const run = (fn) => {
-        return () => {
-            edward.isKey() && fn();
-        }
-    }
-    const commands    = [{
+    
+    const call = (fn) => fn.call(this);
+    const wrapCall = wraptile(call);
+    
+    const callIfKey = wraptile((fn) => {
+        edward.isKey() && call(fn);
+    });
+    
+    const commands = [{
         name    : 'goToLine',
         bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
-        exec    : () => {
-            edward.goToLine();
-        }
+        exec    : wrapCall(edward.goToLine),
     }, {
         name    : 'save',
         bindKey : { win: 'Ctrl-S',  mac: 'Command-S' },
-        exec    : run(() => {
-            edward.save();
-        })
+        exec    : callIfKey(edward.save),
     }, {
         name    : 'saveMC',
         bindKey : { win: 'F2',  mac: 'F2' },
-        exec    : run(() => {
-            edward.save();
-        })
+        exec    : callIfKey(edward.save),
     }, {
         name    : 'beautify',
         bindKey : { win: 'Ctrl-B',  mac: 'Command-B' },
-        exec    : run(() => {
-            edward.beautify();
-        })
+        exec    : callIfKey(edward.beautify),
     }, {
         name    : 'minify',
         bindKey : { win: 'Ctrl-M',  mac: 'Command-M' },
-        exec    : run(() => {
-            edward.minify();
-        })
+        exec    : callIfKey(edward.minify),
     }, {
         name    : 'evaluate',
         bindKey : { win: 'Ctrl-E',  mac: 'Command-E' },
-        exec    : run(() => {
-            edward.evaluate();
-        })
+        exec    : callIfKey(edward.evaluate),
     }];
     
     commands.forEach(addKey);
