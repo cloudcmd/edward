@@ -21,6 +21,7 @@ const Story = require('./story');
 const _clipboard = require('./_clipboard');
 const _setEmmet = require('./_set-emmet');
 const _initSocket = require('./_init-socket');
+const setKeyMap = require('./set-key-map');
 
 const save = require('./save');
 
@@ -352,7 +353,7 @@ Edward.prototype.setOption = function(name, value) {
     preventOverwrite();
     
     if (name === 'keyMap') {
-        this._setKeyMap({
+        this.setKeyMap({
             keyMap: value
         });
         
@@ -372,18 +373,7 @@ Edward.prototype.setOptions = function(options) {
     return this;
 };
 
-Edward.prototype._setKeyMap = function(options) {
-    let keyMap = options && options.keyMap;
-    
-    if (keyMap === 'default')
-        keyMap = 'hash_handler';
-    
-    if (keyMap)
-        this._Ace.setKeyboardHandler('ace/keyboard/' + keyMap);
-    
-    delete options.keyMap;
-};
-
+Edward.prototype.setKeyMap = setKeyMap;
 Edward.prototype._setUseOfWorker = function(mode) {
     const session = this._getSession();
     const isStr = typeof mode === 'string';
@@ -780,9 +770,9 @@ Edward.prototype._loadFiles = function(callback) {
             ].map((name) => {
                 return 'ext-' + name;
             })
-            .map((name) => {
-                return ace + name + '.js';
-            }));
+                .map((name) => {
+                    return ace + name + '.js';
+                }));
             
             load.parallel([url, js], callback);
         },
