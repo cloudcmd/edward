@@ -2,16 +2,9 @@
 
 /* global ace */
 
-module.exports = function(options) {
-    let keyMap = options && options.keyMap;
-    
+module.exports = function(keyMap) {
     if (keyMap === 'default')
         keyMap = 'hash_handler';
-    
-    if (!keyMap)
-        return;
-    
-    this._Ace.setKeyboardHandler('ace/keyboard/' + keyMap);
     
     if (keyMap === 'vim') {
         ace.config.loadModule('ace/keyboard/vim', (module) => {
@@ -19,4 +12,6 @@ module.exports = function(options) {
             Vim.defineEx('write', 'w', this.save.bind(this));
         });
     }
+    
+    this._Ace.setKeyboardHandler('ace/keyboard/' + keyMap);
 };

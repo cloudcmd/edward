@@ -353,9 +353,7 @@ Edward.prototype.setOption = function(name, value) {
     preventOverwrite();
     
     if (name === 'keyMap') {
-        this.setKeyMap({
-            keyMap: value
-        });
+        this.setKeyMap(value);
         
         return this;
     }
