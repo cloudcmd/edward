@@ -4,14 +4,17 @@
 
 module.exports = function(keyMap) {
     if (keyMap === 'default')
-        keyMap = 'hash_handler';
+        return this._Ace.setKeyboardHandler('ace/keyboard/hash_handler');
     
     if (keyMap === 'vim') {
-        ace.config.loadModule('ace/keyboard/vim', (module) => {
-            const {Vim} = module.CodeMirror;
+        ace.config.loadModule('ace/keybinding/vim', (module) => {
+            const {CodeMirror} = ace.require('ace/keyboard/vim');
+            const {Vim} = CodeMirror;
+            
             Vim.defineEx('write', 'w', this.save.bind(this));
+            
+            this._Ace.setOption('keyboardHandler', 'vim');
+            this._Ace.setKeyboardHandler('ace/keyboard/' + keyMap);
         });
     }
-    
-    this._Ace.setKeyboardHandler('ace/keyboard/' + keyMap);
 };
