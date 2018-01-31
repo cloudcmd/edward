@@ -1,3 +1,9 @@
+2018.01.31, v6.1.2
+
+fix:
+- (set-key-map) add ability to use vim key map
+
+
 2018.01.31, v6.1.1
 
 feature:
