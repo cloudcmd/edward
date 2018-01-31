@@ -33,7 +33,6 @@
     "commit": "a5142a2693762d9ad729edd823506386497b4e41"
   },
   "_source": "https://github.com/coderaiser/smalltalk.git",
-  "_target": "^2.5.1",
-  "_originalSource": "smalltalk",
-  "_direct": true
+  "_target": "2.5.1",
+  "_originalSource": "smalltalk"
 }
