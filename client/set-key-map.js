@@ -7,7 +7,7 @@ module.exports = function(keyMap) {
         return this._Ace.setKeyboardHandler('ace/keyboard/hash_handler');
     
     if (keyMap === 'vim') {
-        ace.config.loadModule('ace/keybinding/vim', (module) => {
+        ace.config.loadModule('ace/keybinding/vim', () => {
             const {CodeMirror} = ace.require('ace/keyboard/vim');
             const {Vim} = CodeMirror;
             
