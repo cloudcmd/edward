@@ -68,6 +68,7 @@
     "execon": "^1.2.9",
     "load.js": "^1.1.4",
     "nodemon": "^1.11.0",
+    "redrun": "^6.0.1",
     "rimraf": "^2.6.2",
     "style-loader": "^0.20.1",
     "webpack": "^4.0.1",
