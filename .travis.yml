@@ -7,7 +7,8 @@ node_js:
 
 script:
   - npm run lint
-  - npm run coverage && npm run report
+  - npm run coverage
+  - npm run report
 
 notifications:
     email:
