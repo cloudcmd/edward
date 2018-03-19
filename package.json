@@ -49,7 +49,6 @@
     "express": "^4.14.0",
     "fullstore": "^1.0.0",
     "join-io": "^2.0.0",
-    "os-homedir": "^1.0.0",
     "patchfile": "^1.0.1",
     "readjson": "^1.1.0",
     "rendy": "^1.1.0",
