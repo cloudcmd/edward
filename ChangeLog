@@ -1,3 +1,12 @@
+2018.03.21, v6.1.6
+
+fix:
+- (package) add redrun
+
+feature:
+- (package) os-homedir -> os.homedir
+
+
 2018.02.28, v6.1.5
 
 feature:
