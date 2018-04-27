@@ -1,4 +1,3 @@
-/* global smalltalk */
 /* global ace */
 /* global join */
 /* global restafary */
@@ -13,6 +12,7 @@ const daffy = require('daffy');
 const exec = require('execon');
 const load = require('load.js');
 const wraptile = require('wraptile/legacy');
+const smalltalk = require('smalltalk');
 
 window.load = window.load || load;
 window.exec = window.exec || exec;
@@ -731,27 +731,6 @@ Edward.prototype._loadFiles = function(callback) {
             exec.if(!scripts.length, callback, () => {
                 load.parallel(scripts, callback);
             });
-        },
-        
-        function(callback) {
-            const name = 'smalltalk';
-            const is = window.Promise;
-            const js = '.min.js';
-            const dir = '/modules/' + name + '/dist/';
-            const isFlex = () => {
-                return document.body.style.flex !== undefined;
-            };
-            
-            let jsName = is ? js : '.poly' + js;
-            
-            if (!isFlex())
-                jsName = '.native' + jsName;
-            
-            const names = [jsName, '.min.css'].map((ext) => {
-                return PREFIX + dir + name + ext;
-            });
-            
-            load.parallel(names, callback);
         },
         
         function(callback) {
