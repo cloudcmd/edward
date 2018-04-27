@@ -1,3 +1,11 @@
+2018.04.27, v7.0.2
+
+feature:
+- (package) smalltalk v3.0.0
+- (package) rm unused rendy
+- (package) style-loader v0.21.0
+
+
 2018.04.02, v7.0.1
 
 feature:
