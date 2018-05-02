@@ -59,7 +59,7 @@
     "babel-core": "^6.25.0",
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.6.0",
-    "clean-css-loader": "^0.1.4",
+    "clean-css-loader": "^1.0.1",
     "css-loader": "^0.28.11",
     "daffy": "^1.0.3",
     "eslint": "^4.0.0",
