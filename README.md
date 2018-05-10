@@ -2,11 +2,11 @@ Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMUR
 =======
 [NPMIMGURL]:                https://img.shields.io/npm/v/edward.svg?style=flat
 [BuildStatusIMGURL]:        https://img.shields.io/travis/cloudcmd/edward/master.svg?style=flat
-[DependencyStatusIMGURL]:   https://img.shields.io/gemnasium/cloudcmd/edward.svg?style=flat
+[DependencyStatusIMGURL]:   https://img.shields.io/david/cloudcmd/edward.svg?style=flat
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPM_INFO_IMG]:             https://nodei.co/npm/edward.png?downloads=true&&stars&&downloadRank "npm install edward"
 [NPMURL]:                   https://npmjs.org/package/edward "npm"
-[DependencyStatusURL]:      https://gemnasium.com/cloudcmd/edward "Dependency Status"
+[DependencyStatusURL]:      https://david-dm.org/cloudcmd/edward "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
 [beautifile]:               https://github.com/coderaiser/node-beautifile "Beautifile"
