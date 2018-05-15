@@ -17,7 +17,7 @@ module.exports = function(cmd) {
     
     if (cmd === 'copy') {
         _story.setData(NAME, value);
-        return clipboard.writeText(_Ace.getSelectedText());
+        return clipboard.writeText(value);
     }
     
     if (cmd === 'cut') {
