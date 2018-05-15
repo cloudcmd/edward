@@ -434,19 +434,19 @@ Edward.prototype.selectAll = function() {
 Edward.prototype.copyToClipboard = function() {
     const msg = 'Could not copy, use &ltCtrl&gt + &ltС&gt insted!';
     
-    if (!this._clipboard('copy'))
-        smalltalk.alert(this._TITLE, msg);
+    this._clipboard('copy')
+        .catch(wraptile(smalltalk.alert, this._TITLE, msg));
     
     return this;
 };
 
 Edward.prototype.cutToClipboard = function() {
     const msg = 'Could not cut, use &ltCtrl&gt + &ltX&gt insted!';
+    const remove = this.remove.bind(this);
     
-    if (!this._clipboard('cut'))
-        smalltalk.alert(this._TITLE, msg);
-    else
-        this.remove('right');
+    this._clipboard('cut')
+        .then(wraptile(remove, 'right'))
+        .catch(wraptile(smalltalk.alert, this._TITLE, msg));
     
     return this;
 };
@@ -454,8 +454,8 @@ Edward.prototype.cutToClipboard = function() {
 Edward.prototype.pasteFromClipboard = function() {
     const msg = 'Could not paste, use &ltCtrl&gt + &ltV&gt insted!';
     
-    if (!this._clipboard('paste'))
-        smalltalk.alert(this._TITLE, msg);
+    this._clipboard('paste')
+        .catch(wraptile(smalltalk.alert, this._TITLE, msg));
     
     return this;
 };
