@@ -15,3 +15,5 @@ modules/execon
 modules/pako/dist
 !modules/pako/dist/paco.min.js
 
+yarn-error.log
+
