@@ -63,7 +63,7 @@
     "clean-css-loader": "^1.0.1",
     "css-loader": "^0.28.11",
     "daffy": "^1.0.3",
-    "eslint": "^4.0.0",
+    "eslint": "^5.0.1",
     "execon": "^1.2.9",
     "load.js": "^1.1.4",
     "nodemon": "^1.11.0",
