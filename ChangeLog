@@ -1,3 +1,12 @@
+2018.07.10, v7.0.6
+
+feature:
+- (package) smalltalk v3.1.0
+- (package) css-loader v1.0.0
+- (package) eslint v5.0.1
+- (package) webpack-cli v3.0.1
+
+
 2018.05.22, v7.0.5
 
 feature:
