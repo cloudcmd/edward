@@ -20,6 +20,6 @@
     "loadremote": "~1.2.0",
     "jsSHA": "^2.1.0",
     "emitify": "3.1.0",
-    "ace-builds": "1.4.0"
+    "ace-builds": "^1.4.1"
   }
 }
