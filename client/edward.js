@@ -1,7 +1,6 @@
 /* global ace */
 /* global join */
 /* global restafary */
-/* global Emitify */
 /* global loadRemote */
 
 'use strict';
@@ -10,6 +9,7 @@ require('../css/edward.css');
 
 const daffy = require('daffy');
 const exec = require('execon');
+const Emitify = require('emitify/legacy');
 const load = require('load.js');
 const wraptile = require('wraptile/legacy');
 const smalltalk = require('smalltalk');
@@ -716,7 +716,6 @@ Edward.prototype._loadFiles = function(callback) {
         function(callback) {
             const obj     = {
                 loadRemote  : getModulePath('loadremote', 'lib'),
-                Emitify     : getModulePath('emitify', 'dist', '.min.js'),
                 join        : '/join/join.js'
             };
             
