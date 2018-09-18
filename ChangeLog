@@ -1,3 +1,11 @@
+2018.09.18, v7.0.11
+
+feature:
+- (package) load.js v2.0.0
+- (package) style-loader v0.23.0
+- (package) babel v7.0.0
+
+
 2018.08.08, v7.0.10
 
 feature:
