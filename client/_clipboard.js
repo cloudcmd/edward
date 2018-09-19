@@ -4,7 +4,7 @@ const clipboard = require('@cloudcmd/clipboard');
 const createElement = require('@cloudcmd/create-element');
 
 const showMessage = require('./show-message');
-const once = require('./once');
+const once = require('once');
 const showMessageOnce = once(showMessage);
 
 const resolve = Promise.resolve.bind(Promise);

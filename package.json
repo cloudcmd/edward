@@ -69,6 +69,7 @@
     "execon": "^1.2.9",
     "load.js": "^2.0.0",
     "nodemon": "^1.11.0",
+    "once": "^1.4.0",
     "redrun": "^6.0.1",
     "rimraf": "^2.6.2",
     "smalltalk": "^3.1.0",
