@@ -22,7 +22,7 @@ const _clipboard = require('./_clipboard');
 const _setEmmet = require('./_set-emmet');
 const _initSocket = require('./_init-socket');
 const setKeyMap = require('./set-key-map');
-
+const showMessage = require('./show-message');
 const save = require('./save');
 
 module.exports = (el, options, callback) => {
@@ -84,6 +84,8 @@ function Edward(el, options, callback) {
     };
 }
 
+Edward.prototype.showMessage = showMessage;
+
 Edward.prototype.isKey = function() {
     return this._isKey;
 }
@@ -96,13 +98,6 @@ Edward.prototype.enableKey = function() {
     this._isKey = true;
     return this;
 }
-
-Edward.prototype._showMessageOnce = function(msg) {
-    if (!this._showedOnce) {
-        this.showMessage(msg);
-        this._showedOnce = true;
-    }
-};
 
 function empty() {}
 
@@ -211,16 +206,6 @@ Edward.prototype.evaluate = function() {
         .then(focus);
 };
 
-function createMsg() {
-    const wrapper = document.createElement('div');
-    const html = '<div class="edward-msg">/div>';
-    
-    wrapper.innerHTML = html;
-    const msg = wrapper.firstChild;
-    
-    return msg;
-}
-    
 Edward.prototype._addKey = function(options) {
     this._Ace.commands.addCommand(options);
 };
@@ -464,24 +449,6 @@ Edward.prototype._clipboard = _clipboard;
 
 Edward.prototype._getSession = function() {
     return this._Ace.getSession();
-};
-
-Edward.prototype.showMessage = function(text) {
-    const HIDE_TIME = 2000;
-    
-    if (!this._ElementMsg) {
-        this._ElementMsg = createMsg();
-        this._Element.appendChild(this._ElementMsg);
-    }
-    
-    this._ElementMsg.textContent = text;
-    this._ElementMsg.hidden = false;
-    
-    setTimeout(() => {
-        this._ElementMsg.hidden = true;
-    }, HIDE_TIME);
-    
-    return this;
 };
 
 Edward.prototype.sha = function(callback) {

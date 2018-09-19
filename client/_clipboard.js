@@ -1,6 +1,11 @@
 'use strict';
 
 const clipboard = require('@cloudcmd/clipboard');
+const createElement = require('@cloudcmd/create-element');
+
+const showMessage = require('./show-message');
+const once = require('./once');
+const showMessageOnce = once(showMessage);
 
 const resolve = Promise.resolve.bind(Promise);
 const reject = Promise.reject.bind(Promise);
@@ -28,23 +33,21 @@ module.exports = function(cmd) {
     return clipboard.readText()
         .then(insert)
         .catch(() => {
-            this._showMessageOnce('Could not paste from clipboard. Inner buffer used.');
+            showMessageOnce('Could not paste from clipboard. Inner buffer used.');
             const value = _story.getData(NAME);
             insert(value);
         });
 };
 
 function cut(story, value) {
-    const body = document.body;
-    const textarea = document.createElement('textarea');
+    const textarea = createElement('textarea', {
+        value,
+    });
     
-    body.appendChild(textarea);
-    
-    textarea.value = value;
     textarea.select();
     const result = document.execCommand('cut');
     
-    body.removeChild(textarea);
+    document.body.removeChild(textarea);
     
     return result;
 }
