@@ -1,3 +1,10 @@
+2018.09.26, v8.0.0
+
+feature:
+- (package) drop support of node < 8
+- (package) restafary v4.0.0
+
+
 2018.09.19, v7.0.13
 
 feature:
