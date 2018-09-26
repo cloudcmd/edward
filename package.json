@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/cloudcmd/edward",
   "engines": {
-    "node": ">=4"
+    "node": ">=8"
   },
   "scripts": {
     "start": "node bin/edward package.json",

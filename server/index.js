@@ -6,10 +6,10 @@ const path = require('path');
 const restafary = require('restafary');
 const socketFile = require('socket-file');
 const express = require('express');
-const currify = require('currify/legacy');
+const currify = require('currify');
 const join = require('join-io');
 
-const storage = require('fullstore/legacy');
+const storage = require('fullstore');
 const editFn = require('./edit');
 
 const Router = express.Router;
