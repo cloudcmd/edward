@@ -20,11 +20,16 @@ module.exports = (req, res, next) => {
 }
 
 function replace(from, to) {
-    return Object.assign(to, from);
+    return {
+        ...to,
+        ...from,
+    };
 }
 
 function copy(from) {
-    return Object.assign({}, from);
+    return {
+        ...from,
+    };
 }
 
 function readEdit(callback) {
