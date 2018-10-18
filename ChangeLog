@@ -1,3 +1,9 @@
+2018.10.18, v8.0.6
+
+fix:
+- (init-socket) applyPatch
+
+
 2018.10.18, v8.0.5
 
 fix:
