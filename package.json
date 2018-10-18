@@ -29,7 +29,7 @@
     "lint:client": "eslint --env browser --rule 'no-console:0' client",
     "lint:server": "eslint server",
     "watch:server": "npm run watcher -- bin/edward.js package.json",
-    "build": "redrun build:*",
+    "build": "redrun build:client*",
     "build:start": "redrun build:client start",
     "build:start:dev": "redrun build:client:dev start:dev",
     "prebuild": "rimraf dist*",
