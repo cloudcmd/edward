@@ -4,6 +4,8 @@
 /* global daffy */
 /* global smalltalk */
 
+const {applyPatch} = require('daffy');
+
 const getHost = () => {
     const l = location;
     const href = l.origin || l.protocol + '//' + l.host;
@@ -46,29 +48,23 @@ module.exports = function() {
     });
     
     socket.on('patch', (name, data, hash) => {
-        if (name !== self._FileName)
+        if (name !== this._FileName)
             return;
         
-        this._loadDiff((error) => {
-            if (error)
-                return console.error(error);
-            
-            if (hash !== self._story.getHash(name))
-                return;
-                
-            const cursor = edward.getCursor();
-            const value = edward.getValue();
-            const result = daffy.applyPatch(value, data);
-            
-            edward.setValue(result);
-            
-            edward.sha((error, hash) => {
-                this._story.setData(name, value)
-                    .setHash(name, hash);
-                
-                edward.moveCursorTo(cursor.row, cursor.column);
-            });
-        });
+        if (hash !== this._story.getHash(name))
+            return;
+        
+        const cursor = edward.getCursor();
+        const value = edward.getValue();
+        const result = daffy.applyPatch(value, data);
+        
+        this.setValue(result);
+        
+        this._story
+            .setData(name, value)
+            .setHash(name, this.sha());
+        
+        edward.moveCursorTo(cursor.row, cursor.column);
     });
     
     socket.on('disconnect', () => {

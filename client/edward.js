@@ -7,13 +7,14 @@
 
 require('../css/edward.css');
 
-const daffy = require('daffy');
+const {createPatch} = require('daffy');
 const exec = require('execon');
 const Emitify = require('emitify/legacy');
 const load = require('load.js');
 const wraptile = require('wraptile/legacy');
 const smalltalk = require('smalltalk');
 const {promisify} = require('es6-promisify');
+const jssha = require('jssha');
 
 window.load = window.load || load;
 window.exec = window.exec || exec;
@@ -454,24 +455,12 @@ Edward.prototype._getSession = function() {
     return this._Ace.getSession();
 };
 
-Edward.prototype.sha = function(callback) {
-    const url = this._PREFIX + this._DIR + 'jsSHA/src/sha.js';
+Edward.prototype.sha = function() {
+    const value = this.getValue();
+    const shaObj = new jssha('SHA-1', 'TEXT');
+    shaObj.update(value);
     
-    load.js(url, () => {
-        let hash;
-        
-        const value = this.getValue();
-        
-        const error = exec.try(() => {
-            const shaObj = new window.jsSHA('SHA-1', 'TEXT');
-            shaObj.update(value);
-            hash = shaObj.getHash('HEX');
-        });
-        
-        callback(error, hash);
-    });
-    
-    return this;
+    return shaObj.getHash('HEX');
 };
 
 Edward.prototype.beautify = function() {
@@ -533,13 +522,9 @@ Edward.prototype._onSave = function(error, text) {
     
     edward.showMessage(text);
     
-    edward.sha((error, hash) => {
-        if (error)
-            return console.error(error);
-    
-        this._story.setData(FileName, Value)
-            .setHash(FileName, hash);
-    });
+    const hash = edward.sha();
+    this._story.setData(FileName, Value)
+        .setHash(FileName, hash);
     
     this._Emitter.emit('save', Value.length);
 };
@@ -554,7 +539,7 @@ Edward.prototype._doDiff = async function(path, callback) {
 
 Edward.prototype._diff = function(newValue, callback) {
     this._Value = this._story.getData(this._FileName);
-    return daffy.createPatch(this._Value, newValue);
+    return createPatch(this._Value, newValue);
 };
 
 Edward.prototype._setEmmet = _setEmmet;
