@@ -529,7 +529,7 @@ Edward.prototype._onSave = function(error, text) {
     this._Emitter.emit('save', Value.length);
 };
 
-Edward.prototype._doDiff = async function(path, callback) {
+Edward.prototype._doDiff = async function(path) {
     const value = this.getValue();
     const patch = this._diff(value);
     const equal = await this._story.checkHash(path);
@@ -537,7 +537,7 @@ Edward.prototype._doDiff = async function(path, callback) {
     return equal ? patch : '';
 };
 
-Edward.prototype._diff = function(newValue, callback) {
+Edward.prototype._diff = function(newValue) {
     this._Value = this._story.getData(this._FileName);
     return createPatch(this._Value, newValue);
 };

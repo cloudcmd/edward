@@ -1,10 +1,9 @@
 'use strict';
 
 /* global io */
-/* global daffy */
-/* global smalltalk */
 
 const {applyPatch} = require('daffy');
+const {alert} = require('smalltalk');
 
 const getHost = () => {
     const l = location;
@@ -56,7 +55,7 @@ module.exports = function() {
         
         const cursor = edward.getCursor();
         const value = edward.getValue();
-        const result = daffy.applyPatch(value, data);
+        const result = applyPatch(value, data);
         
         this.setValue(result);
         
@@ -72,7 +71,7 @@ module.exports = function() {
     });
     
     socket.on('err', (error) => {
-        smalltalk.alert(self._TITLE, error);
+        alert(this._TITLE, error);
     });
 };
 
