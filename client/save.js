@@ -1,48 +1,52 @@
 'use strict';
 
-const exec = require('execon');
-const zipio = require('zipio');
+const wraptile = require('wraptile/legacy');
+const {promisify} = require('es6-promisify');
+const zipio = promisify(require('zipio'));
+
+const setValue = wraptile(_setValue);
 
 module.exports = function() {
-    const value = this.getValue();
-    
-    this._loadOptions((error, config) => {
-        const isDiff = config.diff;
-        const isZip = config.zip;
-        const doDiff = this._doDiff.bind(this);
-        
-        exec.if(!isDiff, (patch) => {
-            const patchLength = patch && patch.length || 0;
-            const {length} = this._Value;
-            const isLessMaxLength = length < this._MAX_FILE_SIZE;
-            const isLessLength = isLessMaxLength && patchLength < length;
-            const isStr = typeof patch === 'string';
-            const isPatch = patch && isStr && isLessLength;
-            
-            this._Value = value;
-            
-            let query = '';
-            
-            exec.if(!isZip || isPatch, (equal, data) => {
-                const result  = data || this._Value;
-                
-                if (isPatch)
-                    return this._patch(this._FileName, patch);
-                
-                this._write(this._FileName + query, result);
-            }, (func) => {
-                zipio(value, (error, data) => {
-                    if (error)
-                        console.error(error);
-                    
-                    query = '?unzip';
-                    func(null, data);
-                });
-            });
-            
-        }, exec.with(doDiff, this._FileName));
-    });
+    save.call(this)
+        .then(setValue(this));
     
     return this;
-};
+}
 
+async function save() {
+    const value = this.getValue();
+    const {length} = value;
+    const {
+        _FileName: _filename,
+        _maxSize,
+    } = this;
+    
+    const {diff, zip} = await this._loadOptions()
+    
+    if (diff) {
+        const patch = await this._doDiff(_filename);
+        const isPatch = checkPatch(length, _maxSize, patch);
+        
+        if (isPatch)
+            return this._patch(_filename, patch);
+     }
+    
+    if (!zip)
+        return this._write(_filename, value);
+    
+    const zipedValue = await zipio(value);
+    return this._write(`${_filename}?unzip`, zipedValue);
+}
+
+function _setValue(ctx) {
+    ctx._Value = ctx.getValue();
+}
+
+function checkPatch(length, maxSize, patch) {
+    const patchLength = patch && patch.length || 0;
+    const isLessMaxLength = length < maxSize;
+    const isLessLength = isLessMaxLength && patchLength < length;
+    const isStr = typeof patch === 'string';
+    
+    return patch && isStr && isLessLength;
+}

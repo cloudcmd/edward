@@ -13,9 +13,12 @@ const Emitify = require('emitify/legacy');
 const load = require('load.js');
 const wraptile = require('wraptile/legacy');
 const smalltalk = require('smalltalk');
+const {promisify} = require('es6-promisify');
 
 window.load = window.load || load;
 window.exec = window.exec || exec;
+
+const loadJSON = promisify(load.json);
 
 const Story = require('./story');
 const _clipboard = require('./_clipboard');
@@ -59,9 +62,9 @@ function Edward(el, options, callback) {
     if (typeof el === 'string')
         el = document.querySelector(el);
     
-    this._MAX_FILE_SIZE   = options.maxSize || 512000;
-    this._PREFIX          = options.prefix || '/edward';
-    this._SOCKET_PATH     = options.socketPath || '';
+    this._maxSize = options._maxSize || 512000;
+    this._PREFIX = options.prefix || '/edward';
+    this._SOCKET_PATH = options.socketPath || '';
     
     this._Element = el || document.body;
     
@@ -483,16 +486,17 @@ Edward.prototype.minify = function() {
 
 Edward.prototype.save = save;
 
-Edward.prototype._loadOptions = function(callback) {
+Edward.prototype._loadOptions = async function(callback) {
     const url = this._PREFIX + '/options.json';
     
     if (this._Options)
-        return callback(null, this._Options);
+        return this._Options;
     
-    load.json(url, (error, data) => {
-        this._Options = data;
-        callback(error, data);
-    });
+    const data = await loadJSON(url);
+    
+    this._Options = data;
+    
+    return data;
 };
     
 Edward.prototype._patchHttp = function(path, patch) {
@@ -540,24 +544,17 @@ Edward.prototype._onSave = function(error, text) {
     this._Emitter.emit('save', Value.length);
 };
 
-Edward.prototype._doDiff = function(path, callback) {
+Edward.prototype._doDiff = async function(path, callback) {
     const value = this.getValue();
+    const patch = this._diff(value);
+    const equal = await this._story.checkHash(path);
     
-    this._diff(value, (patch) => {
-        this._story.checkHash(path, (error, equal) => {
-            if (!equal)
-                patch = '';
-            
-            callback(patch);
-        });
-    });
+    return equal ? patch : '';
 };
 
 Edward.prototype._diff = function(newValue, callback) {
     this._Value = this._story.getData(this._FileName);
-    const patch = daffy.createPatch(this._Value, newValue);
-    
-    callback(patch);
+    return daffy.createPatch(this._Value, newValue);
 };
 
 Edward.prototype._setEmmet = _setEmmet;
