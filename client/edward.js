@@ -475,7 +475,7 @@ Edward.prototype.minify = function() {
 
 Edward.prototype.save = save;
 
-Edward.prototype._loadOptions = async function(callback) {
+Edward.prototype._loadOptions = async function() {
     const url = this._PREFIX + '/options.json';
     
     if (this._Options)
