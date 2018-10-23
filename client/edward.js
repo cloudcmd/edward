@@ -1,6 +1,5 @@
 /* global ace */
 /* global join */
-/* global restafary */
 /* global loadRemote */
 
 'use strict';
@@ -15,6 +14,7 @@ const wraptile = require('wraptile/legacy');
 const smalltalk = require('smalltalk');
 const {promisify} = require('es6-promisify');
 const jssha = require('jssha');
+const restafary = require('restafary/legacy/client');
 
 window.load = window.load || load;
 window.exec = window.exec || exec;
@@ -28,6 +28,8 @@ const _initSocket = require('./_init-socket');
 const setKeyMap = require('./set-key-map');
 const showMessage = require('./show-message');
 const save = require('./save');
+
+function empty() {}
 
 module.exports = (el, options, callback) => {
     Edward(el, options, callback);
@@ -102,8 +104,6 @@ Edward.prototype.enableKey = function() {
     this._isKey = true;
     return this;
 }
-
-function empty() {}
 
 Edward.prototype._init = function(fn) {
     const edward = this;
@@ -498,36 +498,7 @@ Edward.prototype._writeHttp = function(path, result) {
     restafary.write(path, result, onSave);
 };
 
-Edward.prototype._onSave = function(error, text) {
-    const edward = this;
-    
-    const Value = this._Value;
-    const FileName = this._FileName;
-    let msg = 'Try again?';
-    
-    if (error) {
-        if (error.message)
-            msg = error.message + '\n' + msg;
-        else
-            msg = 'Can\'t save.' + msg;
-        
-        const onSave = this._onSave.bind(this);
-        
-        return smalltalk.confirm(this._TITLE, msg).then(() => {
-            restafary.write(this._FileName, this._Value, onSave);
-        }).catch(empty).then(()=> {
-            edward.focus();
-        });
-    }
-    
-    edward.showMessage(text);
-    
-    const hash = edward.sha();
-    this._story.setData(FileName, Value)
-        .setHash(FileName, hash);
-    
-    this._Emitter.emit('save', Value.length);
-};
+Edward.prototype._onSave = require('./_on-save');
 
 Edward.prototype._doDiff = async function(path) {
     const value = this.getValue();
@@ -686,7 +657,6 @@ Edward.prototype._loadFiles = function(callback) {
         },
         
         function(callback) {
-            const js = PREFIX + '/restafary.js';
             const ace = DIR + 'ace-builds/src-min/';
             const url = PREFIX + join([
                 'language_tools',
@@ -699,7 +669,7 @@ Edward.prototype._loadFiles = function(callback) {
                     return ace + name + '.js';
                 }));
             
-            load.parallel([url, js], callback);
+            load.js(url, callback);
         },
         
         function() {
