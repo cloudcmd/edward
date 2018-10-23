@@ -509,7 +509,7 @@ Edward.prototype._doDiff = async function(path) {
 };
 
 Edward.prototype._diff = function(newValue) {
-    this._Value = this._story.getData(this._FileName);
+    this._Value = this._story.getData(this._FileName) || this._Value;
     return createPatch(this._Value, newValue);
 };
 
