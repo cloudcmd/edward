@@ -20,7 +20,7 @@ module.exports = function() {
         socket.emit('patch', name, data);
     };
    
-    const socket = io.connect(href + this._PREFIX, {
+    const socket = io.connect(href + this._prefixSocket, {
         'max reconnection attempts' : Math.pow(2, 32),
         'reconnection limit'        : FIVE_SECONDS,
         path                        : this._SOCKET_PATH + '/socket.io'

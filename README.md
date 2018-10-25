@@ -88,8 +88,8 @@ const io = require('socket.io'),
 const socket = io.listen(server);
 
 edward.listen(socket, {
-    root,
-    prefix,
+    root: '/', // optional
+    prefixSocket: '/edward',, //optional
     auth: (accept, reject) => (username, password) => {
         accept();
     }

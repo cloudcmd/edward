@@ -67,6 +67,7 @@ function Edward(el, options, callback) {
     
     this._maxSize = options._maxSize || 512000;
     this._PREFIX = options.prefix || '/edward';
+    this._prefixSocket = options.prefixSocket || '/edward';
     this._SOCKET_PATH = options.socketPath || '';
     
     this._Element = el || document.body;
