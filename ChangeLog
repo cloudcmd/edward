@@ -1,3 +1,12 @@
+2018.10.30, v9.0.1
+
+fix:
+- docs(ChangeLog) rm 
+
+feature:
+- (server) edward: rm condition has no sense
+
+
 2018.10.25, v9.0.0
 
 feature:
