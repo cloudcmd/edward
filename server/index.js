@@ -84,12 +84,9 @@ function checkOption(isOption) {
 }
 
 function _edward(prefix, req, res, next) {
-    const url = req.url
+    const {url} = req;
     
-    if (url.indexOf(prefix))
-        return next();
-    
-    req.url = req.url.replace(prefix, '');
+    req.url = url.replace(prefix, '');
     
     if (/^\/edward\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
