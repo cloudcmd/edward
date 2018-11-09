@@ -4,8 +4,9 @@ const DIR_ROOT = __dirname + '/..';
 const path = require('path');
 
 const restafary = require('restafary');
+const restbox = require('restbox');
 const socketFile = require('socket-file');
-const {Router} = require('express');
+const Router = require('router');
 const currify = require('currify');
 const join = require('join-io');
 
@@ -15,10 +16,9 @@ const editFn = require('./edit');
 const rootStorage = storage();
 const optionsStorage = storage();
 
-const edward = currify(_edward);
 const optionsFn = currify(configFn);
-const restafaryFn = currify(_restafaryFn);
 const joinFn = currify(_joinFn);
+const restboxFn = currify(_restboxFn);
 
 const readjson = require('readjson');
 const HOME = require('os').homedir();
@@ -34,23 +34,35 @@ const readJSHINT = () => {
 
 const jshint = readJSHINT();
 
+const cut = currify((prefix, req, res, next) => {
+    req.url = req.url.replace(prefix, '');
+    next();
+});
+
 module.exports = (options) => {
     options = options || {};
     optionsStorage(options);
     
     const router = Router();
     const prefix = options.prefix || '/edward';
+    const {
+        dropbox,
+        dropboxToken,
+    } = options;
     
     router.route(prefix + '/*')
-        .get(edward(prefix))
+        .all(cut(prefix))
+        .get(edward)
         .get(optionsFn(options))
         .get(editFn)
         .get(modulesFn)
         .get(jshintFn)
-        .get(restafaryFn(''))
+        .get(restboxFn({prefix, dropbox, dropboxToken}))
+        .get(restafaryFn)
         .get(joinFn(options))
         .get(staticFn)
-        .put(restafaryFn(prefix));
+        .put(restboxFn({prefix, dropbox, dropboxToken}))
+        .put(restafaryFn);
     
     return router;
 };
@@ -83,11 +95,7 @@ function checkOption(isOption) {
     return isOption;
 }
 
-function _edward(prefix, req, res, next) {
-    const {url} = req;
-    
-    req.url = url.replace(prefix, '');
-    
+function edward(req, res, next) {
     if (/^\/edward\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
     
@@ -141,20 +149,42 @@ function _joinFn(o, req, res, next) {
     joinFunc(req, res, next);
 }
 
-function _restafaryFn(prefix, req, res, next) {
-    const url = req.url
+function _restboxFn({dropbox, dropboxToken}, req, res, next) {
+    if (!dropbox)
+        return next();
+    
+    const {url} = req;
+    const api = '/api/v1';
+    const indexOf = url.indexOf.bind(url);
+    const not = (fn) => (a) => !fn(a);
+    const is = [
+        `/api/v1`,
+    ].some(not(indexOf));
+    
+    if (!is)
+        return next();
+    
+    const middle = restbox({
+        prefix: api,
+        token: dropboxToken,
+        root: rootStorage()
+    });
+    
+    middle(req, res, next);
+}
+
+function restafaryFn(req, res, next) {
+    const {url} = req;
     const api = '/api/v1/fs';
     const indexOf = url.indexOf.bind(url);
     const not = (fn) => (a) => !fn(a);
     const isRestafary = [
-        `${prefix}/api/v1/fs`,
+        `/api/v1`,
         '/restafary.js'
     ].some(not(indexOf));
     
     if (!isRestafary)
         return next();
-    
-    req.url = url.replace(prefix, '');
     
     const restafaryFunc = restafary({
         prefix: api,
