@@ -1,0 +1,7 @@
+{
+    "match": {
+        "client/edward.js": {
+            "remove-console": false
+        }
+    }
+}

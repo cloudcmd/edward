@@ -517,16 +517,17 @@ Edward.prototype._diff = function(newValue) {
 Edward.prototype._setEmmet = _setEmmet;
 
 Edward.prototype._setJsHintConfig = function(callback) {
-    const JSHINT_PATH = this._PREFIX + '/jshint.json',
-        func = () => {
-            const session = this._getSession();
-            const worker = session.$worker;
-            
-            if (worker)
-                worker.send('changeOptions', [this._JSHintConfig]);
-            
-            exec(callback);
-        };
+    const JSHINT_PATH = this._PREFIX + '/jshint.json';
+    
+    const func = () => {
+        const session = this._getSession();
+        const worker = session.$worker;
+        
+        if (worker)
+            worker.send('changeOptions', [this._JSHintConfig]);
+        
+        exec(callback);
+    };
     
     exec.if(this._JSHintConfig, func, () => {
         load.json(JSHINT_PATH, (error, json) => {
