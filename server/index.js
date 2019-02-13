@@ -27,10 +27,10 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const readJSHINT = () => {
     const home = path.join(HOME, '.jshintrc');
-    const root = path.join(DIR_ROOT,'.jshintrc')
+    const root = path.join(DIR_ROOT,'.jshintrc');
     
     return readjson.sync.try(home) || readjson.sync(root);
-}
+};
 
 const jshint = readJSHINT();
 
@@ -143,7 +143,7 @@ function _joinFn(o, req, res, next) {
         return next ();
     
     const joinFunc = join({
-        dir: DIR_ROOT
+        dir: DIR_ROOT,
     });
     
     joinFunc(req, res, next);
@@ -167,7 +167,7 @@ function _restboxFn({dropbox, dropboxToken}, req, res, next) {
     const middle = restbox({
         prefix: api,
         token: dropboxToken,
-        root: rootStorage()
+        root: rootStorage(),
     });
     
     middle(req, res, next);
@@ -180,7 +180,7 @@ function restafaryFn(req, res, next) {
     const not = (fn) => (a) => !fn(a);
     const isRestafary = [
         `/api/v1`,
-        '/restafary.js'
+        '/restafary.js',
     ].some(not(indexOf));
     
     if (!isRestafary)
@@ -188,7 +188,7 @@ function restafaryFn(req, res, next) {
     
     const restafaryFunc = restafary({
         prefix: api,
-        root: rootStorage()
+        root: rootStorage(),
     });
     
     restafaryFunc(req, res, next);

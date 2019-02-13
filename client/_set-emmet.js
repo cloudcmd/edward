@@ -10,7 +10,7 @@ module.exports = function() {
     const {
         _DIR,
         _PREFIX,
-    } = this
+    } = this;
     
     const dir = _DIR + 'ace-builds/src-min/';
     const dirVendor = '/vendor/';
@@ -26,7 +26,7 @@ module.exports = function() {
     }, (callback) => {
         const url = _PREFIX + join([
             dirVendor + 'emmet.js',
-            dir + 'ext-emmet.js'
+            dir + 'ext-emmet.js',
         ]);
         
         load.js(url, () => {

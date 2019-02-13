@@ -1,13 +1,8 @@
 {
-    "env": {
-        "node": true,
-        "es6": true
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-    },
-    "rules": {
-        "indent": ["error", 4]
-    },
-  "extends": ["eslint:recommended"]
+  "extends": [
+      "plugin:putout/recommended"
+  ],
+  "plugins": [
+      "putout"
+  ]
 }

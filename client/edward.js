@@ -33,7 +33,7 @@ function empty() {}
 
 module.exports = (el, options, callback) => {
     Edward(el, options, callback);
-}
+};
 
 function Edward(el, options, callback) {
     if (!(this instanceof Edward))
@@ -44,7 +44,7 @@ function Edward(el, options, callback) {
     this._Value;
     
     this._Config = {
-        options: {}
+        options: {},
     };
     
     this._Options;
@@ -95,16 +95,16 @@ Edward.prototype.showMessage = showMessage;
 
 Edward.prototype.isKey = function() {
     return this._isKey;
-}
+};
 
 Edward.prototype.disableKey = function() {
     this._isKey = false;
-}
+};
 
 Edward.prototype.enableKey = function() {
     this._isKey = true;
     return this;
-}
+};
 
 Edward.prototype._init = function(fn) {
     const edward = this;
@@ -142,7 +142,7 @@ Edward.prototype._init = function(fn) {
                     Object.keys(this._Config.options).forEach((name) => {
                         options[name] = this._Config.options[name];
                     });
-                }
+                };
                 
                 fn();
                 preventOverwrite();
@@ -168,33 +168,33 @@ Edward.prototype._addCommands = function() {
     
     const commands = [{
         name    : 'goToLine',
-        bindKey : { win: 'Ctrl-G',  mac: 'Command-G' },
+        bindKey : { win: 'Ctrl-G', mac: 'Command-G' },
         exec    : wrapCall(edward.goToLine),
     }, {
         name    : 'save',
-        bindKey : { win: 'Ctrl-S',  mac: 'Command-S' },
+        bindKey : { win: 'Ctrl-S', mac: 'Command-S' },
         exec    : callIfKey(edward.save),
     }, {
         name    : 'saveMC',
-        bindKey : { win: 'F2',  mac: 'F2' },
+        bindKey : { win: 'F2', mac: 'F2' },
         exec    : callIfKey(edward.save),
     }, {
         name    : 'beautify',
-        bindKey : { win: 'Ctrl-B',  mac: 'Command-B' },
+        bindKey : { win: 'Ctrl-B', mac: 'Command-B' },
         exec    : callIfKey(edward.beautify),
     }, {
         name    : 'minify',
-        bindKey : { win: 'Ctrl-M',  mac: 'Command-M' },
+        bindKey : { win: 'Ctrl-M', mac: 'Command-M' },
         exec    : callIfKey(edward.minify),
     }, {
         name    : 'evaluate',
-        bindKey : { win: 'Ctrl-E',  mac: 'Command-E' },
+        bindKey : { win: 'Ctrl-E', mac: 'Command-E' },
         exec    : callIfKey(edward.evaluate),
     }];
     
     commands.forEach(addKey);
 };
-    
+
 Edward.prototype.evaluate = function() {
     const edward = this;
     const focus = edward.focus.bind(this);
@@ -224,9 +224,9 @@ Edward.prototype.addKeyMap = function(keyMap) {
             name: String(Math.random()) + i,
             bindKey : {
                 win : name,
-                mac : name.replace('Ctrl', 'Command')
+                mac : name.replace('Ctrl', 'Command'),
             },
-            exec: keyMap[name]
+            exec: keyMap[name],
         };
         
         return key;
@@ -248,12 +248,12 @@ Edward.prototype.goToLine = function() {
     
     const focus = () => {
         this._Ace.focus();
-    }
+    };
     
     smalltalk.prompt(this._TITLE, msg, number)
         .then(goToLine)
         .catch(empty)
-        .then(focus)
+        .then(focus);
     
     return this;
 };
@@ -323,10 +323,10 @@ Edward.prototype.setValue = function(value) {
 
 Edward.prototype.setValueFirst = function(name, value) {
     const session = this._getSession();
-    const UndoManager = ace.require('ace/undomanager').UndoManager;
+    const {UndoManager} = ace.require('ace/undomanager');
     
-    this._FileName  = name;
-    this._Value     = value;
+    this._FileName = name;
+    this._Value = value;
     
     this.setValue(value);
     
@@ -378,7 +378,7 @@ Edward.prototype._setUseOfWorker = function(mode) {
 };
 
 Edward.prototype.setMode = function(mode) {
-    const modesByName = this._Modelist.modesByName;
+    const {modesByName} = this._Modelist;
     
     if (!modesByName[mode])
         return this;
@@ -391,11 +391,11 @@ Edward.prototype.setMode = function(mode) {
 
 Edward.prototype.setModeForPath = function(path) {
     const session = this._getSession();
-    const modesByName = this._Modelist.modesByName;
+    const {modesByName} = this._Modelist;
     const name = path.split('/').pop();
     
     this._addExt(name, (name) => {
-        const mode = this._Modelist.getModeForPath(name).mode;
+        const {mode} = this._Modelist.getModeForPath(name);
         const htmlMode = modesByName.html.mode;
         const jsMode = modesByName.javascript.mode;
         
@@ -488,7 +488,7 @@ Edward.prototype._loadOptions = async function() {
     
     return data;
 };
-    
+
 Edward.prototype._patchHttp = function(path, patch) {
     const onSave = this._onSave.bind(this);
     restafary.patch(path, patch, onSave);
@@ -588,8 +588,8 @@ Edward.prototype._readWithFlag = function(flag) {
  * to upload file from download bar
  */
 Edward.prototype._onDragOver = function(event) {
-    const dataTransfer = event.dataTransfer;
-    const effectAllowed = dataTransfer.effectAllowed;
+    const {dataTransfer} = event;
+    const {effectAllowed} = dataTransfer;
     
     if (/move|linkMove/.test(effectAllowed))
         dataTransfer.dropEffect = 'move';
@@ -623,7 +623,7 @@ function getModulePath(name, lib, ext = '.js') {
     const dir = '/modules/';
     
     if (lib)
-        libdir  = '/' + lib + '/';
+        libdir = '/' + lib + '/';
     
     const path = dir + name + libdir + name + ext;
     
@@ -636,9 +636,9 @@ Edward.prototype._loadFiles = function(callback) {
     
     exec.series([
         function(callback) {
-            const obj     = {
+            const obj = {
                 loadRemote  : getModulePath('loadremote', 'lib'),
-                join        : '/join/join.js'
+                join        : '/join/join.js',
             };
             
             const scripts = Object.keys(obj)
@@ -663,7 +663,7 @@ Edward.prototype._loadFiles = function(callback) {
             const url = PREFIX + join([
                 'language_tools',
                 'searchbox',
-                'modelist'
+                'modelist',
             ].map((name) => {
                 return 'ext-' + name;
             })
@@ -677,7 +677,7 @@ Edward.prototype._loadFiles = function(callback) {
         function() {
             restafary.prefix(PREFIX + '/api/v1/fs');
             callback();
-        }
+        },
     ]);
 };
 
