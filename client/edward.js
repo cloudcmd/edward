@@ -383,7 +383,7 @@ Edward.prototype.setMode = function(mode) {
     if (!modesByName[mode])
         return this;
     
-    const ext = modesByName[mode].extensions.split('|')[0];
+    const [ext] = modesByName[mode].extensions.split('|');
     this.setModeForPath('.' + ext);
     
     return this;

@@ -99,7 +99,7 @@ function usage() {
 
 function help() {
     const bin = require('../json/bin');
-        
+    
     usage();
     console.log('Options:');
     
