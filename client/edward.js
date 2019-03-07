@@ -296,8 +296,8 @@ Edward.prototype.once = function(event, fn) {
     return this;
 };
 
-Edward.prototype.emit = function() {
-    this._Emitter.emit.apply(this._Emitter, arguments);
+Edward.prototype.emit = function(...args) {
+    this._Emitter.emit(...args);
     return this;
 };
 
