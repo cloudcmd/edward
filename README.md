@@ -9,9 +9,6 @@ Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMUR
 [DependencyStatusURL]:      https://david-dm.org/cloudcmd/edward "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 
-[beautifile]:               https://github.com/coderaiser/node-beautifile "Beautifile"
-[beautify.json]:            https://github.com/coderaiser/node-beautifile/tree/master/json/beautify.json "beautify.json"
-
 [edit.json]:            https://github.com/cloudcmd/edward/tree/master/json/edit.json "edit.json"
 
 
@@ -24,7 +21,6 @@ Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://a
 - Built-in `emmet` (for html files)
 - Drag n drop (drag file from desktop to editor).
 - Built-in `jshint` (with options in `.jshintrc` file, could be overriden by `~/.jshintrc`)
-- Built-in [beautifier][beautifile] (with options in [json/beautify.json][beautify.json], could be overriden by `~/.beautify.json`)
 - Configurable options ([json/edit.json][edit.json] could be overriden by `~/.edward.json`)
 
 ## Install
@@ -51,8 +47,6 @@ Usage: `edward [filename]`
 | `Ctrl + f`            | find
 | `Ctrl + h`            | replace
 | `Ctrl + g`            | go to line
-| `Ctrl + b`            | beautify js, css or html
-| `Ctrl + m`            | minify js, css or html
 | `Ctrl + e`            | evaluate (JavaScript only supported)
 
 For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts "Ace keyboard shortcuts").

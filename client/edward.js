@@ -179,14 +179,6 @@ Edward.prototype._addCommands = function() {
         bindKey : { win: 'F2', mac: 'F2' },
         exec    : callIfKey(edward.save),
     }, {
-        name    : 'beautify',
-        bindKey : { win: 'Ctrl-B', mac: 'Command-B' },
-        exec    : callIfKey(edward.beautify),
-    }, {
-        name    : 'minify',
-        bindKey : { win: 'Ctrl-M', mac: 'Command-M' },
-        exec    : callIfKey(edward.minify),
-    }, {
         name    : 'evaluate',
         bindKey : { win: 'Ctrl-E', mac: 'Command-E' },
         exec    : callIfKey(edward.evaluate),
@@ -464,16 +456,6 @@ Edward.prototype.sha = function() {
     return shaObj.getHash('HEX');
 };
 
-Edward.prototype.beautify = function() {
-    this._readWithFlag('beautify');
-    return this;
-};
-
-Edward.prototype.minify = function() {
-    this._readWithFlag('minify');
-    return this;
-};
-
 Edward.prototype.save = save;
 
 Edward.prototype._loadOptions = async function() {
@@ -566,20 +548,6 @@ Edward.prototype._addExt = function(name, fn) {
         
         fn(name);
     }
-};
-
-Edward.prototype._readWithFlag = function(flag) {
-    const edward = this;
-    const path = this._FileName + '?' + flag;
-    
-    restafary.read(path, (error, data) => {
-        if (error)
-            return smalltalk.alert(this._TITLE, error);
-        
-        edward
-            .setValue(data)
-            .moveCursorTo(0, 0);
-    });
 };
 
 /**
