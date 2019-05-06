@@ -51,7 +51,6 @@ function Edward(el, options, callback) {
     this._FileName;
     this._Modelist;
     this._ElementMsg;
-    this._JSHintConfig;
     this._Ext;
     this._TITLE = 'Edward';
     this._DIR = '/modules/';
@@ -357,7 +356,7 @@ Edward.prototype.setKeyMap = setKeyMap;
 Edward.prototype._setUseOfWorker = function(mode) {
     const session = this._getSession();
     const isStr = typeof mode === 'string';
-    const regStr = 'coffee|css|html|javascript|json|lua|php|xquery';
+    const regStr = 'coffee|css|html|json|lua|php|xquery';
     const regExp = new RegExp(regStr);
     
     let isMatch;
@@ -389,19 +388,14 @@ Edward.prototype.setModeForPath = function(path) {
     this._addExt(name, (name) => {
         const {mode} = this._Modelist.getModeForPath(name);
         const htmlMode = modesByName.html.mode;
-        const jsMode = modesByName.javascript.mode;
         
         const isHTML = mode === htmlMode;
-        const isJS = mode === jsMode;
         
         session.setMode(mode, () => {
             this._setUseOfWorker(mode);
             
             if (isHTML)
                 this._setEmmet();
-            
-            if (isJS && session.getUseWorker())
-                this._setJsHintConfig();
         });
     });
     
@@ -497,31 +491,6 @@ Edward.prototype._diff = function(newValue) {
 };
 
 Edward.prototype._setEmmet = _setEmmet;
-
-Edward.prototype._setJsHintConfig = function(callback) {
-    const JSHINT_PATH = this._PREFIX + '/jshint.json';
-    
-    const func = () => {
-        const session = this._getSession();
-        const worker = session.$worker;
-        
-        if (worker)
-            worker.send('changeOptions', [this._JSHintConfig]);
-        
-        exec(callback);
-    };
-    
-    exec.if(this._JSHintConfig, func, () => {
-        load.json(JSHINT_PATH, (error, json) => {
-            if (error)
-                smalltalk.alert(this._TITLE, error);
-            else
-                this._JSHintConfig = json;
-            
-            func();
-        });
-    });
-};
 
 Edward.prototype._addExt = function(name, fn) {
     if (this._Ext)
