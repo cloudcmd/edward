@@ -20,9 +20,6 @@ const optionsFn = currify(configFn);
 const joinFn = currify(_joinFn);
 const restboxFn = currify(_restboxFn);
 
-const readjson = require('readjson');
-const HOME = require('os').homedir();
-
 const isDev = process.env.NODE_ENV === 'development';
 
 const cut = currify((prefix, req, res, next) => {

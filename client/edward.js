@@ -360,6 +360,7 @@ Edward.prototype._setUseOfWorker = function(mode) {
     const regExp = new RegExp(regStr);
     
     let isMatch;
+    
     if (isStr)
         isMatch = regExp.test(mode);
     

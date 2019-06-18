@@ -27,8 +27,8 @@ const rules = clean([
             loader: 'url-loader',
             options: {
                 limit: 50000,
-            }
-        }
+            },
+        },
     }]);
 
 module.exports = {
