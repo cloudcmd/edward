@@ -136,11 +136,13 @@ Edward.prototype._init = function(fn) {
             this._Ace.$blockScrolling = Infinity;
             
             load.json(this._PREFIX + '/edit.json', (error, config) => {
-                const options = config.options || {};
+                const {
+                    options = {},
+                } = config;
                 const preventOverwrite = () => {
-                    Object.keys(this._Config.options).forEach((name) => {
+                    for (const name of Object.keys(this._Config.options)) {
                         options[name] = this._Config.options[name];
-                    });
+                    }
                 };
                 
                 fn();
@@ -345,9 +347,9 @@ Edward.prototype.setOption = function(name, value) {
 };
 
 Edward.prototype.setOptions = function(options) {
-    Object.keys(options).forEach((name) => {
+    for (const name of Object.keys(options)) {
         this.setOption(name, options[name]);
-    });
+    }
     
     return this;
 };
@@ -549,11 +551,11 @@ Edward.prototype._onDrop = function(event) {
     
     const files = [...event.dataTransfer.files];
     
-    files.forEach((file) => {
+    for (const file of files) {
         const reader = new FileReader();
         reader.addEventListener('load', onLoad);
         reader.readAsBinaryString(file);
-    });
+    }
 };
 
 function getModulePath(name, lib, ext = '.js') {
