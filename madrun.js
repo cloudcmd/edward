@@ -2,18 +2,24 @@
 
 const {
     run,
-    parallel,
+    predefined
 } = require('madrun');
+
+const {putout} = predefined;
 
 module.exports = {
     'start': () => 'node bin/edward package.json',
     'start:dev': () => `NODE_ENV=development ${run('start')}`,
-    'lint:bin': () => 'eslint --rule \'no-console:0\' bin',
-    'lint:client': () => 'eslint --env browser --rule \'no-console:0\' client',
-    'lint:server': () => 'eslint server madrun.js webpack.config.js',
-    'lint': () => parallel(['putout', 'lint:*']),
-    'fix:lint': () => run(['putout', 'lint:*'], '--fix'),
-    'putout': () => `putout client server webpack.config.js`,
+    'lint': () => putout({
+        names: [
+            'bin',
+            'client',
+            'server',
+            'webpack.config.js',
+            'madrun.js',
+        ]
+    }),
+    'fix:lint': () => run('lint', '--fix'),
     'watch:server': () => run('watcher', 'bin/edward.js package.json'),
     'build': () => run('build:client*'),
     'build:start': () => run(['build:client', 'start']),
