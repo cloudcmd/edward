@@ -67,7 +67,7 @@ module.exports = function() {
     });
     
     socket.on('disconnect', () => {
-        edward.save.patch = self._patchHttp;
+        edward.save._patch = self._patchHttp;
     });
     
     socket.on('err', (error) => {
