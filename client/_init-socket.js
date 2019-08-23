@@ -47,7 +47,7 @@ module.exports = function() {
     });
     
     socket.on('patch', (name, data, hash) => {
-        if (name !== this._FileName)
+        if (name !== this._filename)
             return;
         
         if (hash !== this._story.getHash(name))

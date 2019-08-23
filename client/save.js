@@ -18,7 +18,7 @@ async function save() {
     const value = this.getValue();
     const {length} = value;
     const {
-        _FileName: _filename,
+        _filename,
         _maxSize,
     } = this;
     
@@ -40,7 +40,7 @@ async function save() {
 }
 
 function _setValue(ctx) {
-    ctx._Value = ctx.getValue();
+    ctx._value = ctx.getValue();
 }
 
 function checkPatch(length, maxSize, patch) {

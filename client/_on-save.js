@@ -1,15 +1,18 @@
 'use strict';
 
 const {confirm} = require('smalltalk');
-const {write} = require('restafary/legacy/client');
+const tryToCatch = require('try-to-catch/legacy');
+const {promisify} = require('es6-promisify');
+const write = promisify(require('restafary/legacy/client').write);
 
-function empty() {}
-
-module.exports = function onSave(error, text) {
+module.exports = async function(error, text) {
     const edward = this;
     
-    const Value = this._Value;
-    const FileName = this._FileName;
+    const {
+        _value,
+        _filename,
+        _title,
+    } = this;
     let msg = 'Try again?';
     
     if (error) {
@@ -18,20 +21,22 @@ module.exports = function onSave(error, text) {
         else
             msg = 'Can\'t save.' + msg;
         
-        const onSave = this._onSave.bind(this);
+        const [cancel] = await tryToCatch(confirm, _title, msg);
         
-        return confirm(this._TITLE, msg).then(() => {
-            write(this._FileName, this._Value, onSave);
-        }).catch(empty).then(() => {
-            edward.focus();
-        });
+        if (!cancel) {
+            const [error, text] = await tryToCatch(write, _filename, this._value);
+            return this._onSave(error, text);
+        }
+        
+        edward.focus();
     }
     
     edward.showMessage(text);
     
     const hash = edward.sha();
-    this._story.setData(FileName, Value)
-        .setHash(FileName, hash);
+    this._story
+        .setData(_filename, _value)
+        .setHash(_filename, hash);
     
-    this._Emitter.emit('save', Value.length);
+    this._Emitter.emit('save', _value.length);
 };

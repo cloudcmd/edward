@@ -41,18 +41,18 @@ function Edward(el, options, callback) {
     
     this._Ace;
     this._Emmet;
-    this._Value;
+    this._value;
     
     this._Config = {
         options: {},
     };
     
     this._Options;
-    this._FileName;
+    this._filename = '';
     this._Modelist;
     this._ElementMsg;
     this._Ext;
-    this._TITLE = 'Edward';
+    this._title = 'Edward';
     this._DIR = '/modules/';
     this._story = Story();
     this._Emitter;
@@ -191,16 +191,16 @@ Edward.prototype._addCommands = function() {
 Edward.prototype.evaluate = function() {
     const edward = this;
     const focus = edward.focus.bind(this);
-    const isJS = /\.js$/.test(this._FileName);
+    const isJS = /\.js$/.test(this._filename);
     
     if (!isJS)
-        return smalltalk.alert(this._TITLE, 'Evaluation supported for JavaScript only')
+        return smalltalk.alert(this._title, 'Evaluation supported for JavaScript only')
             .then(focus);
     
     const value = edward.getValue();
     const msg = exec.try(Function(value));
     
-    msg && smalltalk.alert(this._TITLE, msg)
+    msg && smalltalk.alert(this._title, msg)
         .then(focus);
 };
 
@@ -243,7 +243,7 @@ Edward.prototype.goToLine = function() {
         this._Ace.focus();
     };
     
-    smalltalk.prompt(this._TITLE, msg, number)
+    smalltalk.prompt(this._title, msg, number)
         .then(goToLine)
         .catch(empty)
         .then(focus);
@@ -296,7 +296,7 @@ Edward.prototype.emit = function(...args) {
 
 Edward.prototype.isChanged = function() {
     const value = this.getValue();
-    const isEqual = value === this._Value;
+    const isEqual = value === this._value;
     
     return !isEqual;
 };
@@ -318,8 +318,8 @@ Edward.prototype.setValueFirst = function(name, value) {
     const session = this._getSession();
     const {UndoManager} = ace.require('ace/undomanager');
     
-    this._FileName = name;
-    this._Value = value;
+    this._filename = name;
+    this._value = value;
     
     this.setValue(value);
     
@@ -414,7 +414,7 @@ Edward.prototype.copyToClipboard = function() {
     const msg = 'Could not copy, use &ltCtrl&gt + &ltС&gt insted!';
     
     this._clipboard('copy')
-        .catch(wraptile(smalltalk.alert, this._TITLE, msg));
+        .catch(wraptile(smalltalk.alert, this._title, msg));
     
     return this;
 };
@@ -425,7 +425,7 @@ Edward.prototype.cutToClipboard = function() {
     
     this._clipboard('cut')
         .then(wraptile(remove, 'right'))
-        .catch(wraptile(smalltalk.alert, this._TITLE, msg));
+        .catch(wraptile(smalltalk.alert, this._title, msg));
     
     return this;
 };
@@ -434,7 +434,7 @@ Edward.prototype.pasteFromClipboard = function() {
     const msg = 'Could not paste, use &ltCtrl&gt + &ltV&gt insted!';
     
     this._clipboard('paste')
-        .catch(wraptile(smalltalk.alert, this._TITLE, msg));
+        .catch(wraptile(smalltalk.alert, this._title, msg));
     
     return this;
 };
@@ -489,8 +489,8 @@ Edward.prototype._doDiff = async function(path) {
 };
 
 Edward.prototype._diff = function(newValue) {
-    this._Value = this._story.getData(this._FileName) || this._Value;
-    return createPatch(this._Value, newValue);
+    this._value = this._story.getData(this._filename) || this._value;
+    return createPatch(this._value, newValue);
 };
 
 Edward.prototype._setEmmet = _setEmmet;

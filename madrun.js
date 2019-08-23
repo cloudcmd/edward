@@ -2,7 +2,7 @@
 
 const {
     run,
-    predefined
+    predefined,
 } = require('madrun');
 
 const {putout} = predefined;
@@ -17,7 +17,7 @@ module.exports = {
             'server',
             'webpack.config.js',
             'madrun.js',
-        ]
+        ],
     }),
     'fix:lint': () => run('lint', '--fix'),
     'watch:server': () => run('watcher', 'bin/edward.js package.json'),
