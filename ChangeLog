@@ -1,3 +1,11 @@
+2019.08.23, v11.0.3
+
+feature:
+- (edward) _Value -> _value
+- (package) putout v5.7.1
+- (package) rimraf v3.0.0
+
+
 2019.08.21, v11.0.2
 
 fix:
