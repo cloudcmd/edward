@@ -1,3 +1,11 @@
+2019.09.04, v11.1.0
+
+feature:
+- (edward) drop legacy support
+- (package) madrun v3.0.1
+- (package) restafary v7.0.0
+
+
 2019.08.23, v11.0.3
 
 feature:
