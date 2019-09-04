@@ -8,13 +8,13 @@ require('../css/edward.css');
 
 const {createPatch} = require('daffy');
 const exec = require('execon');
-const Emitify = require('emitify/legacy');
+const Emitify = require('emitify');
 const load = require('load.js');
-const wraptile = require('wraptile/legacy');
+const wraptile = require('wraptile');
 const smalltalk = require('smalltalk');
 const {promisify} = require('es6-promisify');
 const jssha = require('jssha');
-const restafary = require('restafary/legacy/client');
+const restafary = require('restafary/client');
 
 window.load = window.load || load;
 window.exec = window.exec || exec;
