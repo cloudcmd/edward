@@ -1,3 +1,11 @@
+2019.09.08, v11.1.1
+
+feature:
+- (edward) ace v1.4.6
+- (package) eslint-plugin-node v10.0.0
+- (package) wraptile v3.0.0
+
+
 2019.09.04, v11.1.0
 
 feature:
