@@ -15,11 +15,10 @@ const smalltalk = require('smalltalk');
 const {promisify} = require('es6-promisify');
 const jssha = require('jssha');
 const restafary = require('restafary/client');
+const tryToCatch = require('try-to-catch');
 
 window.load = window.load || load;
 window.exec = window.exec || exec;
-
-const loadJSON = promisify(load.json);
 
 const Story = require('./story');
 const _clipboard = require('./_clipboard');
@@ -121,7 +120,7 @@ Edward.prototype._init = function(fn) {
                 callback();
             });
         },
-        () => {
+        async () => {
             this._Emitter = Emitify();
             this._Ace = ace.edit(this._Element);
             this._Modelist = ace.require('ace/ext/modelist');
@@ -135,23 +134,24 @@ Edward.prototype._init = function(fn) {
             this._addCommands();
             this._Ace.$blockScrolling = Infinity;
             
-            load.json(this._PREFIX + '/edit.json', (error, config) => {
-                const {
-                    options = {},
-                } = config;
-                const preventOverwrite = () => {
-                    for (const name of Object.keys(this._Config.options)) {
-                        options[name] = this._Config.options[name];
-                    }
-                };
-                
-                fn();
-                preventOverwrite();
-                
-                this._Config = config;
-                
-                edward.setOptions(options);
-            });
+            const config = await load.json(this._PREFIX + '/edit.json');
+            
+            const {
+                options = {},
+            } = config;
+            
+            const preventOverwrite = () => {
+                for (const name of Object.keys(this._Config.options)) {
+                    options[name] = this._Config.options[name];
+                }
+            };
+            
+            fn();
+            preventOverwrite();
+            
+            this._Config = config;
+            
+            edward.setOptions(options);
         },
     ]);
 };
@@ -461,7 +461,7 @@ Edward.prototype._loadOptions = async function() {
     if (this._Options)
         return this._Options;
     
-    const data = await loadJSON(url);
+    const data = await load.json(url);
     
     this._Options = data;
     
@@ -495,14 +495,14 @@ Edward.prototype._diff = function(newValue) {
 
 Edward.prototype._setEmmet = _setEmmet;
 
-Edward.prototype._addExt = function(name, fn) {
+Edward.prototype._addExt = async function (name, fn) {
     if (this._Ext)
         return add(null, this._Ext);
     
-    load.json(this._PREFIX + '/json/ext.json', (error, data) => {
-        this._Ext = data;
-        add(error, this._Ext);
-    });
+    const [error, data] = await tryToCatch(load.json, this._PREFIX + '/json/ext.json');
+    this._Ext = data;
+    
+    add(error, this._Ext);
     
     function add(error, exts) {
         if (error)

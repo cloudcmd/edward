@@ -23,18 +23,18 @@ module.exports = function() {
     
     exec.if(this._Emmet, () => {
         this.setOption('enableEmmet', true);
-    }, (callback) => {
+    }, async (callback) => {
         const url = _PREFIX + join([
             dirVendor + 'emmet.js',
             dir + 'ext-emmet.js',
         ]);
         
-        load.js(url, () => {
-            this._Emmet = ace.require('ace/ext/emmet');
-            this._Emmet.setCore(window.emmet);
-            
-            callback();
-        });
+        await load.js(url);
+        
+        this._Emmet = ace.require('ace/ext/emmet');
+        this._Emmet.setCore(window.emmet);
+        
+        callback();
     });
 };
 
