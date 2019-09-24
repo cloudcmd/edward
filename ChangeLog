@@ -1,3 +1,14 @@
+2019.09.24, v11.2.0
+
+fix:
+- (edward) singletone root (coderaiser/cloudcmd/issues/254)
+
+feature:
+- (package) restafary v8.0.1
+- (package) smalltalk v4.0.2
+- (package) restbox v2.0.0
+
+
 2019.09.19, v11.1.4
 
 feature:
