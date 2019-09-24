@@ -12,7 +12,6 @@ const Emitify = require('emitify');
 const load = require('load.js');
 const wraptile = require('wraptile');
 const smalltalk = require('smalltalk');
-const {promisify} = require('es6-promisify');
 const jssha = require('jssha');
 const restafary = require('restafary/client');
 const tryToCatch = require('try-to-catch');
