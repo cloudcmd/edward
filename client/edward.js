@@ -548,7 +548,7 @@ Edward.prototype._onDrop = function(event) {
     
     event.preventDefault();
     
-    const files = [...event.dataTransfer.files];
+    const files = Array.from(event.dataTransfer.files);
     
     for (const file of files) {
         const reader = new FileReader();

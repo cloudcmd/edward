@@ -23,7 +23,7 @@ const maybe = (fn) => {
     if (isFn(fn))
         return fn();
     
-    return data;
+    return fn;
 
 };
 
@@ -138,7 +138,7 @@ function _restboxFn({root, dropbox, dropboxToken}, req, res, next) {
         return next();
     
     const {url} = req;
-    const api = '/api/v1';
+    const prefix = '/api/v1';
     const indexOf = url.indexOf.bind(url);
     const not = (fn) => (a) => !fn(a);
     const is = [
@@ -149,7 +149,7 @@ function _restboxFn({root, dropbox, dropboxToken}, req, res, next) {
         return next();
     
     const middle = restbox({
-        prefix: api,
+        prefix,
         token: dropboxToken,
         root: maybe(root),
     });
