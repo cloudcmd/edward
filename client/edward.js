@@ -1,6 +1,5 @@
 /* global ace */
 /* global join */
-/* global loadRemote */
 
 'use strict';
 
@@ -10,6 +9,7 @@ const {createPatch} = require('daffy');
 const exec = require('execon');
 const Emitify = require('emitify');
 const load = require('load.js');
+const loadremote = require('./loadremote');
 const wraptile = require('wraptile');
 const smalltalk = require('smalltalk');
 const jssha = require('jssha');
@@ -110,14 +110,14 @@ Edward.prototype._init = function(fn) {
     
     exec.series([
         loadFiles,
-        (callback) => {
-            loadRemote('socket', {
+        async (callback) => {
+            await loadremote('socket', {
                 name : 'io',
                 prefix: this._SOCKET_PATH,
-            }, (error) => {
-                !error && initSocket();
-                callback();
             });
+            
+            initSocket();
+            callback();
         },
         async () => {
             this._Emitter = Emitify();
@@ -574,9 +574,8 @@ Edward.prototype._loadFiles = function(callback) {
     const DIR = this._DIR;
     
     exec.series([
-        function(callback) {
+        async function(callback) {
             const obj = {
-                loadRemote  : getModulePath('loadremote', 'lib'),
                 join        : '/join/join.js',
             };
             
@@ -588,16 +587,19 @@ Edward.prototype._loadFiles = function(callback) {
                     return PREFIX + obj[name];
                 });
             
-            exec.if(!scripts.length, callback, () => {
-                load.parallel(scripts, callback);
-            });
+            if (scripts.lengths)
+                return callback();
+            
+            await load.parallel(scripts);
+            callback();
         },
         
-        function(callback) {
-            loadRemote.load('ace', {prefix: PREFIX}, callback);
+        async function(callback) {
+            await loadremote('ace', {prefix: PREFIX});
+            callback();
         },
         
-        function(callback) {
+        async function(callback) {
             const ace = DIR + 'ace-builds/src-min/';
             const url = PREFIX + join([
                 'language_tools',
@@ -605,12 +607,12 @@ Edward.prototype._loadFiles = function(callback) {
                 'modelist',
             ].map((name) => {
                 return 'ext-' + name;
-            })
-                .map((name) => {
-                    return ace + name + '.js';
-                }));
+            }).map((name) => {
+                return ace + name + '.js';
+            }));
             
-            load.js(url, callback);
+            await load.js(url);
+            callback();
         },
         
         function() {

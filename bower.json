@@ -17,7 +17,6 @@
     "modules"
   ],
   "dependencies": {
-    "loadremote": "~1.2.0",
     "ace-builds": "^1.4.6"
   }
 }
