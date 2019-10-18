@@ -557,18 +557,6 @@ Edward.prototype._onDrop = function(event) {
     }
 };
 
-function getModulePath(name, lib, ext = '.js') {
-    let libdir = '/';
-    const dir = '/modules/';
-    
-    if (lib)
-        libdir = '/' + lib + '/';
-    
-    const path = dir + name + libdir + name + ext;
-    
-    return path;
-}
-
 Edward.prototype._loadFiles = function(callback) {
     const PREFIX = this._PREFIX;
     const DIR = this._DIR;
