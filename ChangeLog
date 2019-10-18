@@ -1,3 +1,13 @@
+2019.10.18, v11.2.4
+
+fix:
+- (edward) loadremote (coderaiser/cloudcmd/#257)
+
+feature:
+- (bower) ace-builds v1.4.7
+- (package) try-to-catch v2.0.0
+
+
 2019.10.08, v11.2.3
 
 fix:
