@@ -168,19 +168,19 @@ Edward.prototype._addCommands = function() {
     
     const commands = [{
         name    : 'goToLine',
-        bindKey : { win: 'Ctrl-G', mac: 'Command-G' },
+        bindKey : {win: 'Ctrl-G', mac: 'Command-G'},
         exec    : wrapCall(edward.goToLine),
     }, {
         name    : 'save',
-        bindKey : { win: 'Ctrl-S', mac: 'Command-S' },
+        bindKey : {win: 'Ctrl-S', mac: 'Command-S'},
         exec    : callIfKey(edward.save),
     }, {
         name    : 'saveMC',
-        bindKey : { win: 'F2', mac: 'F2' },
+        bindKey : {win: 'F2', mac: 'F2'},
         exec    : callIfKey(edward.save),
     }, {
         name    : 'evaluate',
-        bindKey : { win: 'Ctrl-E', mac: 'Command-E' },
+        bindKey : {win: 'Ctrl-E', mac: 'Command-E'},
         exec    : callIfKey(edward.evaluate),
     }];
     
