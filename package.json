@@ -66,7 +66,7 @@
     "clean-css-loader": "^2.0.0",
     "css-loader": "^3.0.0",
     "daffy": "^1.0.3",
-    "emitify": "^3.1.0",
+    "emitify": "^4.0.1",
     "es6-promisify": "^6.0.1",
     "eslint": "^6.0.1",
     "eslint-plugin-node": "^10.0.0",
