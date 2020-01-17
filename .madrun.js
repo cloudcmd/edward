@@ -16,7 +16,7 @@ module.exports = {
             'client',
             'server',
             'webpack.config.js',
-            'madrun.js',
+            '.madrun.js',
         ],
     }),
     'fix:lint': () => run('lint', '--fix'),

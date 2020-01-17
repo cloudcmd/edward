@@ -24,7 +24,6 @@ const maybe = (fn) => {
         return fn();
     
     return fn;
-
 };
 
 const isDev = process.env.NODE_ENV === 'development';
