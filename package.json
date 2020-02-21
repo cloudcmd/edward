@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/cloudcmd/edward",
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "start": "madrun start",
