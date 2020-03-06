@@ -16,8 +16,7 @@ module.exports = async (req, res, next) => {
         return res.status(404)
             .send(error.message);
     
-    res .type('json')
-        .send(data);
+    res.json(data);
 };
 
 function replace(from, to) {
