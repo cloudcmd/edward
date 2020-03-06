@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
     if (req.url !== '/edit.json')
         return next();
     
-    const [error, data] = tryToCatch(readEdit);
+    const [error, data] = await tryToCatch(readEdit);
     
     if (error)
         return res.status(404)
