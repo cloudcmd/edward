@@ -5,7 +5,7 @@
     "remote": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/{{ version }}/socket.io.js"
 }, {
     "name": "ace",
-    "version": "1.4.7",
+    "version": "1.4.8",
     "local": "/modules/ace-builds/src-min/ace.js",
     "remote": "//cdnjs.cloudflare.com/ajax/libs/ace/{{ version }}/ace.js"
 }, {
