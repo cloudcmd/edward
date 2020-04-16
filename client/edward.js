@@ -494,7 +494,7 @@ Edward.prototype._diff = function(newValue) {
 
 Edward.prototype._setEmmet = _setEmmet;
 
-Edward.prototype._addExt = async function (name, fn) {
+Edward.prototype._addExt = async function(name, fn) {
     if (this._Ext)
         return add(null, this._Ext);
     
