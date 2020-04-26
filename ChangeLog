@@ -1,3 +1,9 @@
+2020.04.26, v12.0.9
+
+fix:
+- (dward) jssh: default
+
+
 2020.04.16, v12.0.8
 
 feature:
