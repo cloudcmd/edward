@@ -12,7 +12,7 @@ const load = require('load.js');
 const loadremote = require('./loadremote');
 const wraptile = require('wraptile');
 const smalltalk = require('smalltalk');
-const jssha = require('jssha');
+const jssha = require('jssha').default;
 const restafary = require('restafary/client');
 const tryToCatch = require('try-to-catch');
 
