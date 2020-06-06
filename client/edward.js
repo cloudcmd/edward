@@ -29,9 +29,7 @@ const save = require('./save');
 
 function empty() {}
 
-module.exports = (el, options, callback) => {
-    Edward(el, options, callback);
-};
+module.exports = Edward;
 
 function Edward(el, options, callback) {
     if (!(this instanceof Edward))
@@ -509,7 +507,7 @@ Edward.prototype._addExt = async function(name, fn) {
         
         Object.keys(exts).some((ext) => {
             const arr = exts[ext];
-            const is = ~arr.indexOf(name);
+            const is = arr.includes(name);
             
             if (is)
                 name += '.' + ext;

@@ -19,27 +19,15 @@ module.exports = async (req, res, next) => {
     res.json(data);
 };
 
-function replace(from, to) {
-    return {
-        ...to,
-        ...from,
-    };
-}
-
-function copy(from) {
-    return {
-        ...from,
-    };
-}
-
 async function readEdit() {
     const homePath = HOME + '/.edward.json';
-    const data = copy(Edit);
-    
     const [error, edit] = await tryToCatch(readjson, homePath);
     
     if (!error)
-        return replace(edit, data);
+        return {
+            ...Edit,
+            ...edit,
+        };
     
     if (error.code !== 'ENOENT')
         throw Error(`edward --config ${homePath}: ${error.message}`);
