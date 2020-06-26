@@ -12,7 +12,7 @@ module.exports = async function(error, text) {
         _value,
         _filename,
         _title,
-    } = this;
+    } = edward;
     let msg = 'Try again?';
     
     if (error) {
