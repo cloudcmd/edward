@@ -17,6 +17,6 @@
     "modules"
   ],
   "dependencies": {
-    "ace-builds": "^1.4.10"
+    "ace-builds": "^1.4.12"
   }
 }
