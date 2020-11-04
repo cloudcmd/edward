@@ -82,7 +82,7 @@
     "once": "^1.4.0",
     "putout": "^11.0.4",
     "rimraf": "^3.0.0",
-    "smalltalk": "^4.0.6",
+    "smalltalk": "^4.0.7",
     "style-loader": "^2.0.0",
     "url-loader": "^4.0.0",
     "webpack": "^5.1.3",
