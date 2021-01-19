@@ -110,7 +110,7 @@ Edward.prototype._init = function(fn) {
         loadFiles,
         async (callback) => {
             await loadremote('socket', {
-                name : 'io',
+                name: 'io',
                 prefix: this._SOCKET_PATH,
             });
             
@@ -165,21 +165,21 @@ Edward.prototype._addCommands = function() {
     });
     
     const commands = [{
-        name    : 'goToLine',
-        bindKey : {win: 'Ctrl-G', mac: 'Command-G'},
-        exec    : wrapCall(edward.goToLine),
+        name: 'goToLine',
+        bindKey: {win: 'Ctrl-G', mac: 'Command-G'},
+        exec: wrapCall(edward.goToLine),
     }, {
-        name    : 'save',
-        bindKey : {win: 'Ctrl-S', mac: 'Command-S'},
-        exec    : callIfKey(edward.save),
+        name: 'save',
+        bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
+        exec: callIfKey(edward.save),
     }, {
-        name    : 'saveMC',
-        bindKey : {win: 'F2', mac: 'F2'},
-        exec    : callIfKey(edward.save),
+        name: 'saveMC',
+        bindKey: {win: 'F2', mac: 'F2'},
+        exec: callIfKey(edward.save),
     }, {
-        name    : 'evaluate',
-        bindKey : {win: 'Ctrl-E', mac: 'Command-E'},
-        exec    : callIfKey(edward.evaluate),
+        name: 'evaluate',
+        bindKey: {win: 'Ctrl-E', mac: 'Command-E'},
+        exec: callIfKey(edward.evaluate),
     }];
     
     commands.forEach(addKey);
@@ -212,9 +212,9 @@ Edward.prototype.addKeyMap = function(keyMap) {
     const map = Object.keys(keyMap).map((name, i) => {
         const key = {
             name: String(Math.random()) + i,
-            bindKey : {
-                win : name,
-                mac : name.replace('Ctrl', 'Command'),
+            bindKey: {
+                win: name,
+                mac: name.replace('Ctrl', 'Command'),
             },
             exec: keyMap[name],
         };
@@ -562,7 +562,7 @@ Edward.prototype._loadFiles = function(callback) {
     exec.series([
         async function(callback) {
             const obj = {
-                join        : '/join/join.js',
+                join: '/join/join.js',
             };
             
             const scripts = Object.keys(obj)

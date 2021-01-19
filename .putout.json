@@ -1,7 +1,11 @@
 {
     "match": {
         "client/edward.js": {
-            "remove-console": false
+            "remove-console": "off"
         }
-    }
+    },
+    "ignore": [
+        "modules",
+        "vendor"
+    ]
 }
