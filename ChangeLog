@@ -1,3 +1,14 @@
+2021.01.19, v13.0.0
+
+feature:
+- (package) restafary v9.1.1
+- (edward) drop support of node < 14
+- (package) putout v13.7.1
+- (package) madrun v8.6.0
+- (package) socket.io v3.1.0
+- (package) socket-file v5.0.0
+
+
 2020.11.22, v12.0.14
 
 fix:
