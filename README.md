@@ -1,7 +1,8 @@
 # Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL]
 
 [NPMIMGURL]: https://img.shields.io/npm/v/edward.svg?style=flat
-[BuildStatusIMGURL]: https://img.shields.io/travis/cloudcmd/edward/master.svg?style=flat
+[BuildStatusURL]: https://github.com/cloudcmd/edward/actions?query=workflow%3A%22Node+CI%22 "Build Status"
+[BuildStatusIMGURL]: https://github.com/cloudcmd/edward/workflows/Node%20CI/badge.svg
 [DependencyStatusIMGURL]: https://img.shields.io/david/cloudcmd/edward.svg?style=flat
 [LicenseIMGURL]: https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPM_INFO_IMG]: https://nodei.co/npm/edward.png?downloads=true&&stars&&downloadRank "npm install edward"

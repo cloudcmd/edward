@@ -1,5 +1,8 @@
 {
     "match": {
+        "client": {
+            "declare-undefined-variables": "off"
+        },
         "client/edward.js": {
             "remove-console": "off"
         }

@@ -17,5 +17,5 @@ modules/pako/dist
 !modules/pako/dist/paco.min.js
 
 yarn-error.log
-.putoutcache
 
+coverage
