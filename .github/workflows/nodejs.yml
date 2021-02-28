@@ -34,12 +34,3 @@ jobs:
       run:
         redrun lint
     
-    - name: Coverage
-      run:
-        redrun coverage report
-    
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-
