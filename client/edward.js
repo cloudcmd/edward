@@ -35,23 +35,14 @@ function Edward(el, options, callback) {
     if (!(this instanceof Edward))
         return new Edward(el, options, callback);
     
-    this._Ace;
-    this._Emmet;
-    this._value;
-    
     this._Config = {
         options: {},
     };
     
-    this._Options;
     this._filename = '';
-    this._Modelist;
-    this._ElementMsg;
-    this._Ext;
     this._title = 'Edward';
     this._DIR = '/modules/';
     this._story = Story();
-    this._Emitter;
     this._isKey = true;
     
     if (!callback)
