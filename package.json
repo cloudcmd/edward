@@ -80,7 +80,7 @@
     "madrun": "^9.0.3",
     "nodemon": "^2.0.1",
     "once": "^1.4.0",
-    "putout": "^18.14.0",
+    "putout": "^26.0.1",
     "rimraf": "^3.0.0",
     "smalltalk": "^4.0.7",
     "style-loader": "^3.2.1",
