@@ -19,3 +19,4 @@ modules/pako/dist
 yarn-error.log
 
 coverage
+.idea

@@ -1,7 +1,8 @@
+'use strict';
+
+const isString = (a) => typeof a === 'string';
 /* global ace */
 /* global join */
-
-'use strict';
 
 require('../css/edward.css');
 
@@ -48,7 +49,7 @@ function Edward(el, options, callback) {
     if (!callback)
         callback = options;
     
-    if (typeof el === 'string')
+    if (isString(el))
         el = document.querySelector(el);
     
     this._maxSize = options._maxSize || 512_000;
@@ -347,7 +348,7 @@ Edward.prototype._setUseOfWorker = function(mode) {
     const session = this._getSession();
     const isStr = typeof mode === 'string';
     const regStr = 'coffee|css|html|json|lua|php|xquery';
-    const regExp = new RegExp(regStr);
+    const regExp = RegExp(regStr);
     
     let isMatch;
     
@@ -436,6 +437,7 @@ Edward.prototype._getSession = function() {
 Edward.prototype.sha = function() {
     const value = this.getValue();
     const shaObj = new jssha('SHA-1', 'TEXT');
+    
     shaObj.update(value);
     
     return shaObj.getHash('HEX');
@@ -557,12 +559,8 @@ Edward.prototype._loadFiles = function(callback) {
             };
             
             const scripts = Object.keys(obj)
-                .filter((name) => {
-                    return !window[name];
-                })
-                .map((name) => {
-                    return PREFIX + obj[name];
-                });
+                .filter((name) => !window[name])
+                .map((name) => PREFIX + obj[name]);
             
             if (scripts.lengths)
                 return callback();
@@ -582,11 +580,7 @@ Edward.prototype._loadFiles = function(callback) {
                 'language_tools',
                 'searchbox',
                 'modelist',
-            ].map((name) => {
-                return 'ext-' + name;
-            }).map((name) => {
-                return ace + name + '.js';
-            }));
+            ].map((name) => 'ext-' + name).map((name) => ace + name + '.js'));
             
             await load.js(url);
             callback();

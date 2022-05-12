@@ -2,9 +2,8 @@
 
 function createMsg() {
     const wrapper = document.createElement('div');
-    const html = '<div class="edward-msg">/div>';
     
-    wrapper.innerHTML = html;
+    wrapper.innerHTML = '<div class="edward-msg">/div>';
     const msg = wrapper.firstChild;
     
     return msg;

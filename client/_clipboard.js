@@ -34,7 +34,9 @@ module.exports = function(cmd) {
         .then(insert)
         .catch(() => {
             showMessageOnce('Could not paste from clipboard. Inner buffer used.');
+            
             const value = _story.getData(NAME);
+            
             insert(value);
         });
 };

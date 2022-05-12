@@ -1,13 +1,11 @@
-# Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL]
+# Edward [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL]
 
 [NPMIMGURL]: https://img.shields.io/npm/v/edward.svg?style=flat
 [BuildStatusURL]: https://github.com/cloudcmd/edward/actions?query=workflow%3A%22Node+CI%22 "Build Status"
 [BuildStatusIMGURL]: https://github.com/cloudcmd/edward/workflows/Node%20CI/badge.svg
-[DependencyStatusIMGURL]: https://img.shields.io/david/cloudcmd/edward.svg?style=flat
 [LicenseIMGURL]: https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPM_INFO_IMG]: https://nodei.co/npm/edward.png?downloads=true&&stars&&downloadRank "npm install edward"
 [NPMURL]: https://npmjs.org/package/edward "npm"
-[DependencyStatusURL]: https://david-dm.org/cloudcmd/edward "Dependency Status"
 [LicenseURL]: https://tldrlegal.com/license/mit-license "MIT License"
 [edit.json]: https://github.com/cloudcmd/edward/tree/master/json/edit.json "edit.json"
 
@@ -28,7 +26,7 @@ Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://a
 npm i edward -g
 ```
 
-![NPM_INFO][NPM_INFO_IMG]
+![NPM\_INFO][NPM_INFO_IMG]
 
 ## Command line parameters
 
@@ -68,12 +66,12 @@ const express = require('express');
 const app = express();
 
 app.use(edward({
-    root: '/',              // default
-    online: true,           // default
-    diff: true,             // default
-    zip: true,              // default
-    dropbox: false,         // optional
-    dropboxToken: 'token',  // optional
+    root: '/', // default
+    online: true, // default
+    diff: true, // default
+    zip: true, // default
+    dropbox: false, // optional
+    dropboxToken: 'token', // optional
 }));
 
 app.listen(31_337);

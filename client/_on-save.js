@@ -19,7 +19,7 @@ module.exports = async function(error, text) {
         if (error.message)
             msg = error.message + '\n' + msg;
         else
-            msg = 'Can\'t save.' + msg;
+            msg = `Can't save.` + msg;
         
         const [cancel] = await tryToCatch(confirm, _title, msg);
         
