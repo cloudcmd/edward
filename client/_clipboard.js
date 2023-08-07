@@ -12,10 +12,7 @@ const reject = Promise.reject.bind(Promise);
 
 module.exports = function(cmd) {
     const NAME = 'editor-clipboard';
-    const {
-        _Ace,
-        _story,
-    } = this;
+    const {_Ace, _story} = this;
     
     const insert = _Ace.insert.bind(_Ace);
     const value = this._Ace.getSelectedText();
@@ -30,7 +27,8 @@ module.exports = function(cmd) {
         return cut(_story, value) ? resolve() : reject();
     }
     
-    return clipboard.readText()
+    return clipboard
+        .readText()
         .then(insert)
         .catch(() => {
             showMessageOnce('Could not paste from clipboard. Inner buffer used.');
@@ -53,4 +51,3 @@ function cut(story, value) {
     
     return result;
 }
-

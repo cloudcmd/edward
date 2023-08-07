@@ -13,6 +13,7 @@ module.exports = async function(error, text) {
         _filename,
         _title,
     } = edward;
+    
     let msg = 'Try again?';
     
     if (error) {
@@ -34,7 +35,8 @@ module.exports = async function(error, text) {
     edward.showMessage(text);
     
     const hash = edward.sha();
-    this._story
+    this
+        ._story
         .setData(_filename, _value)
         .setHash(_filename, hash);
     

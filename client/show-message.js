@@ -4,9 +4,8 @@ function createMsg() {
     const wrapper = document.createElement('div');
     
     wrapper.innerHTML = '<div class="edward-msg">/div>';
-    const msg = wrapper.firstChild;
     
-    return msg;
+    return wrapper.firstChild;
 }
 
 module.exports = showMessage;
@@ -28,4 +27,3 @@ function showMessage(text) {
     
     return this;
 }
-

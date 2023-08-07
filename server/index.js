@@ -1,8 +1,5 @@
 'use strict';
 
-const isUndefined = (a) => typeof a === 'undefined';
-
-const DIR_ROOT = __dirname + '/..';
 const path = require('path');
 
 const restafary = require('restafary');
@@ -13,7 +10,8 @@ const currify = require('currify');
 const join = require('join-io');
 
 const editFn = require('./edit');
-
+const DIR_ROOT = `${__dirname}/..`;
+const isUndefined = (a) => typeof a === 'undefined';
 const optionsFn = currify(configFn);
 const joinFn = currify(_joinFn);
 const restboxFn = currify(_restboxFn);
@@ -46,17 +44,28 @@ module.exports = (options) => {
         dropboxToken,
     } = options;
     
-    router.route(prefix + '/*')
+    router
+        .route(`${prefix}/*`)
         .all(cut(prefix))
         .get(edward)
         .get(optionsFn(options))
         .get(editFn)
         .get(modulesFn)
-        .get(restboxFn({prefix, root, dropbox, dropboxToken}))
+        .get(restboxFn({
+            prefix,
+            root,
+            dropbox,
+            dropboxToken,
+        }))
         .get(restafaryFn(root))
         .get(joinFn(options))
         .get(staticFn)
-        .put(restboxFn({prefix, root, dropbox, dropboxToken}))
+        .put(restboxFn({
+            prefix,
+            root,
+            dropbox,
+            dropboxToken,
+        }))
         .put(restafaryFn(root));
     
     return router;
@@ -106,7 +115,8 @@ function configFn(o, req, res, next) {
     if (req.url.indexOf('/options.json'))
         return next();
     
-    res .type('json')
+    res
+        .type('json')
         .send({
             diff,
             zip,
@@ -142,9 +152,8 @@ function _restboxFn({root, dropbox, dropboxToken}, req, res, next) {
     const prefix = '/api/v1';
     const indexOf = url.indexOf.bind(url);
     const not = (fn) => (a) => !fn(a);
-    const is = [
-        `/api/v1`,
-    ].some(not(indexOf));
+    
+    const is = [`/api/v1`].some(not(indexOf));
     
     if (!is)
         return next();
@@ -163,6 +172,7 @@ function _restafaryFn(root, req, res, next) {
     const prefix = '/api/v1/fs';
     const indexOf = url.indexOf.bind(url);
     const not = (fn) => (a) => !fn(a);
+    
     const isRestafary = [
         `/api/v1`,
         '/restafary.js',
@@ -183,4 +193,3 @@ function staticFn(req, res) {
     const file = path.normalize(DIR_ROOT + req.url);
     res.sendFile(file);
 }
-

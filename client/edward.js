@@ -1,9 +1,9 @@
 'use strict';
 
 const isString = (a) => typeof a === 'string';
+
 /* global ace */
 /* global join */
-
 require('../css/edward.css');
 
 const {createPatch} = require('daffy');
@@ -125,9 +125,7 @@ Edward.prototype._init = function(fn) {
             
             const config = await load.json(this._PREFIX + '/edit.json');
             
-            const {
-                options = {},
-            } = config;
+            const {options = {}} = config;
             
             const preventOverwrite = () => {
                 for (const name of Object.keys(this._Config.options)) {
@@ -158,19 +156,31 @@ Edward.prototype._addCommands = function() {
     
     const commands = [{
         name: 'goToLine',
-        bindKey: {win: 'Ctrl-G', mac: 'Command-G'},
+        bindKey: {
+            win: 'Ctrl-G',
+            mac: 'Command-G',
+        },
         exec: wrapCall(edward.goToLine),
     }, {
         name: 'save',
-        bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
+        bindKey: {
+            win: 'Ctrl-S',
+            mac: 'Command-S',
+        },
         exec: callIfKey(edward.save),
     }, {
         name: 'saveMC',
-        bindKey: {win: 'F2', mac: 'F2'},
+        bindKey: {
+            win: 'F2',
+            mac: 'F2',
+        },
         exec: callIfKey(edward.save),
     }, {
         name: 'evaluate',
-        bindKey: {win: 'Ctrl-E', mac: 'Command-E'},
+        bindKey: {
+            win: 'Ctrl-E',
+            mac: 'Command-E',
+        },
         exec: callIfKey(edward.evaluate),
     }];
     
@@ -183,14 +193,14 @@ Edward.prototype.evaluate = function() {
     const isJS = /\.js$/.test(this._filename);
     
     if (!isJS)
-        return smalltalk.alert(this._title, 'Evaluation supported for JavaScript only')
+        return smalltalk
+            .alert(this._title, 'Evaluation supported for JavaScript only')
             .then(focus);
     
     const value = edward.getValue();
     const msg = exec.try(Function(value));
     
-    msg && smalltalk.alert(this._title, msg)
-        .then(focus);
+    msg && smalltalk.alert(this._title, msg).then(focus);
 };
 
 Edward.prototype._addKey = function(options) {
@@ -201,18 +211,20 @@ Edward.prototype.addKeyMap = function(keyMap) {
     if (typeof keyMap !== 'object')
         throw Error('map should be object!');
     
-    const map = Object.keys(keyMap).map((name, i) => {
-        const key = {
-            name: String(Math.random()) + i,
-            bindKey: {
-                win: name,
-                mac: name.replace('Ctrl', 'Command'),
-            },
-            exec: keyMap[name],
-        };
-        
-        return key;
-    });
+    const map = Object
+        .keys(keyMap)
+        .map((name, i) => {
+            const key = {
+                name: String(Math.random()) + i,
+                bindKey: {
+                    win: name,
+                    mac: name.replace('Ctrl', 'Command'),
+                },
+                exec: keyMap[name],
+            };
+            
+            return key;
+        });
     
     map.forEach(this._addKey());
     
@@ -232,7 +244,8 @@ Edward.prototype.goToLine = function() {
         this._Ace.focus();
     };
     
-    smalltalk.prompt(this._title, msg, number)
+    smalltalk
+        .prompt(this._title, msg, number)
         .then(goToLine)
         .catch(empty)
         .then(focus);
@@ -346,7 +359,7 @@ Edward.prototype.setOptions = function(options) {
 Edward.prototype.setKeyMap = setKeyMap;
 Edward.prototype._setUseOfWorker = function(mode) {
     const session = this._getSession();
-    const isStr = typeof mode === 'string';
+    const isStr = isString(mode);
     const regStr = 'coffee|css|html|json|lua|php|xquery';
     const regExp = RegExp(regStr);
     
@@ -367,7 +380,7 @@ Edward.prototype.setMode = function(mode) {
         return this;
     
     const [ext] = modesByName[mode].extensions.split('|');
-    this.setModeForPath('.' + ext);
+    this.setModeForPath(`.${ext}`);
     
     return this;
 };
@@ -375,7 +388,9 @@ Edward.prototype.setMode = function(mode) {
 Edward.prototype.setModeForPath = function(path) {
     const session = this._getSession();
     const {modesByName} = this._Modelist;
-    const name = path.split('/').pop();
+    const name = path
+        .split('/')
+        .pop();
     
     this._addExt(name, (name) => {
         const {mode} = this._Modelist.getModeForPath(name);
@@ -402,7 +417,8 @@ Edward.prototype.selectAll = function() {
 Edward.prototype.copyToClipboard = function() {
     const msg = 'Could not copy, use &ltCtrl&gt + &ltС&gt insted!';
     
-    this._clipboard('copy')
+    this
+        ._clipboard('copy')
         .catch(wraptile(smalltalk.alert, this._title, msg));
     
     return this;
@@ -412,7 +428,8 @@ Edward.prototype.cutToClipboard = function() {
     const msg = 'Could not cut, use &ltCtrl&gt + &ltX&gt insted!';
     const remove = this.remove.bind(this);
     
-    this._clipboard('cut')
+    this
+        ._clipboard('cut')
         .then(wraptile(remove, 'right'))
         .catch(wraptile(smalltalk.alert, this._title, msg));
     
@@ -422,7 +439,8 @@ Edward.prototype.cutToClipboard = function() {
 Edward.prototype.pasteFromClipboard = function() {
     const msg = 'Could not paste, use &ltCtrl&gt + &ltV&gt insted!';
     
-    this._clipboard('paste')
+    this
+        ._clipboard('paste')
         .catch(wraptile(smalltalk.alert, this._title, msg));
     
     return this;
@@ -490,6 +508,7 @@ Edward.prototype._addExt = async function(name, fn) {
         return add(null, this._Ext);
     
     const [error, data] = await tryToCatch(load.json, this._PREFIX + '/json/ext.json');
+    
     this._Ext = data;
     
     add(error, this._Ext);
@@ -498,15 +517,17 @@ Edward.prototype._addExt = async function(name, fn) {
         if (error)
             return console.error(Error('Could not load ext.json!'));
         
-        Object.keys(exts).some((ext) => {
-            const arr = exts[ext];
-            const is = arr.includes(name);
-            
-            if (is)
-                name += '.' + ext;
-            
-            return is;
-        });
+        Object
+            .keys(exts)
+            .some((ext) => {
+                const arr = exts[ext];
+                const is = arr.includes(name);
+                
+                if (is)
+                    name += `.${ext}`;
+                
+                return is;
+            });
         
         fn(name);
     }
@@ -558,7 +579,8 @@ Edward.prototype._loadFiles = function(callback) {
                 join: '/join/join.js',
             };
             
-            const scripts = Object.keys(obj)
+            const scripts = Object
+                .keys(obj)
                 .filter((name) => !window[name])
                 .map((name) => PREFIX + obj[name]);
             
@@ -568,28 +590,28 @@ Edward.prototype._loadFiles = function(callback) {
             await load.parallel(scripts);
             callback();
         },
-        
         async function(callback) {
-            await loadremote('ace', {prefix: PREFIX});
+            await loadremote('ace', {
+                prefix: PREFIX,
+            });
             callback();
         },
-        
         async function(callback) {
-            const ace = DIR + 'ace-builds/src-min/';
+            const ace = `${DIR}ace-builds/src-min/`;
             const url = PREFIX + join([
                 'language_tools',
                 'searchbox',
                 'modelist',
-            ].map((name) => 'ext-' + name).map((name) => ace + name + '.js'));
+            ]
+                .map((name) => `ext-${name}`)
+                .map((name) => ace + name + '.js'));
             
             await load.js(url);
             callback();
         },
-        
         function() {
-            restafary.prefix(PREFIX + '/api/v1/fs');
+            restafary.prefix(`${PREFIX}/api/v1/fs`);
             callback();
         },
     ]);
 };
-

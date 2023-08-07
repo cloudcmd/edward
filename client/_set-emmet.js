@@ -5,14 +5,10 @@ const load = require('load.js');
 
 /* global ace */
 /* global join */
-
 module.exports = function() {
-    const {
-        _DIR,
-        _PREFIX,
-    } = this;
+    const {_DIR, _PREFIX} = this;
     
-    const dir = _DIR + 'ace-builds/src-min/';
+    const dir = `${_DIR}ace-builds/src-min/`;
     const dirVendor = '/vendor/';
     
     const {extensions} = this._Config;
@@ -25,8 +21,8 @@ module.exports = function() {
         this.setOption('enableEmmet', true);
     }, async (callback) => {
         const url = _PREFIX + join([
-            dirVendor + 'emmet.js',
-            dir + 'ext-emmet.js',
+            `${dirVendor}emmet.js`,
+            `${dir}ext-emmet.js`,
         ]);
         
         await load.js(url);
@@ -37,4 +33,3 @@ module.exports = function() {
         callback();
     });
 };
-

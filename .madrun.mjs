@@ -21,4 +21,3 @@ export default {
     'watch:client:dev': () => run('build:client:dev', '--watch'),
     'wisdom': () => run('build'),
 };
-

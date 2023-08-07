@@ -2,7 +2,6 @@
     "ini": [
         ".editorconfig"
     ],
-    
     "json": [
         ".eslintrc",
         ".jshintrc",

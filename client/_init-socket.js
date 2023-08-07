@@ -1,21 +1,20 @@
 'use strict';
 
 /* global io */
-
 const {applyPatch} = require('daffy');
 const {alert} = require('smalltalk');
 
 const getHost = () => {
     const l = location;
-    const href = l.origin || l.protocol + '//' + l.host;
     
-    return href;
+    return l.origin || l.protocol + '//' + l.host;
 };
 
 module.exports = function() {
     const edward = this;
     const href = getHost();
     const FIVE_SECONDS = 5000;
+    
     const patch = (name, data) => {
         socket.emit('patch', name, data);
     };
@@ -41,7 +40,8 @@ module.exports = function() {
     });
     
     socket.on('file', (name, data) => {
-        edward.setModeForPath(name)
+        edward
+            .setModeForPath(name)
             .setValueFirst(name, data)
             .moveCursorTo(0, 0);
     });
@@ -59,7 +59,8 @@ module.exports = function() {
         
         this.setValue(result);
         
-        this._story
+        this
+            ._story
             .setData(name, value)
             .setHash(name, this.sha());
         
@@ -74,4 +75,3 @@ module.exports = function() {
         alert(this._TITLE, error);
     });
 };
-
