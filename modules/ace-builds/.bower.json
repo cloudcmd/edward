@@ -17,15 +17,15 @@
     "url": "https://github.com/ajaxorg/ace-builds/issues"
   },
   "homepage": "https://github.com/ajaxorg/ace-builds",
-  "version": "1.23.4",
-  "_release": "1.23.4",
+  "version": "1.24.1",
+  "_release": "1.24.1",
   "_resolution": {
     "type": "version",
-    "tag": "v1.23.4",
-    "commit": "06196affdfb41229876086ba5eacd53ccf203709"
+    "tag": "v1.24.1",
+    "commit": "d065fe88b942824db5e8820b8e9693df3499a2cb"
   },
   "_source": "https://github.com/ajaxorg/ace-builds.git",
-  "_target": "^1.23.4",
+  "_target": "^1.24.1",
   "_originalSource": "ace-builds",
   "_direct": true
 }
