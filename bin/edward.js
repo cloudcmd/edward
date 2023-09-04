@@ -2,6 +2,7 @@
 
 'use strict';
 
+const process = require('process');
 const fs = require('fs');
 const [arg] = process.argv.slice(2);
 

@@ -2,9 +2,8 @@
 
 const path = require('path');
 
+const {env} = require('process');
 const dir = './client';
-
-const {env} = process;
 const isDev = env.NODE_ENV === 'development';
 
 const dist = path.resolve(__dirname, 'dist');
