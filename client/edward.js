@@ -200,7 +200,9 @@ Edward.prototype.evaluate = function() {
     const value = edward.getValue();
     const msg = exec.try(Function(value));
     
-    msg && smalltalk.alert(this._title, msg).then(focus);
+    msg && smalltalk
+        .alert(this._title, msg)
+        .then(focus);
 };
 
 Edward.prototype._addKey = function(options) {
