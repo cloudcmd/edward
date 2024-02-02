@@ -1,3 +1,13 @@
+2024.02.02, v15.0.0
+
+feature:
+- c8ae759 edward: ace-builds: v1.32.5
+- dc81c2f edward: drop support of node < 18
+- 30531a8 edward: madrun v10.0.1
+- cae274d edward: eslint-plugin-putout v22.3.1
+- 856cae7 edward: putout v35.0.4
+- 3a2e3d7 edward: restafary v12.0.0
+
 2023.09.04, v14.2.0
 
 feature:
