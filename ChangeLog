@@ -1,3 +1,8 @@
+2024.03.06, v15.0.2
+
+feature:
+- 7a496d7 edward: socket-file v7.0.0
+
 2024.02.02, v15.0.1
 
 fix:
