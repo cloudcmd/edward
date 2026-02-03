@@ -1,38 +1,33 @@
-'use strict';
-
-const isString = (a) => typeof a === 'string';
-
 /* global ace */
 /* global join */
-require('../css/edward.css');
+import '../css/edward.css';
+import {createPatch} from 'daffy';
+import exec from 'execon';
+import Emitify from 'emitify';
+import load from 'load.js';
+import wraptile from 'wraptile';
+import * as smalltalk from 'smalltalk';
+import jssha from 'jssha';
+import restafary from 'restafary/client';
+import {tryToCatch} from 'try-to-catch';
+import loadremote from './loadremote.js';
+import Story from './story.js';
+import _clipboard from './_clipboard.js';
+import _setEmmet from './_set-emmet.js';
+import _initSocket from './_init-socket.js';
+import setKeyMap from './set-key-map.js';
+import showMessage from './show-message.js';
+import save from './save.js';
+import {_onSave} from './_on-save.js';
 
-const {createPatch} = require('daffy');
-const exec = require('execon');
-const Emitify = require('emitify');
-const load = require('load.js');
-const loadremote = require('./loadremote');
-const wraptile = require('wraptile');
-const smalltalk = require('smalltalk');
-const jssha = require('jssha');
-const restafary = require('restafary/client');
-const {tryToCatch} = require('try-to-catch');
+const isString = (a) => typeof a === 'string';
 
 globalThis.load = globalThis.load || load;
 globalThis.exec = globalThis.exec || exec;
 
-const Story = require('./story');
-const _clipboard = require('./_clipboard');
-const _setEmmet = require('./_set-emmet');
-const _initSocket = require('./_init-socket');
-const setKeyMap = require('./set-key-map');
-const showMessage = require('./show-message');
-const save = require('./save');
-
 function empty() {}
 
-module.exports = Edward;
-
-function Edward(el, options, callback) {
+export default function Edward(el, options, callback) {
     if (!(this instanceof Edward))
         return new Edward(el, options, callback);
     
@@ -488,7 +483,7 @@ Edward.prototype._writeHttp = function(path, result) {
     restafary.write(path, result, onSave);
 };
 
-Edward.prototype._onSave = require('./_on-save');
+Edward.prototype._onSave = _onSave;
 
 Edward.prototype._doDiff = async function(path) {
     const value = this.getValue();

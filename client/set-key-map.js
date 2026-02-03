@@ -1,7 +1,5 @@
-'use strict';
-
 /* global ace */
-module.exports = function(keyMap) {
+export default function(keyMap) {
     if (keyMap === 'default')
         return this._Ace.setKeyboardHandler('ace/keyboard/hash_handler');
     
@@ -15,4 +13,4 @@ module.exports = function(keyMap) {
             this._Ace.setOption('keyboardHandler', 'vim');
             this._Ace.setKeyboardHandler(`ace/keyboard/${keyMap}`);
         });
-};
+}

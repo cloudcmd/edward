@@ -4,7 +4,7 @@
   "description": "web editor based on Ace",
   "main": "./server/index.js",
   "exports": "./server/index.js",
-  "type": "commonjs",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/cloudcmd/edward"
@@ -81,6 +81,7 @@
     "nodemon": "^3.0.1",
     "once": "^1.4.0",
     "putout": "^41.17.0",
+    "redlint": "^5.4.0",
     "rimraf": "^6.1.2",
     "smalltalk": "^5.0.0",
     "style-loader": "^4.0.0",

@@ -1,11 +1,9 @@
-'use strict';
-
-const exec = require('execon');
-const load = require('load.js');
+import exec from 'execon';
+import load from 'load.js';
 
 /* global ace */
 /* global join */
-module.exports = function() {
+export default function() {
     const {_DIR, _PREFIX} = this;
     
     const dir = `${_DIR}ace-builds/src-min/`;
@@ -32,4 +30,4 @@ module.exports = function() {
         
         callback();
     });
-};
+}

@@ -1,9 +1,19 @@
 #!/usr/bin/env node
 
-'use strict';
+import process from 'node:process';
+import fs from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {dirname} from 'node:path';
+import http from 'node:http';
+import express from 'express';
+import {Server} from 'socket.io';
+import info from '../package.json' with {
+    type: 'json',
+};
+import {edward} from '../server/index.js';
 
-const process = require('process');
-const fs = require('fs');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const [arg] = process.argv.slice(2);
 
 if (!arg)
@@ -21,7 +31,7 @@ else
     });
 
 function getPath(name) {
-    const reg = /^(~|\/)/;
+    const reg = /^[~/]/;
     
     if (!reg.test(name))
         name = process.cwd() + '/' + name;
@@ -32,10 +42,6 @@ function getPath(name) {
 function main(name) {
     const filename = getPath(name);
     const DIR = `${__dirname}/../assets/`;
-    const edward = require('..');
-    const http = require('http');
-    const express = require('express');
-    const io = require('socket.io');
     
     const app = express();
     const server = http.createServer(app);
@@ -49,13 +55,13 @@ function main(name) {
     app
         .use(express.static(DIR))
         .use(edward({
-            diff: true,
-            zip: true,
-        }));
+        diff: true,
+        zip: true,
+    }));
     
     server.listen(port, ip);
     
-    const socket = io(server);
+    const socket = new Server(server);
     const edSocket = edward.listen(socket);
     
     edSocket.on('connection', () => {
@@ -84,19 +90,15 @@ function checkFile(name, callback) {
 }
 
 function version() {
-    console.log(`v${info().version}`);
-}
-
-function info() {
-    return require('../package');
+    console.log(`v${info.version}`);
 }
 
 function usage() {
-    console.log(`Usage: ${info().name} [filename]`);
+    console.log(`Usage: ${info.name} [filename]`);
 }
 
-function help() {
-    const bin = require('../json/bin');
+async function help() {
+    const bin = await import('../json/bin');
     
     usage();
     console.log('Options:');

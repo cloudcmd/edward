@@ -9,6 +9,7 @@ modules/ace-builds
 !modules/ace-builds/src-min
 
 yarn-error.log
+client
 
 
 coverage

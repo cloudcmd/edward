@@ -1,11 +1,11 @@
-'use strict';
+import {confirm} from 'smalltalk';
+import {tryToCatch} from 'try-to-catch';
+import {promisify} from 'es6-promisify';
+import {write} from 'restafary/client';
 
-const {confirm} = require('smalltalk');
-const {tryToCatch} = require('try-to-catch');
-const {promisify} = require('es6-promisify');
-const write = promisify(require('restafary/client').write);
+const _write = promisify(write);
 
-module.exports = async function(error, text) {
+export async function _onSave(error, text) {
     const edward = this;
     
     const {
@@ -25,7 +25,7 @@ module.exports = async function(error, text) {
         const [cancel] = await tryToCatch(confirm, _title, msg);
         
         if (!cancel) {
-            const [error, text] = await tryToCatch(write, _filename, this._value);
+            const [error, text] = await tryToCatch(_write, _filename, this._value);
             return this._onSave(error, text);
         }
         
@@ -41,4 +41,4 @@ module.exports = async function(error, text) {
         .setHash(_filename, hash);
     
     this._Emitter.emit('save', _value.length);
-};
+}

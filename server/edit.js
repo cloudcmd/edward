@@ -1,12 +1,13 @@
-'use strict';
+import nodeOs from 'node:os';
+import readjson from 'readjson';
+import {tryToCatch} from 'try-to-catch';
+import Edit from '../json/edit.json' with {
+    type: 'json',
+};
 
-const readjson = require('readjson');
-const {tryToCatch} = require('try-to-catch');
+const HOME = nodeOs.homedir();
 
-const Edit = require('../json/edit.json');
-const HOME = require('node:os').homedir();
-
-module.exports = async (req, res, next) => {
+export default async (req, res, next) => {
     if (req.url !== '/edit.json')
         return next();
     

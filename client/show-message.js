@@ -1,5 +1,3 @@
-'use strict';
-
 function createMsg() {
     const wrapper = document.createElement('div');
     
@@ -8,7 +6,7 @@ function createMsg() {
     return wrapper.firstChild;
 }
 
-module.exports = showMessage;
+export default showMessage;
 
 function showMessage(text) {
     const HIDE_TIME = 2000;

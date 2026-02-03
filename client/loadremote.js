@@ -1,9 +1,8 @@
-'use strict';
+import load from 'load.js';
+import {tryToCatch} from 'try-to-catch';
+import once from 'once';
 
 const isString = (a) => typeof a === 'string';
-const load = require('load.js');
-const {tryToCatch} = require('try-to-catch');
-const once = require('once');
 
 const loadModules = once(async (prefix) => {
     const url = `${prefix}/modules.json`;
@@ -26,7 +25,7 @@ const off = async function(local) {
     await load.parallel(local);
 };
 
-module.exports = async (name, options = {}) => {
+export default async (name, options = {}) => {
     const o = options;
     
     const {prefix = ''} = o;
@@ -69,7 +68,10 @@ module.exports = async (name, options = {}) => {
     if (!online)
         return await off(local);
     
-    await on({remote, local});
+    await on({
+        remote,
+        local,
+    });
 };
 
 function binom(name, array) {

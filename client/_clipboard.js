@@ -1,16 +1,14 @@
-'use strict';
+import clipboard from '@cloudcmd/clipboard';
+import createElement from '@cloudcmd/create-element';
+import once from 'once';
+import showMessage from './show-message.js';
 
-const clipboard = require('@cloudcmd/clipboard');
-const createElement = require('@cloudcmd/create-element');
-
-const showMessage = require('./show-message');
-const once = require('once');
 const showMessageOnce = once(showMessage);
 
 const resolve = Promise.resolve.bind(Promise);
 const reject = Promise.reject.bind(Promise);
 
-module.exports = function(cmd) {
+export default function(cmd) {
     const NAME = 'editor-clipboard';
     const {_Ace, _story} = this;
     
@@ -37,7 +35,7 @@ module.exports = function(cmd) {
             
             insert(value);
         });
-};
+}
 
 function cut(value) {
     const textarea = createElement('textarea', {

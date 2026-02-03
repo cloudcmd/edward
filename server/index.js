@@ -1,16 +1,16 @@
-'use strict';
+import process from 'node:process';
+import path, {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import restafary from 'restafary';
+import restbox from 'restbox';
+import socketFile from 'socket-file';
+import Router from 'router';
+import currify from 'currify';
+import join from 'join-io';
+import editFn from './edit.js';
 
-const process = require('node:process');
-const path = require('node:path');
-
-const restafary = require('restafary');
-const restbox = require('restbox');
-const socketFile = require('socket-file');
-const Router = require('router');
-const currify = require('currify');
-const join = require('join-io');
-
-const editFn = require('./edit');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const DIR_ROOT = `${__dirname}/..`;
 const isUndefined = (a) => typeof a === 'undefined';
 const optionsFn = currify(configFn);
@@ -34,7 +34,7 @@ const cut = currify((prefix, req, res, next) => {
     next();
 });
 
-module.exports = (options) => {
+export function edward(options) {
     options = options || {};
     
     const router = Router();
@@ -48,31 +48,30 @@ module.exports = (options) => {
     router
         .route(`${prefix}/*path`)
         .all(cut(prefix))
-        .get(edward)
+        .get(dist)
         .get(optionsFn(options))
         .get(editFn)
         .get(modulesFn)
         .get(restboxFn({
-        prefix,
-        root,
-        dropbox,
-        dropboxToken,
-    }))
+            prefix,
+            root,
+            dropbox,
+            dropboxToken,
+        }))
         .get(restafaryFn(root))
         .get(joinFn(options))
         .get(staticFn)
         .put(restboxFn({
-        prefix,
-        root,
-        dropbox,
-        dropboxToken,
-    }))
+            prefix,
+            root,
+            dropbox,
+            dropboxToken,
+        }))
         .put(restafaryFn(root));
     
     return router;
-};
-
-module.exports.listen = (socket, options) => {
+}
+edward.listen = (socket, options) => {
     options = options || {};
     
     const {
@@ -98,7 +97,7 @@ function checkOption(isOption) {
     return isOption;
 }
 
-function edward(req, res, next) {
+function dist(req, res, next) {
     if (/^\/edward\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
     
