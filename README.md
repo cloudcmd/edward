@@ -61,8 +61,9 @@ For this purpuse API could be used.
 Middleware of `edward`. Options could be omitted.
 
 ```js
-const edward = require('edward');
-const express = require('express');
+import {edward} from 'edward';
+import express from 'express';
+
 const app = express();
 
 app.use(edward({
@@ -82,8 +83,9 @@ app.listen(31_337);
 Could be used with [socket.io](http://socket.io "Socket.io") to handle editor events with.
 
 ```js
-const io = require('socket.io');
-const socket = io.listen(server);
+import {Server} from 'socket.io';
+
+const socket = new Server(server);
 
 edward.listen(socket, {
     root: '/', // optional
