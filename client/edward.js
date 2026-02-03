@@ -15,10 +15,10 @@ const wraptile = require('wraptile');
 const smalltalk = require('smalltalk');
 const jssha = require('jssha');
 const restafary = require('restafary/client');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 
-window.load = window.load || load;
-window.exec = window.exec || exec;
+globalThis.load = globalThis.load || load;
+globalThis.exec = globalThis.exec || exec;
 
 const Story = require('./story');
 const _clipboard = require('./_clipboard');
@@ -101,45 +101,45 @@ Edward.prototype._init = function(fn) {
     exec.series([
         loadFiles,
         async (callback) => {
-            await loadremote('socket', {
-                name: 'io',
-                prefix: this._SOCKET_PATH,
-            });
-            
-            initSocket();
-            callback();
-        },
+        await loadremote('socket', {
+            name: 'io',
+            prefix: this._SOCKET_PATH,
+        });
+        
+        initSocket();
+        callback();
+    },
         async () => {
-            this._Emitter = Emitify();
-            this._Ace = ace.edit(this._Element);
-            this._Modelist = ace.require('ace/ext/modelist');
-            
-            this._Emitter.on('auth', (username, password) => {
-                this._socket.emit('auth', username, password);
-            });
-            
-            ace.require('ace/ext/language_tools');
-            
-            this._addCommands();
-            this._Ace.$blockScrolling = Infinity;
-            
-            const config = await load.json(this._PREFIX + '/edit.json');
-            
-            const {options = {}} = config;
-            
-            const preventOverwrite = () => {
-                for (const name of Object.keys(this._Config.options)) {
-                    options[name] = this._Config.options[name];
-                }
-            };
-            
-            fn();
-            preventOverwrite();
-            
-            this._Config = config;
-            
-            edward.setOptions(options);
-        },
+        this._Emitter = Emitify();
+        this._Ace = ace.edit(this._Element);
+        this._Modelist = ace.require('ace/ext/modelist');
+        
+        this._Emitter.on('auth', (username, password) => {
+            this._socket.emit('auth', username, password);
+        });
+        
+        ace.require('ace/ext/language_tools');
+        
+        this._addCommands();
+        this._Ace.$blockScrolling = Infinity;
+        
+        const config = await load.json(this._PREFIX + '/edit.json');
+        
+        const {options = {}} = config;
+        
+        const preventOverwrite = () => {
+            for (const name of Object.keys(this._Config.options)) {
+                options[name] = this._Config.options[name];
+            }
+        };
+        
+        fn();
+        preventOverwrite();
+        
+        this._Config = config;
+        
+        edward.setOptions(options);
+    },
     ]);
 };
 
@@ -190,7 +190,7 @@ Edward.prototype._addCommands = function() {
 Edward.prototype.evaluate = function() {
     const edward = this;
     const focus = edward.focus.bind(this);
-    const isJS = /\.js$/.test(this._filename);
+    const isJS = this._filename.endsWith('.js');
     
     if (!isJS)
         return smalltalk
@@ -216,17 +216,17 @@ Edward.prototype.addKeyMap = function(keyMap) {
     const map = Object
         .keys(keyMap)
         .map((name, i) => {
-            const key = {
-                name: String(Math.random()) + i,
-                bindKey: {
-                    win: name,
-                    mac: name.replace('Ctrl', 'Command'),
-                },
-                exec: keyMap[name],
-            };
-            
-            return key;
-        });
+        const key = {
+            name: String(Math.random()) + i,
+            bindKey: {
+                win: name,
+                mac: name.replace('Ctrl', 'Command'),
+            },
+            exec: keyMap[name],
+        };
+        
+        return key;
+    });
     
     map.forEach(this._addKey());
     

@@ -24,7 +24,7 @@ module.exports = function(cmd) {
     
     if (cmd === 'cut') {
         _story.setData(NAME, value);
-        return cut(_story, value) ? resolve() : reject();
+        return cut(value) ? resolve() : reject();
     }
     
     return clipboard
@@ -39,7 +39,7 @@ module.exports = function(cmd) {
         });
 };
 
-function cut(story, value) {
+function cut(value) {
     const textarea = createElement('textarea', {
         value,
     });

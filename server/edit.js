@@ -1,10 +1,10 @@
 'use strict';
 
 const readjson = require('readjson');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 
 const Edit = require('../json/edit.json');
-const HOME = require('os').homedir();
+const HOME = require('node:os').homedir();
 
 module.exports = async (req, res, next) => {
     if (req.url !== '/edit.json')

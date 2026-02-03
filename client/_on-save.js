@@ -1,7 +1,7 @@
 'use strict';
 
 const {confirm} = require('smalltalk');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const {promisify} = require('es6-promisify');
 const write = promisify(require('restafary/client').write);
 

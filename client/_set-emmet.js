@@ -28,7 +28,7 @@ module.exports = function() {
         await load.js(url);
         
         this._Emmet = ace.require('ace/ext/emmet');
-        this._Emmet.setCore(window.emmet);
+        this._Emmet.setCore(globalThis.emmet);
         
         callback();
     });

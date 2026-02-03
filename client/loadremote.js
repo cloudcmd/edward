@@ -2,7 +2,7 @@
 
 const isString = (a) => typeof a === 'string';
 const load = require('load.js');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const once = require('once');
 
 const loadModules = once(async (prefix) => {
@@ -15,11 +15,11 @@ const loadOptions = once(async (prefix) => {
     return await load.json(url);
 });
 
-const on = async (remote) => {
+const on = async ({remote, local}) => {
     const [error] = await tryToCatch(load.parallel, remote);
     
     if (error)
-        await off();
+        await off(local);
 };
 
 const off = async function(local) {
@@ -54,7 +54,7 @@ module.exports = async (name, options = {}) => {
     
     if (isArray) {
         remoteTmpls = module.remote;
-        local = module.local;
+        ({local} = module);
     } else {
         remoteTmpls = [module.remote];
         local = [module.local];
@@ -69,7 +69,7 @@ module.exports = async (name, options = {}) => {
     if (!online)
         return await off(local);
     
-    await on(remote);
+    await on({remote, local});
 };
 
 function binom(name, array) {

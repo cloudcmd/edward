@@ -1,7 +1,7 @@
 'use strict';
 
-const process = require('process');
-const path = require('path');
+const process = require('node:process');
+const path = require('node:path');
 
 const restafary = require('restafary');
 const restbox = require('restbox');
@@ -46,27 +46,27 @@ module.exports = (options) => {
     } = options;
     
     router
-        .route(`${prefix}/*`)
+        .route(`${prefix}/*path`)
         .all(cut(prefix))
         .get(edward)
         .get(optionsFn(options))
         .get(editFn)
         .get(modulesFn)
         .get(restboxFn({
-            prefix,
-            root,
-            dropbox,
-            dropboxToken,
-        }))
+        prefix,
+        root,
+        dropbox,
+        dropboxToken,
+    }))
         .get(restafaryFn(root))
         .get(joinFn(options))
         .get(staticFn)
         .put(restboxFn({
-            prefix,
-            root,
-            dropbox,
-            dropboxToken,
-        }))
+        prefix,
+        root,
+        dropbox,
+        dropboxToken,
+    }))
         .put(restafaryFn(root));
     
     return router;
