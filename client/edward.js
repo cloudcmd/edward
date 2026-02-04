@@ -8,7 +8,7 @@ import load from 'load.js';
 import wraptile from 'wraptile';
 import * as smalltalk from 'smalltalk';
 import jssha from 'jssha';
-import restafary from 'restafary/client';
+import * as restafary from 'restafary/client';
 import {tryToCatch} from 'try-to-catch';
 import loadremote from './loadremote.js';
 import Story from './story.js';

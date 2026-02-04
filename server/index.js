@@ -1,7 +1,7 @@
 import process from 'node:process';
 import path, {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import restafary from 'restafary';
+import {restafary} from 'restafary';
 import restbox from 'restbox';
 import socketFile from 'socket-file';
 import Router from 'router';

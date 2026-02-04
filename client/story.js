@@ -1,5 +1,5 @@
 import {promisify} from 'es6-promisify';
-import restafary from 'restafary/client';
+import * as restafary from 'restafary/client';
 
 export default Story;
 
