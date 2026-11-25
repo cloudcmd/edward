@@ -1,6 +1,6 @@
 .*
 !.jshintrc
-webpack.config.js
+rspack.config.js
 bower.json
 
 modules/load

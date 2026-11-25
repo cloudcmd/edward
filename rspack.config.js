@@ -26,10 +26,10 @@ const rules = clean([{
     ],
 }, {
     test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
-    use: {
-        loader: 'url-loader',
-        options: {
-            limit: 50_000,
+    type: 'asset',
+    parser: {
+        dataUrlCondition: {
+            maxSize: 50_000,
         },
     },
 }]);

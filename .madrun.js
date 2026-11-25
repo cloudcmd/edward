@@ -12,7 +12,7 @@ export default {
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'prebuild': () => 'rimraf dist*',
-    'build-progress': () => 'webpack --progress',
+    'build-progress': () => 'rspack build',
     'build:client': () => run('build-progress', '--mode production'),
     'build:client:dev': async () => `NODE_ENV=development ${await run('build-progress')} --mode development`,
     'watcher': () => 'nodemon -w client -w server --exec',
