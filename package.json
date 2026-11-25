@@ -54,7 +54,7 @@
     "join-io": "^5.0.0",
     "readjson": "^2.0.1",
     "restafary": "^13.0.0",
-    "restbox": "^4.0.1",
+    "restbox": "^5.0.1",
     "router": "^2.2.0",
     "socket-file": "^8.0.0",
     "socket.io": "^4.1.3",
