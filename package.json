@@ -7,7 +7,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cloudcmd/edward"
+    "url": "git+https://github.com/cloudcmd/edward"
   },
   "keywords": [
     "editor",

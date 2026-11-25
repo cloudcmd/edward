@@ -18,10 +18,11 @@ export default function() {
     exec.if(this._Emmet, () => {
         this.setOption('enableEmmet', true);
     }, async (callback) => {
-        const url = _PREFIX + join([
-            `${dirVendor}emmet.js`,
-            `${dir}ext-emmet.js`,
-        ]);
+        const url = _PREFIX +
+            join([
+                `${dirVendor}emmet.js`,
+                `${dir}ext-emmet.js`,
+            ]);
         
         await load.js(url);
         

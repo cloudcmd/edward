@@ -23,7 +23,7 @@ const isFn = (a) => typeof a === 'function';
 const maybe = (fn) => {
     if (isFn(fn))
         return fn();
-
+    
     return fn;
 };
 
@@ -36,7 +36,7 @@ const cut = currify((prefix, req, res, next) => {
 
 export function edward(options) {
     options = options || {};
-
+    
     const router = Router();
     const {
         prefix = '/edward',
@@ -44,7 +44,7 @@ export function edward(options) {
         dropbox,
         dropboxToken,
     } = options;
-
+    
     router
         .route(`${prefix}/*path`)
         .all(cut(prefix))
@@ -68,20 +68,19 @@ export function edward(options) {
             dropboxToken,
         }))
         .put(restafaryFn(root));
-
+    
     return router;
 }
+
 edward.listen = (socket, options) => {
     options = options || {};
-
-    console.log(options);
-
+    
     const {
         root = '/',
         auth,
         prefixSocket = '/edward',
     } = options;
-
+    
     return socketFile(socket, {
         root: maybe(root),
         auth,
@@ -92,20 +91,20 @@ edward.listen = (socket, options) => {
 function checkOption(isOption) {
     if (isFn(isOption))
         return isOption();
-
+    
     if (isUndefined(isOption))
         return true;
-
+    
     return isOption;
 }
 
 function dist(req, res, next) {
     if (/^\/edward\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
-
+    
     if (isDev)
         req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
-
+    
     next();
 }
 
@@ -113,10 +112,10 @@ function configFn(o, req, res, next) {
     const online = checkOption(o.online);
     const diff = checkOption(o.diff);
     const zip = checkOption(o.zip);
-
+    
     if (req.url.indexOf('/options.json'))
         return next();
-
+    
     res
         .type('json')
         .send({
@@ -129,43 +128,43 @@ function configFn(o, req, res, next) {
 function modulesFn(req, res, next) {
     if (req.url.indexOf('/modules.json'))
         return next();
-
+    
     req.url = '/json/' + req.url;
-
+    
     next();
 }
 
 function _joinFn(o, req, res, next) {
     if (req.url.indexOf('/join'))
         return next();
-
+    
     const joinFunc = join({
         dir: DIR_ROOT,
     });
-
+    
     joinFunc(req, res, next);
 }
 
 function _restboxFn({root, dropbox, dropboxToken}, req, res, next) {
     if (!dropbox)
         return next();
-
+    
     const {url} = req;
     const prefix = '/api/v1';
     const indexOf = url.indexOf.bind(url);
     const not = (fn) => (a) => !fn(a);
-
+    
     const is = [`/api/v1`].some(not(indexOf));
-
+    
     if (!is)
         return next();
-
+    
     const middle = restbox({
         prefix,
         token: dropboxToken,
         root: maybe(root),
     });
-
+    
     middle(req, res, next);
 }
 
@@ -174,20 +173,20 @@ function _restafaryFn(root, req, res, next) {
     const prefix = '/api/v1/fs';
     const indexOf = url.indexOf.bind(url);
     const not = (fn) => (a) => !fn(a);
-
+    
     const isRestafary = [
         `/api/v1`,
         '/restafary.js',
     ].some(not(indexOf));
-
+    
     if (!isRestafary)
         return next();
-
+    
     const middle = restafary({
         prefix,
         root: maybe(root),
     });
-
+    
     middle(req, res, next);
 }
 

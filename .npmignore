@@ -1,16 +1,17 @@
+*.config.*
+*.log
+*.lock
+
 .*
-!.jshintrc
+
 rspack.config.js
 bower.json
 
 modules/load
 modules/execon
 modules/ace-builds
-!modules/ace-builds/src-min
-
-yarn-error.log
 client
-
-
 coverage
-*.config.*
+
+!.jshintrc
+!modules/ace-builds/src-min

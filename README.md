@@ -26,7 +26,7 @@ Web editor used in [Cloud Commander](http://cloudcmd.io) based on [Ace](http://a
 npm i edward -g
 ```
 
-![NPM\_INFO][NPM_INFO_IMG]
+![NPM_INFO][NPM_INFO_IMG]
 
 ## Command line parameters
 

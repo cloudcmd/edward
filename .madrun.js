@@ -10,7 +10,10 @@ export default {
     'watch:server': () => run('watcher', 'bin/edward.js package.json'),
     'build': () => run('build:client*'),
     'build:start': () => run(['build:client', 'start']),
-    'build:start:dev': () => run(['build:client:dev', 'start:dev']),
+    'build:start:dev': () => run([
+        'build:client:dev',
+        'start:dev',
+    ]),
     'prebuild': () => 'rimraf dist*',
     'build-progress': () => 'rspack build',
     'build:client': () => run('build-progress', '--mode production'),

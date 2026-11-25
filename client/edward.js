@@ -96,45 +96,45 @@ Edward.prototype._init = function(fn) {
     exec.series([
         loadFiles,
         async (callback) => {
-        await loadremote('socket', {
-            name: 'io',
-            prefix: this._SOCKET_PATH,
-        });
-        
-        initSocket();
-        callback();
-    },
+            await loadremote('socket', {
+                name: 'io',
+                prefix: this._SOCKET_PATH,
+            });
+            
+            initSocket();
+            callback();
+        },
         async () => {
-        this._Emitter = Emitify();
-        this._Ace = ace.edit(this._Element);
-        this._Modelist = ace.require('ace/ext/modelist');
-        
-        this._Emitter.on('auth', (username, password) => {
-            this._socket.emit('auth', username, password);
-        });
-        
-        ace.require('ace/ext/language_tools');
-        
-        this._addCommands();
-        this._Ace.$blockScrolling = Infinity;
-        
-        const config = await load.json(this._PREFIX + '/edit.json');
-        
-        const {options = {}} = config;
-        
-        const preventOverwrite = () => {
-            for (const name of Object.keys(this._Config.options)) {
-                options[name] = this._Config.options[name];
-            }
-        };
-        
-        fn();
-        preventOverwrite();
-        
-        this._Config = config;
-        
-        edward.setOptions(options);
-    },
+            this._Emitter = Emitify();
+            this._Ace = ace.edit(this._Element);
+            this._Modelist = ace.require('ace/ext/modelist');
+            
+            this._Emitter.on('auth', (username, password) => {
+                this._socket.emit('auth', username, password);
+            });
+            
+            ace.require('ace/ext/language_tools');
+            
+            this._addCommands();
+            this._Ace.$blockScrolling = Infinity;
+            
+            const config = await load.json(this._PREFIX + '/edit.json');
+            
+            const {options = {}} = config;
+            
+            const preventOverwrite = () => {
+                for (const name of Object.keys(this._Config.options)) {
+                    options[name] = this._Config.options[name];
+                }
+            };
+            
+            fn();
+            preventOverwrite();
+            
+            this._Config = config;
+            
+            edward.setOptions(options);
+        },
     ]);
 };
 
@@ -211,17 +211,17 @@ Edward.prototype.addKeyMap = function(keyMap) {
     const map = Object
         .keys(keyMap)
         .map((name, i) => {
-        const key = {
-            name: String(Math.random()) + i,
-            bindKey: {
-                win: name,
-                mac: name.replace('Ctrl', 'Command'),
-            },
-            exec: keyMap[name],
-        };
-        
-        return key;
-    });
+            const key = {
+                name: String(Math.random()) + i,
+                bindKey: {
+                    win: name,
+                    mac: name.replace('Ctrl', 'Command'),
+                },
+                exec: keyMap[name],
+            };
+            
+            return key;
+        });
     
     map.forEach(this._addKey());
     
@@ -385,6 +385,7 @@ Edward.prototype.setMode = function(mode) {
 Edward.prototype.setModeForPath = function(path) {
     const session = this._getSession();
     const {modesByName} = this._Modelist;
+    
     const name = path
         .split('/')
         .pop();
@@ -595,13 +596,16 @@ Edward.prototype._loadFiles = function(callback) {
         },
         async function(callback) {
             const ace = `${DIR}ace-builds/src-min/`;
-            const url = PREFIX + join([
-                'language_tools',
-                'searchbox',
-                'modelist',
-            ]
-                .map((name) => `ext-${name}`)
-                .map((name) => ace + name + '.js'));
+            const url = PREFIX +
+                join(
+                    [
+                        'language_tools',
+                        'searchbox',
+                        'modelist',
+                    ]
+                        .map((name) => `ext-${name}`)
+                        .map((name) => ace + name + '.js'),
+                );
             
             await load.js(url);
             callback();

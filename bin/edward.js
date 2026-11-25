@@ -24,10 +24,12 @@ else if (/^(-h|--help)$/.test(arg))
     help();
 else
     checkFile(arg, (error) => {
-        if (!error)
+        if (!error) {
             main(arg);
-        else
-            console.error(error.message);
+            return;
+        }
+        
+        console.error(error.message);
     });
 
 function getPath(name) {
@@ -55,9 +57,9 @@ function main(name) {
     app
         .use(express.static(DIR))
         .use(edward({
-        diff: true,
-        zip: true,
-    }));
+            diff: true,
+            zip: true,
+        }));
     
     server.listen(port, ip);
     
@@ -66,10 +68,12 @@ function main(name) {
     
     edSocket.on('connection', () => {
         fs.readFile(name, 'utf8', (error, data) => {
-            if (error)
+            if (error) {
                 console.error(error.message);
-            else
-                edSocket.emit('file', filename, data);
+                return;
+            }
+            
+            edSocket.emit('file', filename, data);
         });
     });
     
