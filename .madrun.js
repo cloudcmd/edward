@@ -3,6 +3,7 @@ import {run} from 'madrun';
 export default {
     'start': () => 'node bin/edward package.json',
     'start:dev': async () => `NODE_ENV=development ${await run('start')}`,
+    'test:e2e': () => 'playwright test',
     'lint': () => 'putout .',
     'fresh:lint': () => run('lint', '--fresh'),
     'lint:fresh': () => run('lint', '--fresh'),

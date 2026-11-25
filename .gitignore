@@ -19,3 +19,6 @@ modules/pako/dist
 coverage
 
 !modules/pako/dist/paco.min.js
+
+test-results
+playwright-report

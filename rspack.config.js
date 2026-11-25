@@ -1,6 +1,7 @@
 import path, {dirname} from 'node:path';
 import {env} from 'node:process';
 import {fileURLToPath} from 'node:url';
+import {rspack} from '@rspack/core';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -40,17 +41,24 @@ export default {
         edward: `${dir}/edward.js`,
     },
     output: {
-        library: 'edward',
+        library: {
+            name: 'edward',
+            export: 'default',
+            type: 'var',
+        },
         filename: '[name].js',
         path: isDev ? distDev : dist,
         pathinfo: isDev,
-        libraryTarget: 'var',
-        libraryExport: 'default',
         devtoolModuleFilenameTemplate,
     },
     module: {
         rules,
     },
+    plugins: [
+        new rspack.DefinePlugin({
+            global: 'globalThis',
+        }),
+    ],
 };
 
 function devtoolModuleFilenameTemplate(info) {

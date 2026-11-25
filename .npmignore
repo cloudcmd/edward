@@ -15,3 +15,5 @@ coverage
 
 !.jshintrc
 !modules/ace-builds/src-min
+e2e
+test-results
