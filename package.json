@@ -81,7 +81,7 @@
     "nodemon": "^3.0.1",
     "once": "^1.4.0",
     "putout": "^42.26.3",
-    "redlint": "^5.4.0",
+    "redlint": "^6.9.2",
     "rimraf": "^6.1.2",
     "smalltalk": "^5.0.0",
     "style-loader": "^4.0.0",
