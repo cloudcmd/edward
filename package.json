@@ -73,7 +73,7 @@
     "es6-promisify": "^7.0.0",
     "eslint": "^10.15.0",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-putout": "^30.0.2",
+    "eslint-plugin-putout": "^31.5.0",
     "execon": "^1.2.9",
     "jssha": "^3.1.0",
     "load.js": "^3.0.2",
